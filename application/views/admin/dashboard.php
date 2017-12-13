@@ -12,7 +12,7 @@
                        <div class="col-md-4 col-sm-6">
                        <a href="movimientos/ventas/add">
                         <?php $cant = 0?>
-                             <?php foreach($ventas as $usuarios):?>
+                             <?php foreach($venta as $usuarios):?>
                                <?php $cant++;?>
                             <?php endforeach;?>
                         <div class="dashboard-tile detail tile-red" style="background-color:#20B2AA   ;color: #fff">
