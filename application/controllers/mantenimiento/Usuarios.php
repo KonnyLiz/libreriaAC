@@ -8,7 +8,6 @@ private $permisos;
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Usuarios_model");
 		//$this->load->model("Oportunidades_model");
-		$this->load->model("Grupos_model");
 	}
 
 	public function index()
@@ -16,7 +15,6 @@ private $permisos;
 		$data  = array(
 			"permisos" => $this->permisos, 
 			'usuario' => $this->Usuarios_model->getUsuarios(),
-			"grupo" => $this->Grupos_model->getGrupos(),
 			//'oportunidad' => $this->Oportunidades_model->getOportunidades(),
 		);
 		$this->load->view("layouts/header");
@@ -74,7 +72,6 @@ private $permisos;
 	public function edit($id){
 		$data  = array(
 			'usuario' => $this->Usuarios_model->getUsuario($id), 
-			"grupo" => $this->Grupos_model->getGrupos(),
 
 		);
 		$this->load->view("layouts/header");

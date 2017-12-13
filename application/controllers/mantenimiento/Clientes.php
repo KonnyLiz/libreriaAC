@@ -7,7 +7,6 @@ private $permisos;
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();                                   
 		$this->load->model("Clientes_model");  
-		$this->load->model("Oportunidades_model");
 		//$this->load->model("Grupos_model");
 	}
 
@@ -16,7 +15,6 @@ private $permisos;
 		$data  = array(
 			"permisos" => $this->permisos,                          
 			'cliente' => $this->Clientes_model->getClientes(),
-			'oportunidad' => $this->Oportunidades_model->getOportunidades(),
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
