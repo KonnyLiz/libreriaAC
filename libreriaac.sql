@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-12-2017 a las 22:53:47
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 14-12-2017 a las 04:45:41
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -69,15 +71,20 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
-  `nombres` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `apellidos` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
-  `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `dui` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
-  `nit` varchar(25) COLLATE utf8_spanish2_ci NOT NULL,
+  `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `nit` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `registro` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `registro` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT NULL
+  `estado` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `nombres`, `nit`, `registro`, `direccion`, `estado`) VALUES
+(1, 'Hugo', '123', '123', 'sm', 1),
+(2, 'Zulmi Amaya', 'yy', 'rr', 'ee', 1);
 
 -- --------------------------------------------------------
 
@@ -385,8 +392,7 @@ ALTER TABLE `categorias`
 -- Indices de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ruc_UNIQUE` (`registro`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `detalle_abastecer`
@@ -494,7 +500,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
@@ -504,7 +510,7 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
@@ -539,7 +545,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
@@ -628,6 +634,7 @@ ALTER TABLE `ventas`
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`tipo_comprobante_id`) REFERENCES `tipo_comprobante` (`id`),
   ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
   ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

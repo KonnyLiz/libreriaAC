@@ -1,3 +1,4 @@
+<?php
 <section class="main-content-wrapper">
             <section id="main-content">
                 <div class="row">
@@ -12,7 +13,7 @@
                     </div>
                         <h1 class="h1">Clientes</h1>
                 </div>
-<!-- modal del cliente -->
+<!-- Content Wrapper. Contains page content -->
 <div class="modal fade" id="modal-default">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -62,9 +63,12 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
+                                    <th>Apellido</th>
+                                    <th>Telefono</th>
+                                    <th>DUI</th>
                                     <th>NIT</th>
-                                    <th>Registro</th>
-                                    <th>Direccion</th>
+                                    <th>Grupo</th>
+                                    <th>Dirección</th>
                                     <th>Acción</th>
                                 </tr>
                             </thead>
@@ -74,13 +78,16 @@
                                         <tr>
                                             <td><?php echo $clientes->id;?></td>
                                             <td><?php echo $clientes->nombres;?></td>
+                                            <td><?php echo $clientes->apellidos;?></td>
+                                            <td><?php echo $clientes->telefono;?></td>
+                                            <td><?php echo $clientes->dui;?></td>
                                             <td><?php echo $clientes->nit;?></td>
-                                            <td><?php echo $clientes->registro;?></td>
+                                             <td><?php echo $clientes->grupo;?></td>
                                             <td><?php echo $clientes->direccion;?></td>
-                                            <?php $datacliente = $clientes->id."*".$clientes->nombres."*".$clientes->nit."*".$clientes->registro."*".$clientes->direccion."*".$clientes->estado;?>
+                                            <?php $datacliente = $clientes->id."*". $clientes->grupo."*".$clientes->nombres."*".$clientes->apellidos."*".$clientes->telefono."*".$clientes->dui."*".$clientes->nit."*".$clientes->direccion."*".$clientes->registro."*".$clientes->empresa."*".$clientes->estado;?>
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
+                                                    <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
                                                         <span class="fa fa-search"></span>
                                                     </button>
                                                     <?php if($permisos->update == 1):?>
@@ -102,6 +109,16 @@
                         <a href="<?php echo base_url();?>pdfcontroller/clientes" target="_blank">
                         <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte General</button>
                         </a>
+                        <a href="<?php echo base_url();?>pdfcontroller/clientes1" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte Gurpo #1</button>
+                        </a>
+                         </a>
+                        <a href="<?php echo base_url();?>pdfcontroller/clientes2" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i> Reporte Gurpo #2</button>
+                        </a>
+                        <a href="<?php echo base_url();?>pdfcontroller/clientes3" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i> Reporte Gurpo #3</button>
+                        </a>
                        </div>
                      </div>
                 </div>
@@ -118,40 +135,3 @@
                                 
                              </div>
                         <?php endif;?>
-                         <form action="<?php echo base_url();?>mantenimiento/Clientes/store" method="POST">
-                            <!--<div class="form-group">
-                                <label for="codigo">Reunion:</label>
-                                <input type="date" class="form-control"  name="reunion" >
-                            </div>-->
-                             <div class="form-group <?php echo !empty(form_error("r2"))? 'has-error':'' ?>">
-                                <label for="codigo">Nombre:</label>
-                                <input  value="<?php echo set_value("r2")?>" type="text" class="form-control"  name="r2" required>
-                                <?php echo form_error("r2", "<span class='help-block'>", "</span>");?>
-                            </div>
-                            <div class="form-group <?php echo !empty(form_error("r5"))? 'has-error':'' ?>">
-                                <label for="codigo">NIT</label>
-                                <input value="<?php echo set_value("r5")?>" type="text" class="form-control"  name="r5" >
-                                <?php echo form_error("r5", "<span class='help-block'>", "</span>");?>
-                            </div>
-                            <div class="form-group <?php echo !empty(form_error("r6"))? 'has-error':'' ?>">
-                                <label for="codigo">Registro</label>
-                                <input value="<?php echo set_value("r6")?>" type="text" class="form-control"  name="r6" >
-                                <?php echo form_error("r6", "<span class='help-block'>", "</span>");?>
-                            </div>
-                            <div class="form-group <?php echo !empty(form_error("r7"))? 'has-error':'' ?>">
-                                <label for="codigo">Direccion:</label>
-                                <input  value="<?php echo set_value("r7")?>" type="text" class="form-control"  name="r7" >
-                                <?php echo form_error("r7", "<span class='help-block'>", "</span>");?>
-                            </div>
-                                <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                            </div>
-                            
-                        </form>
-                                    </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
