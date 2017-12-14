@@ -66,8 +66,11 @@
                                     <th>Codigo</th>
                                     <th>Nombre</th>
                                     <th>Descripcion</th>
+                                    <th>Marca</th>
+                                    <th>Proveedor</th>
                                     <th>Precio</th>
-                                    <th>Mayoreo</th>
+                                    <th>Mayoreo 1</th>
+                                    <th>Mayoreo 2</th>
                                     <th>Stock</th>
                                     <th>Categoria</th>
                                     <th>Opciones</th>
@@ -81,23 +84,23 @@
                                             <td><?php echo $producto->codigo;?></td>
                                             <td><?php echo $producto->nombre;?></td>
                                             <td><?php echo $producto->descripcion;?></td>
+                                            <td><?php echo $producto->id_marca;?></td>
+                                            <td><?php echo $producto->id_proveedor;?></td>
                                             <td><?php echo $producto->precio;?></td>
-                                            <td><?php echo $producto->precio_mayoreo;?></td>
+                                            <td><?php echo $producto->precio_mayoreo1;?></td>
+                                            <td><?php echo $producto->precio_mayoreo2;?></td>
                                             <td><?php echo $producto->stock;?></td>
-                                            <td><?php echo $producto->categoria;?></td>
-                                            <?php $dataproducto = $producto->id."*".$producto->codigo."*".$producto->nombre."*".$producto->descripcion."*".$producto->precio."*".$producto->precio_mayoreo."*".$producto->stock."*".$producto->categoria;?>
+                                            <td><?php echo $producto->categoria_id;?></td>
+                                            
                                             <td>
                                                 <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $dataproducto;?>">
-                                                        <span class="fa fa-search"></span>
-                                                    </button>
-</li><?php if($permisos->update == 1):?> <a href="<?php echo base_url()?>mantenimiento/productos/edit/<?php echo $producto->id;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
+                                            </li><?php if($permisos->update == 1):?> <a href="<?php echo base_url()?>mantenimiento/productos/edit/<?php echo $producto->id;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
                                                     <?php if($permisos->update == 1):?>
- </li><?php endif?>
+                                            </li><?php endif?>
                                                    
-<?php endif?>
- <?php if($permisos->delete == 1):?> <a href="<?php echo base_url();?>mantenimiento/productos/delete/<?php echo $producto->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
-<?php endif?>
+                                            <?php endif?>
+                                            <?php if($permisos->delete == 1):?> <a href="<?php echo base_url();?>mantenimiento/productos/delete/<?php echo $producto->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
+                                            <?php endif?>
                                                     
                                                    
                                                 </div>
@@ -141,6 +144,22 @@
                                 <label for="descripcion">Descripcion:</label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
+                            <div class="form-group">
+                                <label for="categoria">Marca:</label>
+                                <select name="marca" id="categoria" class="form-control">
+                                    <?php foreach($marca as $marcas):?>
+                                        <option value="<?php echo $marcas->id_marca?>"><?php echo $marcas->nombre;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoria">Proveedor:</label>
+                                <select name="proveedor" id="categoria" class="form-control">
+                                    <?php foreach($proveedor as $proveedores):?>
+                                        <option value="<?php echo $proveedores->id_proveedor?>"><?php echo $proveedores->nombre;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
                              <div class="form-group <?php echo !empty(form_error("precio_e"))? 'has-error':'' ?>">
                                 <label for="precio">Precio de entrada:</label>
                                 <input value="<?php echo set_value("precio_e")?>" type="text" class="form-control" id="precio" name="precio_e">
@@ -152,8 +171,13 @@
                                 <?php echo form_error("precio", "<span class='help-block'>", "</span>");?>
                             </div>
                              <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
-                                <label for="precio">Precio de mayoreo:</label>
+                                <label for="precio">Precio de mayoreo1:</label>
                                 <input value="<?php echo set_value("precio_m")?>" type="text" class="form-control" id="precio" name="precio_m">
+                                <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
+                            </div>
+                            <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
+                                <label for="precio">Precio de mayoreo2:</label>
+                                <input value="<?php echo set_value("precio_m")?>" type="text" class="form-control" id="precio" name="precio_m1">
                                 <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
                             </div>
                             <div class="form-group <?php echo !empty(form_error("stock"))? 'has-error':'' ?>">
