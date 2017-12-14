@@ -12,7 +12,7 @@
                         </ul>
 
  
- <h1 class="">Ventas</h1>
+ <h1 class="">Servicios</h1>
  
 
 <!-- Content Wrapper. Contains page content -->
@@ -23,7 +23,7 @@
 
     <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Datos</h3>
+        <h3 class="panel-title">Tipo de servicio</h3>
                                 
     </div>
     <div class="panel-body">
@@ -34,8 +34,7 @@
         <!-- Default box -->
         <div class="box box-solid">
             <div class="box-body">
-                <div class="row">
-                    
+                <div class="row">                 
                         <div class="col-md-3" style="padding-bottom: 12px">
                                     <label for="">Fecha:</label>
                                     <input type="date" class="form-control" name="fecha" required>
@@ -43,29 +42,7 @@
                         <div class="col-md-12">
 
                         <form action="<?php echo base_url();?>movimientos/ventas/store" method="POST" class="form-horizontal">
-                            <div class="form-group">
-                                <div class="col-md-3">
-                                    <label for="">Comprobante:</label>
-                                    <select name="comprobantes" id="comprobantes" class="form-control" required>
-                                        <option value="">Seleccione...</option>
-                                        <?php foreach ($tipoComprobantes as $tipoComprobante) { ?>
-                                            <?php $dataComprobante = $tipoComprobante->id."*".$tipoComprobante->cantidad."*".$tipoComprobante->iva."*".$tipoComprobante->serie; ?>
-                                           <option value="<?php echo $dataComprobante;?>"><?php echo $tipoComprobante->nombre ?></option>
-                                        <?php } ?>
-                                    </select>
-                                    <input type="hidden" id="idcomprobante" name="idcomprobante">
-                                    <input type="hidden" id="iva">
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Serie:</label>
-                                    <input type="text" class="form-control" id="serie" name="serie" readonly>
-                                </div>
-                                <div class="col-md-3">
-                                    <label for="">Numero:</label>
-                                    <input type="text" class="form-control" id="numero" name="numero" readonly>
-                                </div>
-                                 
-                            </div>
+                           
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Cliente:</label>
@@ -87,8 +64,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
-                                    <label for="">Producto:</label>
-                                    <input type="text" class="form-control" id="producto" name="valor">
+                                    <label for="">Servicio:</label>
+                                    <input type="text" class="form-control" id="servicio" name="valor">
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">&nbsp;</label>
@@ -182,7 +159,7 @@
                                         <tr>
                                             <td><?php echo $cliente->id;?></td>
                                             <td><?php echo $cliente->nombres;?></td>
-                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->dui."*".$cliente->nit."*".$cliente->telefono."*".$cliente->direccion?>
+                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->nit."*".$cliente->registro."*".$cliente->direccion?>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-check" value="<?php echo $datacliente;?>"><span class="fa fa-check"></span></button>
                                             </td>

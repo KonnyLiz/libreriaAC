@@ -260,8 +260,34 @@ $(document).ready(function () {
     
     //$('.sidebar-menu').tree();
     //funcion para el select de comprobantes
+    //****************servicios/**********************************************************************
 
-    //****************Ventas
+
+    $("#servicio").autocomplete({
+        source:function(request,response){
+            $.ajax({
+                url: base_url+"movimientos7servicios/getServicios",
+                type: "POST",
+                dataType: "json",
+                data:{ valor: request.term},
+                success: function(data){
+                    response(data);
+                }
+            });
+        },
+        minLength:2,
+        select:function(event, ui){
+            data = ui.item.id_servicio +"*" +ui.item.nombre+"*"+ui.item.descripción+"*"+ui.item.precio+"*"+ui.item.precio1+"*"+ui.item.precio2;
+            $("#btn-agregar").val(data);
+
+        },
+
+    });
+
+
+
+
+    //****************Ventas/*************
     $("#comprobantes").on("change", function(){
         option = $(this).val();
         
