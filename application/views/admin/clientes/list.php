@@ -123,15 +123,13 @@
                                 <label for="codigo">Reunion:</label>
                                 <input type="date" class="form-control"  name="reunion" >
                             </div>-->
-                             <div class="form-group <?php echo !empty(form_error("r2"))? 'has-error':'' ?>">
+                             <div class="form-group">
                                 <label for="codigo">Nombre:</label>
-                                <input  value="<?php echo set_value("r2")?>" type="text" class="form-control"  name="r2" required>
-                                <?php echo form_error("r2", "<span class='help-block'>", "</span>");?>
+                                <input type="text" title="Solo puede contener letras" class="form-control" pattern="^[a-zñ]+[a-zñ\s]+[a-zñ]$" name="r2" required>
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("r5"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="codigo">NIT</label>
-                                <input value="<?php echo set_value("r5")?>" type="text" class="form-control"  name="r5" >
-                                <?php echo form_error("r5", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" pattern="/^\d{4}-\d{6}-\d{3}-\d{1}$/" name="r5" >
                             </div>
                             <div class="form-group <?php echo !empty(form_error("r6"))? 'has-error':'' ?>">
                                 <label for="codigo">Registro</label>
