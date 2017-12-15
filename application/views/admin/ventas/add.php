@@ -70,8 +70,8 @@
                                 <div class="col-md-6">
                                     <label for="">Cliente:</label>
                                     <div class="input-group">
-                                        <input type="hidden" name="idcliente" id="idcliente">
-                                        <input type="text" class="form-control" disabled="disabled" id="cliente">
+                                       <input type="hidden" name="idcliente" id="idcliente">
+                                        <input type="text" class="form-control"  id="cliente2" name="valor">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span> Buscar</button>
                                         </span>
@@ -87,7 +87,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
-                                    <label for="">Producto:</label>
+                                    <label for="">productoucto:</label>
                                     <input type="text" class="form-control" id="producto" name="valor">
                                 </div>
                                 <div class="col-md-2">
@@ -100,13 +100,23 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-
                                         <th>Precio</th>
                                         <th>Stock Max.</th>
                                         <th>Cantidad</th>
                                         <th>Importe</th>
-                                        <th></th>
+                                         <th>Eliminar</th>
                                     </tr>
+                                    <?php foreach($servicios as $serv):?>
+                                    <tr>
+                                      <td><?php echo ($serv->id_servicio);?><input type="hidden" name="precios" id="<?php echo($serv->nombre).'2';?>" value="<?php echo($serv->precio.'*'.$serv->precio2.'*'.$serv->precio3); ?>"></td>
+                                       <td><?php echo ($serv->nombre);?></td>
+                                       <td ><input id="<?php echo($serv->nombre).'1';?>" value="<?php echo($serv->precio);?>"></td>
+                                       <td>-------</td>
+                                       <td><input type='number'  name='' min="0" values='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
+                                       <td>-------</td> 
+                                      <td></td> 
+                                    </tr>  <?php endforeach;?>
+                                    
                                 </thead>
                                 <tbody>
                                 
@@ -138,7 +148,6 @@
                                         <input type="text" class="form-control" placeholder="Username" name="total" id="total" readonly="readonly">
                                     </div>
                                 </div>
-                            </div>
                             
                             <div class="form-group">
                                 <div class="col-md-12">
@@ -182,7 +191,7 @@
                                         <tr>
                                             <td><?php echo $cliente->id;?></td>
                                             <td><?php echo $cliente->nombres;?></td>
-                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->dui."*".$cliente->nit."*".$cliente->telefono."*".$cliente->direccion?>
+                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->nit."*".$cliente->direccion?>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-check" value="<?php echo $datacliente;?>"><span class="fa fa-check"></span></button>
                                             </td>

@@ -10,12 +10,14 @@ private $permisos;
 		$this->load->model("Ventas_model");
 		$this->load->model("Clientes_model");
 		$this->load->model("Productos_model");
+		$this->load->model("Servicios_model");
 	}
 
 	public function index(){
 		$data = array(
 			"permisos" => $this->permisos, 
 			'ventas' => $this->Ventas_model->getVentas(),
+			'servicios' => $this->Servicios_model->getServicios(),
 		);
 
 		$this->load->view("layouts/header");
@@ -27,7 +29,8 @@ private $permisos;
 	public function add(){
 		$data = array(
 			"tipoComprobantes" => $this->Ventas_model->getComprobantes(),
-			"clientes" => $this->Clientes_model->getClientes()
+			"clientes" => $this->Clientes_model->getClientes(),
+			'servicios' => $this->Servicios_model->getServicios(),
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -40,6 +43,12 @@ private $permisos;
 		$clientes = $this->Ventas_model->getProductos($valor);
 		echo json_encode($clientes);
 	}
+	public function getClientes(){
+		$valor = $this->input->post("valor");
+		$clientes = $this->Ventas_model->getClientes($valor);
+		echo json_encode($clientes);
+	}
+	
 
 	//funcion para guardar la venta
 	public function store(){

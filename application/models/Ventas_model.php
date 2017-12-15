@@ -15,7 +15,13 @@ class Ventas_model extends CI_Model {
 		$resultados = $this->db->get();
 		return $resultados->result_array();
 	}
-
+	public function getClientes($valor){
+		$this->db->select("id, nombres");
+		$this->db->from("clientes");
+		$this->db->like("nombres", $valor);
+		$resultados = $this->db->get();
+		return $resultados->result_array();
+	}
 	public function save($data){
 		return $this->db->insert("ventas", $data);
 	}

@@ -263,26 +263,6 @@ $(document).ready(function () {
     //****************servicios/**********************************************************************
 
 
-    $("#servicio").autocomplete({
-        source:function(request,response){
-            $.ajax({
-                url: base_url+"movimientos7servicios/getServicios",
-                type: "POST",
-                dataType: "json",
-                data:{ valor: request.term},
-                success: function(data){
-                    response(data);
-                }
-            });
-        },
-        minLength:2,
-        select:function(event, ui){
-            data = ui.item.id_servicio +"*" +ui.item.nombre+"*"+ui.item.descripción+"*"+ui.item.precio+"*"+ui.item.precio1+"*"+ui.item.precio2;
-            $("#btn-agregar").val(data);
-
-        },
-
-    });
 
 
 
@@ -303,6 +283,78 @@ $(document).ready(function () {
             $("#iva").val(null);
             $("#serie").val(null);
             $("#numero").val(null);
+        }
+        sumar();
+    });
+    $("#laminación").on("change", function(){
+        option = $(this).val();
+        porId=$("#laminación2").val();
+        info = porId.split("*");
+        
+        if (option>=12 && option<=99 ) {
+             $("#laminación1").val(info[1]);
+
+        }else if(option>99){
+             $("#laminación1").val(info[2]);
+        }else{
+            $("#laminación1").val(info[0]);
+        }
+        sumar();
+    });
+    $("#impresiones").on("change", function(){
+        option = $(this).val();
+        porId=$("#impresiones2").val();
+        info = porId.split("*");
+        
+        if (option>=12 && option<=99 ) {
+             $("#impresiones1").val(info[1]);
+
+        }else if(option>99){
+             $("#impresiones1").val(info[2]);
+        }else{
+            $("#impresiones1").val(info[0]);
+        }
+        sumar();
+    });$("#refilado").on("change", function(){
+        option = $(this).val();
+        porId=$("#refilado2").val();
+        info = porId.split("*");
+        
+        if (option>=12 && option<=99 ) {
+             $("#refilado1").val(info[1]);
+
+        }else if(option>99){
+             $("#refilado1").val(info[2]);
+        }else{
+            $("#refilado1").val(info[0]);
+        }
+        sumar();
+    });$("#fotocopias").on("change", function(){
+       option = $(this).val();
+        porId=$("#fotocopias2").val();
+        info = porId.split("*");
+        
+        if (option>=12 && option<=99 ) {
+             $("#fotocopias1").val(info[1]);
+
+        }else if(option>99){
+             $("#fotocopias1").val(info[2]);
+        }else{
+            $("#fotocopias1").val(info[0]);
+        }
+        sumar();
+    });$("#anillados").on("change", function(){
+        option = $(this).val();
+        porId=$("#anillados2").val();
+        info = porId.split("*");
+        
+        if (option>=12 && option<=99 ) {
+             $("#anillados1").val(info[1]);
+
+        }else if(option>99){
+             $("#anillados1").val(info[2]);
+        }else{
+            $("#anillados1").val(info[0]);
         }
         sumar();
     });
@@ -333,7 +385,25 @@ $(document).ready(function () {
             $("#btn-agregar").val(data);
         }, 
     });
-
+    
+    $("#cliente2").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: base_url+"movimientos/ventas/getclientes",
+                type: "POST",
+                dataType: "json",
+                data:{ valor: request.term},
+                success: function(data){
+                    response(data);
+                }
+            });
+        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
+        minLength:2, //caracteres que activan el autocomplete
+        select: function(event, ui){
+          //  data = ui.item.id + "*" + ui.item.nombres;
+        // $("#btn-agregar").val(data);
+        }, 
+    });
     $("#btn-agregar").on("click", function(){
         data = $(this).val();
         if (data != " "){
@@ -517,6 +587,7 @@ function sumarReabastecimiento(){
       var res = porId.split("*");
         $("#gru2").val(res[1]);
     }
+
 </script>
 
 </body>

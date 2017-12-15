@@ -8,7 +8,6 @@ class Clientes_model extends CI_Model {
 		$resultados = $this->db->get("clientes");
 		return $resultados->result();
 	}
-
 	public function getCliente($id){
 		$this->db->where("id",$id);
 		$resultado = $this->db->get("clientes");
