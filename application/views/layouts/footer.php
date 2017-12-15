@@ -12,7 +12,7 @@
 
 <!-- jQuery 3 -->
     <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/moment.min.js'></script>
-<script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
+ <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>   
 <script src='<?php echo base_url(); ?>assets/fullcalendar/locale/es.js'></script> 
 
@@ -238,14 +238,13 @@ $(document).ready(function () {
         var cliente = $(this).val(); 
         //alert(cliente);
         var infocliente = cliente.split("*");
-        html = "<p><strong>Nombres:</strong>"+infocliente[1]+"</p>"
-        html += "<p><strong>Apellidos:</strong>"+infocliente[2]+"</p>"
-        html += "<p><strong>Telefono:</strong>"+infocliente[3]+"</p>"
-        html += "<p><strong>Direccion:</strong>"+infocliente[4]+"</p>"
-        html += "<p><strong>RUC:</strong>"+infocliente[5]+"</p>"
-        html += "<p><strong>Empresa:</strong>"+infocliente[6]+"</p>";
+        html = "<p><strong>Nombres: </strong>"+infocliente[1]+"</p>"
+        html += "<p><strong>NIT: </strong>"+infocliente[2]+"</p>"
+        html += "<p><strong>Registro: </strong>"+infocliente[3]+"</p>"
+        html += "<p><strong>Direccion: </strong>"+infocliente[4]+"</p>";
         $("#modal-default .modal-body").html(html);
     });
+
     $(".btn-view").on("click", function(){
         var id = $(this).val();
         $.ajax({

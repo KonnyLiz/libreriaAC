@@ -24,36 +24,22 @@ private $permisos;
 	}
 
 	public function store(){
-		$nombres = $this->input->post("nombre2");
-		$grupo  =  $this->input->post("grupo");
-		$apellidos =  $this->input->post("r2");
-		$telefono = $this->input->post("r3");
-		$dui = $this->input->post("r4");
+		$nombres =  $this->input->post("r2");
 		$nit = $this->input->post("r5");
-		$direccion = $this->input->post("r6");
-		$registro = $this->input->post("r7");
-		$empresa = $this->input->post("r8");
+		$registro = $this->input->post("r6");
+		$direccion = $this->input->post("r7");
 		$estado = 1;
 
 		
-		$this->form_validation->set_rules("r3", "Telefono", "alpha_dash|required");
-		$this->form_validation->set_rules("r4", "DUI", "alpha_dash|required");
-		$this->form_validation->set_rules("r5", "NIT", "alpha_dash|required");
-		$this->form_validation->set_rules("r6", "Direccion", "required");
-		$this->form_validation->set_rules("r7", "Registro", "required");
-		$this->form_validation->set_rules("r8", "Empresa", "required");
+		$this->form_validation->set_rules("r5", "NIT", "alpha_dash");
+		$this->form_validation->set_rules("r6", "Registro", "alpha_dash");
 		
 		if ($this->form_validation->run()){
 			$data  = array(
-				'grupo' => $grupo, 
 				'nombres' => $nombres, 
-				'apellidos' => $apellidos,
-				'telefono' => $telefono,
-				'dui' => $dui,
 				'nit' => $nit,
 				'direccion' => $direccion,
 				'registro' => $registro,
-				'empresa' => $empresa,
 				'estado' => $estado
 			);
 
@@ -81,37 +67,21 @@ private $permisos;
 
 	public function update(){
 		$idcliente = $this->input->post("id_cliente");
-		$nombres = $this->input->post("nom");
-		$grupo  =  $this->input->post("r1");
-		$apellidos = $this->input->post("r2");
-		$telefono = $this->input->post("r3");
-		$dui = $this->input->post("r4");
+		$nombres =  $this->input->post("r2");
 		$nit = $this->input->post("r5");
-		$direccion = $this->input->post("r6");
-		$registro = $this->input->post("r7");
-		$empresa = $this->input->post("r8");
+		$registro = $this->input->post("r6");
+		$direccion = $this->input->post("r7");
 		$estado = 1;
-		$this->form_validation->set_rules("nom", "Nombre", "required");
-
-		$this->form_validation->set_rules("r2", "Apellido", "required");
-		$this->form_validation->set_rules("r3", "Telefono", "alpha_dash|required");
-		$this->form_validation->set_rules("r4", "DUI", "alpha_dash|required");
-		$this->form_validation->set_rules("r5", "NIT", "alpha_dash|required");
-		$this->form_validation->set_rules("r6", "Direccion", "required");
-		$this->form_validation->set_rules("r7", "Registro", "required");
-		$this->form_validation->set_rules("r8", "Empresa", "required");
+		
+		$this->form_validation->set_rules("r5", "NIT", "alpha_dash");
+		$this->form_validation->set_rules("r6", "Registro", "alpha_dash");
 		
 		if ($this->form_validation->run()){
 			$data  = array(
-				'grupo' => $grupo, 
 				'nombres' => $nombres, 
-				'apellidos' => $apellidos,
-				'telefono' => $telefono,
-				'dui' => $dui,
 				'nit' => $nit,
 				'direccion' => $direccion,
 				'registro' => $registro,
-				'empresa' => $empresa,
 				'estado' => $estado
 			);
 
