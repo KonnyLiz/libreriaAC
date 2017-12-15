@@ -8,6 +8,8 @@ class Productos extends CI_Controller {
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Productos_model");
 		$this->load->model("Categorias_model");
+		$this->load->model("Marcas_model");
+		$this->load->model("Proveedores_model");
 	}
 
 	public function index()
@@ -15,7 +17,9 @@ class Productos extends CI_Controller {
 		$data  = array(
 			"permisos" => $this->permisos,
 			'productos' => $this->Productos_model->getProductos(),
-			"categorias" => $this->Categorias_model->getCategorias() 
+			"categorias" => $this->Categorias_model->getCategorias(),
+			"marca" => $this->Marcas_model->getMarcas() ,
+			"proveedor" => $this->Proveedores_model->getProveedores()  
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -28,9 +32,12 @@ class Productos extends CI_Controller {
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
+		$marca = $this->input->post("marca");
+		$proveedor = $this->input->post("proveedor");
 		$precio_e = $this->input->post("precio_e");
 		$precio = $this->input->post("precio");
 		$precio_m = $this->input->post("precio_m");
+		$precio_m1 = $this->input->post("precio_m1");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
 
@@ -46,9 +53,12 @@ class Productos extends CI_Controller {
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
+				'id_marca' => $marca,
+				'id_proveedor' => $proveedor,
 				'precio_entrada' => $precio_e,
 				'precio' => $precio,
-				'precio_mayoreo' => $precio_m,
+				'precio_mayoreo1' => $precio_m,
+				'precio_mayoreo2' => $precio_m1,
 				'stock' => $stock,
 				'categoria_id' => $categoria,
 				'estado' => "1"
@@ -71,7 +81,9 @@ class Productos extends CI_Controller {
 	public function edit($id){
 		$data =array( 
 			"producto" => $this->Productos_model->getProducto($id),
-			"categorias" => $this->Categorias_model->getCategorias()
+			"categorias" => $this->Categorias_model->getCategorias(),
+			"marca" => $this->Marcas_model->getMarcas() ,
+			"proveedor" => $this->Proveedores_model->getProveedores(), 
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -83,10 +95,13 @@ class Productos extends CI_Controller {
 		$idproducto = $this->input->post("idproducto");
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
+		$marca = $this->input->post("marca");
+		$prov = $this->input->post("proveedor");
 		$descripcion = $this->input->post("descripcion");
 		$precio_e = $this->input->post("precio_e");
 		$precio = $this->input->post("precio");
 		$precio_m = $this->input->post("precio_m");
+		$precio_m1 = $this->input->post("precio_m1");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
 
@@ -109,9 +124,12 @@ class Productos extends CI_Controller {
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
+				'id_proveedor' => $prov,
+				'id_marca' => $marca,
 				'precio_entrada' => $precio_e,
 				'precio' => $precio,
-				'precio_mayoreo' => $precio_m,
+				'precio_mayoreo1' => $precio_m,
+				'precio_mayoreo2' => $precio_m1,
 				'stock' => $stock,
 				'categoria_id' => $categoria,
 			);
