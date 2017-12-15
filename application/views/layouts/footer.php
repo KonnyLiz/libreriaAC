@@ -289,44 +289,72 @@ $(document).ready(function () {
     $("#laminación").on("change", function(){
         option = $(this).val();
         porId=$("#laminación2").val();
+
+       
+       // $("#laminación3").val(lami);
+        
         info = porId.split("*");
         
         if (option>=12 && option<=99 ) {
              $("#laminación1").val(info[1]);
-
+            lami = val("laminación");
+             document.getElementById("laminación3").innerHTML = lami;              
         }else if(option>99){
              $("#laminación1").val(info[2]);
+             lami = val("laminación");
+             document.getElementById("laminación3").innerHTML = lami;
         }else{
             $("#laminación1").val(info[0]);
+             lami = val("laminación");
+             document.getElementById("laminación3").innerHTML = lami;
         }
         sumar();
     });
+
+
+    //************************************************ tramo para cuando se aumente el input de un servicio
+
     $("#impresiones").on("change", function(){
-        option = $(this).val();
-        porId=$("#impresiones2").val();
-        info = porId.split("*");
-        
+        option = $(this).val(); //optiene el valor del imput con id impresiones
+        porId=$("#impresiones2").val(); //se obtiene un input de tipi hidden que contiene todos los precios de cada servicio en el foreach
+        info = porId.split("*");//se separan por la identificacion *
+                
+                //tramo de condiciones para cambiar el valor de venta de servicio
         if (option>=12 && option<=99 ) {
-             $("#impresiones1").val(info[1]);
+             $("#impresiones1").val(info[1]); // aqui se obtiene el valor de la poscion 2 que seria el precio2 que se tiene en trabla
+             lami = val("impresiones");
+             document.getElementById("impresiones3").innerHTML = lami;//aqui se manda al label importe el valor para que aparezca
 
         }else if(option>99){
              $("#impresiones1").val(info[2]);
+               lami = val("impresiones");
+             document.getElementById("impresiones3").innerHTML = lami;
         }else{
             $("#impresiones1").val(info[0]);
+              lami = val("impresiones");
+             document.getElementById("impresiones3").innerHTML = lami;
         }
         sumar();
-    });$("#refilado").on("change", function(){
+    });
+    //la misma estructura sigue las demas funciones
+    $("#refilado").on("change", function(){
         option = $(this).val();
         porId=$("#refilado2").val();
         info = porId.split("*");
         
         if (option>=12 && option<=99 ) {
              $("#refilado1").val(info[1]);
+               lami = val("refilado");
+             document.getElementById("refilado3").innerHTML = lami;
 
         }else if(option>99){
              $("#refilado1").val(info[2]);
+              lami = val("refilado");
+             document.getElementById("refilado3").innerHTML = lami;
         }else{
             $("#refilado1").val(info[0]);
+             lami = val("refilado");
+             document.getElementById("refilado3").innerHTML = lami;
         }
         sumar();
     });$("#fotocopias").on("change", function(){
@@ -336,11 +364,17 @@ $(document).ready(function () {
         
         if (option>=12 && option<=99 ) {
              $("#fotocopias1").val(info[1]);
+              lami = val("fotocopias");
+             document.getElementById("fotocopias3").innerHTML = lami;
 
         }else if(option>99){
              $("#fotocopias1").val(info[2]);
+             lami = val("fotocopias");
+             document.getElementById("fotocopias3").innerHTML = lami;
         }else{
             $("#fotocopias1").val(info[0]);
+            lami = val("fotocopias");
+             document.getElementById("fotocopias3").innerHTML = lami;
         }
         sumar();
     });$("#anillados").on("change", function(){
@@ -350,11 +384,17 @@ $(document).ready(function () {
         
         if (option>=12 && option<=99 ) {
              $("#anillados1").val(info[1]);
+             lami = val("anillados");
+             document.getElementById("anillados3").innerHTML = lami;
 
         }else if(option>99){
              $("#anillados1").val(info[2]);
+              lami = val("anillados");
+             document.getElementById("anillados3").innerHTML = lami;
         }else{
             $("#anillados1").val(info[0]);
+             lami = val("anillados");
+             document.getElementById("anillados3").innerHTML = lami;
         }
         sumar();
     });
@@ -545,19 +585,27 @@ function generarNumero(numero){
         return "00000" + (Number(numero)+1);
     }
 }
-
+function val(serv){
+    lami =  parseFloat($('#'+serv).val());
+    lami =  lami * parseFloat($('#'+serv+'1').val());
+    lami = parseFloat(lami.toFixed(2));
+    return  lami;
+}
 function sumar(){
 
+    val_serv = val("laminación")+val("anillados")+val("impresiones")+val("fotocopias")+val("refilado");
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
         subtotal = subtotal + Number($(this).find("td:eq(5)").text());
     });
+    
     $("#subtotal").val(parseFloat(subtotal.toFixed(2)));
     porcentaje = $("#iva").val();
     iva = subtotal * (porcentaje/100);
     $("#iva2").val(iva.toFixed(2));
     descuento = parseInt($("#descuento").val());
-    total = subtotal + iva - descuento;
+    //aqui resive el valor que se devulve en val_serv que es el valor de todos los servicios
+    total = subtotal + iva - descuento + parseFloat(val_serv.toFixed(2));
     $("#total").val(total.toFixed(2));
 }
 

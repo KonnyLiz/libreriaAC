@@ -112,8 +112,8 @@
                                        <td><?php echo ($serv->nombre);?></td>
                                        <td ><input id="<?php echo($serv->nombre).'1';?>" value="<?php echo($serv->precio);?>"></td>
                                        <td>-------</td>
-                                       <td><input type='number'  name='' min="0" values='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
-                                       <td>-------</td> 
+                                       <td><input type='number'  name='' min="0" value='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
+                                       <td><p id = "<?php echo($serv->nombre).'3';?>"></p></td> 
                                       <td></td> 
                                     </tr>  <?php endforeach;?>
                                     
