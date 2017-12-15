@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-12-2017 a las 04:45:41
+-- Tiempo de generación: 15-12-2017 a las 22:24:17
 -- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Versión de PHP: 5.6.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -136,8 +136,17 @@ CREATE TABLE `eventos` (
 
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
-  `nombre` varchar(100) NOT NULL
+  `nombre` varchar(100) NOT NULL,
+  `esatdo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `marca`
+--
+
+INSERT INTO `marca` (`id_marca`, `nombre`, `esatdo`) VALUES
+(1, 'Pelikan', 1),
+(2, 'Bic', 1);
 
 -- --------------------------------------------------------
 
@@ -245,6 +254,13 @@ CREATE TABLE `productos` (
   `estado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `productos`
+--
+
+INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `estado`) VALUES
+(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 100, 4, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -254,10 +270,18 @@ CREATE TABLE `productos` (
 CREATE TABLE `proveedor` (
   `id_proveedor` int(11) NOT NULL,
   `nombre` varchar(150) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `id_marca` int(11) NOT NULL,
   `telefono` varchar(10) NOT NULL,
-  `direccion` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL
+  `direccion` varchar(200) CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `telefono`, `direccion`, `estado`) VALUES
+(1, 'disasa', '61099440', '22 calle oriente pol e casa # 2 col. esperanza San salvador', 1),
+(2, 'sony', '76636542', 'sivar', 1);
 
 -- --------------------------------------------------------
 
@@ -293,6 +317,32 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
 (1, 'superadmin', 'control toal'),
 (2, 'admin', 'control total'),
 (3, 'vendedor', 'ciertos modulos');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `servicios`
+--
+
+CREATE TABLE `servicios` (
+  `id_servicio` int(11) NOT NULL,
+  `nombre` varchar(25) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `descripción` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `precio` float NOT NULL,
+  `precio2` float NOT NULL,
+  `precio3` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `servicios`
+--
+
+INSERT INTO `servicios` (`id_servicio`, `nombre`, `descripción`, `precio`, `precio2`, `precio3`) VALUES
+(1, 'laminación', 'con una hoja de plástico se laminan documentos', 1, 0.95, 0.9),
+(2, 'fotocopias', 'se sacan copias de documentos y más', 0.05, 0.05, 0.04),
+(3, 'impresiones', 'impresiones a color o blanco y negro', 0.2, 0.15, 0.13),
+(4, 'anillados', 'ya se de impresiones, libros o mas', 4, 3.75, 3.5),
+(5, 'refilado', 'refilación de cartuchos de impresora', 5, 4.75, 4.55);
 
 -- --------------------------------------------------------
 
@@ -452,8 +502,7 @@ ALTER TABLE `productos`
 -- Indices de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  ADD PRIMARY KEY (`id_proveedor`,`id_marca`),
-  ADD KEY `id_marca` (`id_marca`);
+  ADD PRIMARY KEY (`id_proveedor`);
 
 --
 -- Indices de la tabla `reclamos`
@@ -467,6 +516,12 @@ ALTER TABLE `reclamos`
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`);
+
+--
+-- Indices de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD PRIMARY KEY (`id_servicio`);
 
 --
 -- Indices de la tabla `tipo_comprobante`
@@ -530,7 +585,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
@@ -545,12 +600,12 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
@@ -561,6 +616,11 @@ ALTER TABLE `reclamos`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
@@ -614,12 +674,6 @@ ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`),
   ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
-
---
--- Filtros para la tabla `proveedor`
---
-ALTER TABLE `proveedor`
-  ADD CONSTRAINT `proveedor_ibfk_1` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
 
 --
 -- Filtros para la tabla `usuarios`
