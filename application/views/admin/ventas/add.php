@@ -70,8 +70,8 @@
                                 <div class="col-md-6">
                                     <label for="">Cliente:</label>
                                     <div class="input-group">
-                                       <input type="hidden" name="idcliente" id="idcliente">
-                                        <input type="text" class="form-control"  id="cliente2" name="valor">
+                                        <input type="hidden" name="idcliente" id="idcliente">
+                                        <input type="text" class="form-control" disabled="disabled" id="cliente">
                                         <span class="input-group-btn">
                                             <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span> Buscar</button>
                                         </span>
