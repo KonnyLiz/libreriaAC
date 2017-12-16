@@ -30,11 +30,6 @@ private $permisos;
 		$direccion = $this->input->post("r7");
 		$estado = 1;
 
-		
-		$this->form_validation->set_rules("r5", "NIT", "alpha_dash");
-		$this->form_validation->set_rules("r6", "Registro", "alpha_dash");
-		
-		if ($this->form_validation->run()){
 			$data  = array(
 				'nombres' => $nombres, 
 				'nit' => $nit,
@@ -50,9 +45,6 @@ private $permisos;
 				$this->session->set_flashdata("error","No se pudo guardar la informacion");
 				redirect(base_url()."mantenimiento/clientes/add");
 			}
-		} else {
-			$this->index();
-		}
 	}
 
 	public function edit($id){
@@ -73,10 +65,6 @@ private $permisos;
 		$direccion = $this->input->post("r7");
 		$estado = 1;
 		
-		$this->form_validation->set_rules("r5", "NIT", "alpha_dash");
-		$this->form_validation->set_rules("r6", "Registro", "alpha_dash");
-		
-		if ($this->form_validation->run()){
 			$data  = array(
 				'nombres' => $nombres, 
 				'nit' => $nit,
@@ -92,9 +80,6 @@ private $permisos;
 				$this->session->set_flashdata("error","No se pudo actualizar la informacion");
 				redirect(base_url()."mantenimiento/clientes/edit/".$idcliente);
 			}
-		} else {
-			$this->edit($idcliente);
-		}
 	}
 
 	public function delete($id){

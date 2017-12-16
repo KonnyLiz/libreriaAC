@@ -125,21 +125,19 @@
                             </div>-->
                              <div class="form-group">
                                 <label for="codigo">Nombre:</label>
-                                <input type="text" title="Solo puede contener letras" class="form-control" pattern="^[a-zñ]+[a-zñ\s]+[a-zñ]$" name="r2" required>
+                                <input type="text" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control" name="r2" required>
                             </div>
                             <div class="form-group">
                                 <label for="codigo">NIT</label>
-                                <input type="text" class="form-control" pattern="/^\d{4}-\d{6}-\d{3}-\d{1}$/" name="r5" >
+                                <input type="text" title="Formato: ####-######-###-#" class="form-control" pattern="[0-9]{4}-[0-9]{6}-[0-9]{3}-[0-9]{1}" name="r5" >
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("r6"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="codigo">Registro</label>
-                                <input value="<?php echo set_value("r6")?>" type="text" class="form-control"  name="r6" >
-                                <?php echo form_error("r6", "<span class='help-block'>", "</span>");?>
+                                <input title="Formato: ######-#" pattern="[0-9]{6}-[0-9]{1}" type="text" class="form-control"  name="r6" >
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("r7"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="codigo">Direccion:</label>
-                                <input  value="<?php echo set_value("r7")?>" type="text" class="form-control"  name="r7" >
-                                <?php echo form_error("r7", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control"  name="r7" >
                             </div>
                                 <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-flat">Guardar</button>
