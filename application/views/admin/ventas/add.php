@@ -38,7 +38,7 @@
                     
                         <div class="col-md-3" style="padding-bottom: 12px">
                                     <label for="">Fecha:</label>
-                                    <input type="date" class="form-control" name="fecha" required>
+                                    <input type="date" class="form-control" name="fecha" value="<?php echo date("Y-m-d");?>" required>
                                 </div>
                         <div class="col-md-12">
 
