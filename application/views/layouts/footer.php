@@ -269,6 +269,11 @@ $(document).ready(function () {
 
     //****************Ventas/*************
     $("#comprobantes").on("change", function(){
+         des_imp = 0;
+         des_lam = 0;
+         des_foto = 0;
+         des_ani = 0;
+         des_ref = 0;
         option = $(this).val();
         
         if (option != ""){
@@ -289,23 +294,29 @@ $(document).ready(function () {
     $("#laminación").on("change", function(){
         option = $(this).val();
         porId=$("#laminación2").val();
-
        
        // $("#laminación3").val(lami);
         
         info = porId.split("*");
+         des_lam = info[0];
         
         if (option>=12 && option<=99 ) {
              $("#laminación1").val(info[1]);
+             des_lam = des_lam * option;
             lami = val("laminación");
+            des_lam = des_lam - lami;
              document.getElementById("laminación3").innerHTML = lami;              
         }else if(option>99){
              $("#laminación1").val(info[2]);
+             des_lam = des_lam * option;
              lami = val("laminación");
+               des_lam = des_lam - lami;
              document.getElementById("laminación3").innerHTML = lami;
         }else{
             $("#laminación1").val(info[0]);
+            des_lam = des_lam * option;
              lami = val("laminación");
+               des_lam = des_lam - lami;
              document.getElementById("laminación3").innerHTML = lami;
         }
         sumar();
@@ -318,20 +329,27 @@ $(document).ready(function () {
         option = $(this).val(); //optiene el valor del imput con id impresiones
         porId=$("#impresiones2").val(); //se obtiene un input de tipi hidden que contiene todos los precios de cada servicio en el foreach
         info = porId.split("*");//se separan por la identificacion *
+        des_imp = info[0];
                 
                 //tramo de condiciones para cambiar el valor de venta de servicio
         if (option>=12 && option<=99 ) {
              $("#impresiones1").val(info[1]); // aqui se obtiene el valor de la poscion 2 que seria el precio2 que se tiene en trabla
              lami = val("impresiones");
+             des_imp = des_imp * option;
+             des_imp = des_imp - lami;
              document.getElementById("impresiones3").innerHTML = lami;//aqui se manda al label importe el valor para que aparezca
 
         }else if(option>99){
              $("#impresiones1").val(info[2]);
                lami = val("impresiones");
+                des_imp = des_imp * option;
+             des_imp = des_imp - lami;
              document.getElementById("impresiones3").innerHTML = lami;
         }else{
             $("#impresiones1").val(info[0]);
               lami = val("impresiones");
+             des_imp = des_imp * option;
+             des_imp = des_imp - lami;
              document.getElementById("impresiones3").innerHTML = lami;
         }
         sumar();
@@ -341,19 +359,26 @@ $(document).ready(function () {
         option = $(this).val();
         porId=$("#refilado2").val();
         info = porId.split("*");
+        des_ref = info[0];
         
         if (option>=12 && option<=99 ) {
              $("#refilado1").val(info[1]);
                lami = val("refilado");
+                des_ref = des_ref * option;
+             des_ref = des_ref - lami;
              document.getElementById("refilado3").innerHTML = lami;
 
         }else if(option>99){
              $("#refilado1").val(info[2]);
               lami = val("refilado");
+              des_ref = des_ref * option;
+             des_ref = des_ref - lami;
              document.getElementById("refilado3").innerHTML = lami;
         }else{
             $("#refilado1").val(info[0]);
              lami = val("refilado");
+             des_ref = des_ref * option;
+             des_ref = des_ref - lami;
              document.getElementById("refilado3").innerHTML = lami;
         }
         sumar();
@@ -361,19 +386,26 @@ $(document).ready(function () {
        option = $(this).val();
         porId=$("#fotocopias2").val();
         info = porId.split("*");
+        des_foto = info[0];
         
         if (option>=12 && option<=99 ) {
              $("#fotocopias1").val(info[1]);
               lami = val("fotocopias");
+              des_foto = des_foto * option;
+             des_foto = des_foto - lami;
              document.getElementById("fotocopias3").innerHTML = lami;
 
         }else if(option>99){
              $("#fotocopias1").val(info[2]);
              lami = val("fotocopias");
+             des_foto = des_foto * option;
+             des_foto = des_foto - lami;
              document.getElementById("fotocopias3").innerHTML = lami;
         }else{
             $("#fotocopias1").val(info[0]);
             lami = val("fotocopias");
+            des_foto = des_foto * option;
+             des_foto = des_foto - lami;
              document.getElementById("fotocopias3").innerHTML = lami;
         }
         sumar();
@@ -381,19 +413,26 @@ $(document).ready(function () {
         option = $(this).val();
         porId=$("#anillados2").val();
         info = porId.split("*");
+        des_ani = info[0];
         
         if (option>=12 && option<=99 ) {
              $("#anillados1").val(info[1]);
              lami = val("anillados");
+             des_ani = des_ani * option;
+             des_ani = des_ani - lami;
              document.getElementById("anillados3").innerHTML = lami;
 
         }else if(option>99){
              $("#anillados1").val(info[2]);
               lami = val("anillados");
+              des_ani = des_ani * option;
+             des_ani = des_ani - lami;
              document.getElementById("anillados3").innerHTML = lami;
         }else{
             $("#anillados1").val(info[0]);
              lami = val("anillados");
+             des_ani = des_ani * option;
+             des_ani = des_ani - lami;
              document.getElementById("anillados3").innerHTML = lami;
         }
         sumar();
@@ -563,26 +602,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#proveedor-reabastecer").autocomplete({
-        source: function(request, response){
-            $.ajax({
-                url: base_url+"movimientos/reabastecer/getProveedor",
-                type: "POST",
-                dataType: "json",
-                data:{ valor: request.term},
-                success: function(data){
-                    response(data);
-                }
-            });
-        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
-        minLength:2, //caracteres que activan el autocomplete
-        select: function(event, ui){
-            data = ui.item.id_proveedor + "*" + ui.item.label;
-            infoProveedor = data.split("*");
-            $("#idproveedor").val(infoProveedor[0]);
-        }, 
-    });
-
 });
 
 function generarNumero(numero){
@@ -623,9 +642,11 @@ function sumar(){
     porcentaje = $("#iva").val();
     iva = subtotal * (porcentaje/100);
     $("#iva2").val(iva.toFixed(2));
-    descuento = parseInt($("#descuento").val());
+    //descuento = parseInt($("#descuento").val()));
+    $("#subtotal").val(parseFloat(des_lam + des_imp + des_ani + des_foto + des_ref+ val_serv).toFixed(2));
+    $("#descuento").val( (des_lam + des_imp + des_ani + des_foto + des_ref).toFixed(2));
     //aqui resive el valor que se devulve en val_serv que es el valor de todos los servicios
-    total = subtotal + iva - descuento + parseFloat(val_serv.toFixed(2));
+    total = subtotal + iva + parseFloat(val_serv.toFixed(2));
     $("#total").val(total.toFixed(2));
 }
 
@@ -637,6 +658,24 @@ function sumarReabastecimiento(){
     $("#total-reabastecer").val(total.toFixed(2));
 }
 </script>
+
+</script>
+<script type="text/javascript">
+    function jajaja(){
+      var porId=document.getElementById("nombre").value;
+      var res = porId.split("*");
+        $("#grupo").val(res[1]);
+    }
+    function raro(){
+      var porId=document.getElementById("nombre").value;
+      var res = porId.split("*");
+        $("#nombre2").val(res[0]);
+    }
+    function raro2(){
+      var porId=document.getElementById("nombre").value;
+      var res = porId.split("*");
+        $("#gru2").val(res[1]);
+    }
 
 </script>
 

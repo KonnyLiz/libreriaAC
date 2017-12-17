@@ -63,7 +63,7 @@
                                     <?php foreach($ventas as $venta) {?>
                                     <tr>
                                         <td><?php echo $venta->id;?></td>
-                                        <td><?php echo $venta->nombres." ".$venta->apellidos;?></td>
+                                        <td><?php echo $venta->nombres;?></td>
                                         <td><?php echo $venta->tipo_comprobante;?></td>
                                         <td><?php echo $venta->num_documento;?></td>
                                         <td><?php echo $venta->usuNombre." ".$venta->usuApellido;?></td>
