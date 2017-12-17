@@ -28,10 +28,16 @@ private $permisos;
 		$this->load->view("layouts/footer");
 	}
 
+	public function getProveedor(){
+		$valor = $this->input->post("valorProveedor");
+		$prov = $this->Reabastecer_model->getProveedor($valor);
+		echo json_encode($prov);
+	}
+
 	public function getProductos(){
 		$valor = $this->input->post("valor");
-		$clientes = $this->Reabastecer_model->getProductos($valor);
-		echo json_encode($clientes);
+		$producto = $this->Reabastecer_model->getProductos($valor);
+		echo json_encode($producto);
 	}
 
 	public function store(){
@@ -40,12 +46,14 @@ private $permisos;
 		$cantidades =$this->input->post("cantidades");
 		$importe =$this->input->post("importes");
 		$total = $this->input->post("total-reabastecer");
+		$idProveedor = $this->input->post("idproveedor");
 		$idusuario = $this->session->userdata('id'); 
 
 		$data = array(
 			'fecha' => $fecha,
 			'total_abastecer' => $total,
 			'usuario_id' => $idusuario,
+			'proveedor_id' => $idProveedor,
 		);
 
 		if ($this->Reabastecer_model->save($data)){

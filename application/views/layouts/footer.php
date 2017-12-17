@@ -563,6 +563,26 @@ $(document).ready(function () {
         });
     });
 
+    $("#proveedor-reabastecer").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: base_url+"movimientos/reabastecer/getProveedor",
+                type: "POST",
+                dataType: "json",
+                data:{ valor: request.term},
+                success: function(data){
+                    response(data);
+                }
+            });
+        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
+        minLength:2, //caracteres que activan el autocomplete
+        select: function(event, ui){
+            data = ui.item.id_proveedor + "*" + ui.item.label;
+            infoProveedor = data.split("*");
+            $("#idproveedor").val(infoProveedor[0]);
+        }, 
+    });
+
 });
 
 function generarNumero(numero){
@@ -617,24 +637,6 @@ function sumarReabastecimiento(){
     $("#total-reabastecer").val(total.toFixed(2));
 }
 </script>
-
-</script>
-<script type="text/javascript">
-    function jajaja(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#grupo").val(res[1]);
-    }
-    function raro(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#nombre2").val(res[0]);
-    }
-    function raro2(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#gru2").val(res[1]);
-    }
 
 </script>
 

@@ -7,7 +7,7 @@
                             <li><a href="#">Dashboard</a>
                             </li>
                             <li>Movimientos</li>
-                            <li class="active">Reabastecer</li>
+                            <li class="active">Abastecer</li>
                         </ul>
         <?php if($this->session->flashdata("error")):?>
             <div class="alert alert-danger alert-dismissible">
@@ -16,7 +16,7 @@
             </div>
         <?php endif;?>
 
-        <h1>Reabastecer</h1>
+        <h1>Abastecer</h1>
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,6 +51,14 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
+                                    <label for="">Proveedor:</label>
+                                    <input type="text" class="form-control" id="proveedor-reabastecer" name="valorProveedor">
+                                    <input type="hidden" id="idproveedor" name="idproveedor">
+                                </div>
+                                 <div class="col-md-6">
+                                    <label for="">&nbsp;</label>
+                                </div>
+                                <div class="col-md-6">
                                     <label for="">Producto:</label>
                                     <input type="text" class="form-control" id="producto-reabastecer" name="valor">
                                 </div>
@@ -64,7 +72,6 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-
                                         <th>Precio Entrada</th>
                                         <th>Existencias</th>
                                         <th>Cantidad</th>

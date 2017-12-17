@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Ferreteria xyz</title>
+<title>Libreria A&amp;C</title>
    <?php
    
     require_once('flyweit.php');
