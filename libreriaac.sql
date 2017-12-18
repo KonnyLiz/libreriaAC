@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2017 a las 22:24:17
+-- Tiempo de generación: 18-12-2017 a las 04:01:08
 -- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 5.6.31
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -32,8 +32,16 @@ CREATE TABLE `abastecer` (
   `id` int(11) NOT NULL,
   `fecha` date NOT NULL,
   `total_abastecer` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `usuario_id` int(11) NOT NULL
+  `usuario_id` int(11) NOT NULL,
+  `proveedor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `abastecer`
+--
+
+INSERT INTO `abastecer` (`id`, `fecha`, `total_abastecer`, `usuario_id`, `proveedor_id`) VALUES
+(1, '2017-12-16', '0.08', 7, 2);
 
 -- --------------------------------------------------------
 
@@ -84,7 +92,16 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id`, `nombres`, `nit`, `registro`, `direccion`, `estado`) VALUES
 (1, 'Hugo', '123', '123', 'sm', 1),
-(2, 'Zulmi Amaya', 'yy', 'rr', 'ee', 1);
+(2, 'Zulmi Amaya', 'yy', 'rr', 'ee', 1),
+(3, 'dd dddd', '98989800000000', '', '', 1),
+(4, 'wenas', '1217-061296-101-0', '', '', 1),
+(5, 'ffs', '1217-061296-101-0', '987654-0', '', 1),
+(6, 'ggg', '1217-061296-101-0', '123456-0', '', 1),
+(7, 'fff fff', '1217-061296-101-0', '123456-0', '', 1),
+(8, 'eeee', '1217-061296-101-0', '123456-0', '', 1),
+(9, 'ff vvv vvv', '1217-061296-101-0', '123456-0', '', 1),
+(10, '22222', '1217-061296-101-0', '123456-0', '', 1),
+(11, 'dddd cccc2', '1217-061296-101-0', '123456-0', '', 1);
 
 -- --------------------------------------------------------
 
@@ -99,6 +116,13 @@ CREATE TABLE `detalle_abastecer` (
   `cantidad_abastecer` float NOT NULL,
   `importe` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_abastecer`
+--
+
+INSERT INTO `detalle_abastecer` (`id`, `abastecer_id`, `producto_id`, `cantidad_abastecer`, `importe`) VALUES
+(1, 1, 1, 1, 0.08);
 
 -- --------------------------------------------------------
 
@@ -137,16 +161,18 @@ CREATE TABLE `eventos` (
 CREATE TABLE `marca` (
   `id_marca` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
-  `esatdo` tinyint(4) NOT NULL
+  `estado` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `marca`
 --
 
-INSERT INTO `marca` (`id_marca`, `nombre`, `esatdo`) VALUES
+INSERT INTO `marca` (`id_marca`, `nombre`, `estado`) VALUES
 (1, 'Pelikan', 1),
-(2, 'Bic', 1);
+(2, 'Bic', 1),
+(3, 'Paper', 1),
+(4, 'Matsuri', 1);
 
 -- --------------------------------------------------------
 
@@ -259,7 +285,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `estado`) VALUES
-(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 100, 4, 1);
+(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 101, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -429,7 +455,8 @@ CREATE TABLE `ventas` (
 --
 ALTER TABLE `abastecer`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_usuario_id` (`usuario_id`);
+  ADD KEY `fk_usuario_id` (`usuario_id`),
+  ADD KEY `fk_proveedor` (`proveedor_id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -555,7 +582,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
@@ -565,12 +592,12 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
@@ -585,7 +612,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
@@ -605,7 +632,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
@@ -644,7 +671,8 @@ ALTER TABLE `ventas`
 -- Filtros para la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  ADD CONSTRAINT `abastecer_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `abastecer_ibfk_1` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `abastecer_ibfk_2` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id_proveedor`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Filtros para la tabla `detalle_abastecer`

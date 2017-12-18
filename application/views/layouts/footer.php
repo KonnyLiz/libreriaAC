@@ -602,6 +602,31 @@ $(document).ready(function () {
         });
     });
 
+<<<<<<< HEAD
+    $("#proveedor-reabastecer").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: base_url+"movimientos/reabastecer/getProveedor",
+                type: "POST",
+                dataType: "json",
+                data:{ valorProveedor: request.term},
+                success: function(data){
+                    response(data);
+                }
+            });
+        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
+        minLength:2, //caracteres que activan el autocomplete
+        select: function(event, ui){
+            data = ui.item.id_proveedor + "*" + ui.item.label;
+            infoProveedor = data.split("*");
+            $("#idproveedor").val(infoProveedor[0]);
+        }, 
+    });
+
+ 
+
+=======
+>>>>>>> 70bcfe7dcd80de8e5f684f3f04e0c1b0d2ddb170
 });
 
 function generarNumero(numero){

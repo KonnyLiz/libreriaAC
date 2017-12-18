@@ -49,15 +49,14 @@
                                     <input type="date" class="form-control" name="fecha" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-md-6">
+                             <div class="form-group">
+                              <div class="col-md-6">
                                     <label for="">Proveedor:</label>
-                                    <input type="text" class="form-control" id="proveedor-reabastecer" name="valorProveedor">
+                                    <input type="text" class="form-control" id="proveedor-reabastecer" name="valorProveedor" required>
                                     <input type="hidden" id="idproveedor" name="idproveedor">
                                 </div>
-                                 <div class="col-md-6">
-                                    <label for="">&nbsp;</label>
-                                </div>
+                            </div>
+                            <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Producto:</label>
                                     <input type="text" class="form-control" id="producto-reabastecer" name="valor">

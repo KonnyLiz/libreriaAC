@@ -29,8 +29,8 @@ private $permisos;
 	}
 
 	public function getProveedor(){
-		$valor = $this->input->post("valorProveedor");
-		$prov = $this->Reabastecer_model->getProveedor($valor);
+		$valorProveedor = $this->input->post("valorProveedor");
+		$prov = $this->Reabastecer_model->getProveedor($valorProveedor);
 		echo json_encode($prov);
 	}
 

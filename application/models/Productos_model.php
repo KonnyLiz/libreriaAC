@@ -19,7 +19,7 @@ class Productos_model extends CI_Model {
 		return $resultado->row();
 	}
 	public function save($data){
-		return $this->db->insert("productos",$data);
+		return $this->db->insert("productos",$data); 
 	}
 
 	public function update($id,$data){
