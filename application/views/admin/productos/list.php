@@ -130,28 +130,38 @@
                              </div>
                         <?php endif;?>
                                 <form action="<?php echo base_url();?>mantenimiento/productos/store" method="POST">
-                            <div class="form-group <?php echo !empty(form_error("codigo"))? 'has-error':'' ?>">
+
+                            <div class="form-group">
                                 <label for="codigo">Codigo:</label>
-                                <input value="<?php echo set_value("codigo")?>" type="text" class="form-control" id="codigo" name="codigo">
-                                <?php echo form_error("codigo", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="codigo" name="codigo">
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input value="<?php echo set_value("nombre")?>" type="text" class="form-control" id="nombre" name="nombre">
-                                <?php echo form_error("nombre", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="nombre" name="nombre">
                             </div>
                             <div class="form-group">
                                 <label for="descripcion">Descripcion:</label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion">
                             </div>
-                            <div class="form-group">
-                                <label for="categoria">Marca:</label>
+                          
+                            <div class="form-group">      
+                                   <label for="categoria">Marca:</label>
+                                    <div class="input-group">
+                                        
                                 <select name="marca" id="categoria" class="form-control">
                                     <?php foreach($marca as $marcas):?>
                                         <option value="<?php echo $marcas->id_marca?>"><?php echo $marcas->nombre;?></option>
                                     <?php endforeach;?>
                                 </select>
+                                        <span class="input-group-btn">
+                                             <label for="">&nbsp;</label>
+                                        </span>
+                                        <span class="input-group-btn">
+                                            <button id="btn-agregar-Marca" type="button" class="btn btn-success btn-flat btn-block" data-toggle="modal" data-target="#modal-agregarMarca"><span class="fa fa-plus"></span> Agregar Marca</button>
+                                        </span>
+                                    </div><!-- /input-group -->
                             </div>
+
                             <div class="form-group">
                                 <label for="categoria">Proveedor:</label>
                                 <select name="proveedor" id="categoria" class="form-control">
@@ -160,30 +170,25 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-                             <div class="form-group <?php echo !empty(form_error("precio_e"))? 'has-error':'' ?>">
+                             <div class="form-group">
                                 <label for="precio">Precio de entrada:</label>
-                                <input value="<?php echo set_value("precio_e")?>" type="text" class="form-control" id="precio" name="precio_e">
-                                <?php echo form_error("precio_e", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="precio" name="precio_e">
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("precio"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="precio">Precio de salida:</label>
-                                <input value="<?php echo set_value("precio")?>" type="text" class="form-control" id="precio" name="precio">
-                                <?php echo form_error("precio", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="precio" name="precio">
                             </div>
-                             <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
+                             <div class="form-group">
                                 <label for="precio">Precio de mayoreo1:</label>
-                                <input value="<?php echo set_value("precio_m")?>" type="text" class="form-control" id="precio" name="precio_m">
-                                <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="precio" name="precio_m">
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="precio">Precio de mayoreo2:</label>
-                                <input value="<?php echo set_value("precio_m")?>" type="text" class="form-control" id="precio" name="precio_m1">
-                                <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="precio" name="precio_m1">
                             </div>
-                            <div class="form-group <?php echo !empty(form_error("stock"))? 'has-error':'' ?>">
+                            <div class="form-group">
                                 <label for="stock">Stock:</label>
-                                <input value="<?php echo set_value("stock")?>" type="text" class="form-control" id="stock" name="stock">
-                                <?php echo form_error("stock", "<span class='help-block'>", "</span>");?>
+                                <input type="text" class="form-control" id="stock" name="stock">
                             </div>
                             <div class="form-group">
                                 <label for="categoria">Categoria:</label>
@@ -206,3 +211,38 @@
                     </div>
                         
 
+<!-- /.modal agregar cliente-->
+<div class="modal fade" id="modal-agregarMarca">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Agregar Marca</h4>
+            </div>
+            <div class="modal-body">
+               <form class="form-horizontal form-border" action="<?php echo base_url();?>mantenimiento/productos/save_Marca" method="POST">
+                                
+                                    <div class="form-group" >
+                                        <label class="col-sm-3 control-label">Nombre</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Nombre de la marca" name="nombre" required>
+                                        </div>
+                                        </div>
+                                    <div class="col-xs-6 col-md-4 " style="position: relative;">
+                                        <!-- Button trigger modal -->
+                                       
+                                    </div>
+                                    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+                 <button  id="guardarMarca" class="btn btn-primary btn-lg" type="submit"><i class=" fa fa-plus"></i>Guardar</button>
+            </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -

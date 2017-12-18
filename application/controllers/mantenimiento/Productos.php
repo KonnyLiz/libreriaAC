@@ -153,4 +153,27 @@ class Productos extends CI_Controller {
 		echo "mantenimiento/productos";
 	}
 
+	public function save_Marca(){
+		$nombre = $this->input->post("nombre");
+		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[categorias.nombre]");
+
+		if ($this->form_validation->run()) {
+				$data  = array(
+				'nombre' => $nombre, 
+				'estado' => "1"
+			);
+
+			if ($this->Marcas_model->save($data)) {
+				redirect(base_url()."mantenimiento/productos");
+			}
+			else{
+				$this->session->set_flashdata("error","No se pudo guardar la informacion");
+				redirect(base_url()."mantenimiento/productos");
+			}
+		}else {
+			$this->index();
+		}
+	}
+
+
 }
