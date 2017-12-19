@@ -2,7 +2,7 @@
             <div class="pull-right hidden-xs">
                 <b>Ventas/CRM Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2017 <a href="#">Libreria A&C</a>.</strong> All rights
+            <strong>Copyright &copy; 2017 <a href="#">Libreria A&amp;C</a>.</strong> All rights
             reserved.
         </footer>
     </div>
@@ -160,15 +160,10 @@ $(document).ready(function (){
                             window.open(event.url);
                             return false;
                         }
-
                     }
-                   
-                    
                 });
             });
-    
-            
-      
+     
     $('#btnUpdEvento').click(function(){
         var nome = $('#txtBandaRP').val();
         var fi = $('#fi').val();
@@ -205,9 +200,6 @@ $(document).ready(function (){
         location.reload();
     });
 
-
-
-    
     $(".btn-remove").on("click", function(e){
         e.preventDefault();
         var ruta = $(this).attr("href");
@@ -221,6 +213,7 @@ $(document).ready(function (){
             }
         });
     });
+
     $(".btn-view-producto").on("click", function(){
         var producto = $(this).val(); 
         //alert(cliente);
@@ -252,20 +245,13 @@ $(document).ready(function (){
             type:"POST",
             success:function(resp){
                 $("#modal-default .modal-body").html(resp);
-                //alert(resp);
             }
-
         });
     });
     
     //$('.sidebar-menu').tree();
     //funcion para el select de comprobantes
     //****************servicios/**********************************************************************
-
-
-
-
-
 
     //****************Ventas/*************
     $("#comprobantes").on("change", function(){
@@ -533,12 +519,16 @@ $(document).ready(function (){
 
     //accion de la ventana modal para ver los detalles de venta
     $(document).on("click", ".btn-view-venta", function(){
-        valor_id = $(this).val();
+        var producto = $(this).val(); 
+        var infoproducto = producto.split("*");
+        tipo_comprobante_id = infoproducto[1];
+        valor_id = infoproducto[0];
         $.ajax({
             url: base_url+"movimientos/ventas/view",
             type:"POST",
             dataType: "html",
-            data:{id:valor_id},
+            data:{id:valor_id,
+            tipo_comprobante:tipo_comprobante_id},
             success: function(data){
                 $("#modal-default .modal-body").html(data);
             }
@@ -593,7 +583,6 @@ $(document).ready(function (){
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
             html += "</tr>";
             $("#tbreabastecer tbody").append(html);
-
         } else {
             alert("seleccione un producto");
         }
@@ -631,9 +620,6 @@ $(document).ready(function (){
             $("#idproveedor").val(infoProveedor[0]);
         }, 
     });
-
- 
-
 
 });
 

@@ -134,11 +134,18 @@ private $permisos;
 	//obtiene de un input el id de la venta a mostrar detalles
 	public function view(){
 		$idVenta = $this->input->post("id");
+		$comprobante = $this->input->post("tipo_comprobante");
 		$data = array(
 			"venta" => $this->Ventas_model->getVenta($idVenta),
 			"detalles" => $this->Ventas_model->getDetalle($idVenta)
 		);
-		$this->load->view("admin/ventas/view", $data);
+if ($comprobante == 1) {
+	$this->load->view("admin/ventas/fc", $data);
+}elseif($comprobante == 2){
+	$this->load->view("admin/ventas/view", $data);
+}else{
+	echo "que pedo";
+}	
 	}
 
 	public function save_Cliente(){
