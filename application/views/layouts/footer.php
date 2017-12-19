@@ -643,15 +643,10 @@ function generarNumero(numero){
         return "00000" + (Number(numero)+1);
     }
 }
-function val(serv){
-    lami =  parseFloat($('#'+serv).val());
-    lami =  lami * parseFloat($('#'+serv+'1').val());
-    lami = parseFloat(lami.toFixed(2));
-    return  lami;
-}
+
 function sumar(){
 
-    val_serv = val("laminación")+val("anillados")+val("impresiones")+val("fotocopias")+val("refilado");
+   
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
         subtotal = subtotal + Number($(this).find("td:eq(5)").text());
@@ -662,8 +657,8 @@ function sumar(){
     iva = subtotal * (porcentaje/100);
     $("#iva2").val(iva.toFixed(2));
     //descuento = parseInt($("#descuento").val()));
-    $("#subtotal").val(parseFloat(des_lam + des_imp + des_ani + des_foto + des_ref+ val_serv).toFixed(2));
-    $("#descuento").val( (des_lam + des_imp + des_ani + des_foto + des_ref).toFixed(2));
+   // $("#subtotal").val(parseFloat(des_lam + des_imp + des_ani + des_foto + des_ref+ val_serv).toFixed(2));
+    //$("#descuento").val( (des_lam + des_imp + des_ani + des_foto + des_ref).toFixed(2));
     //aqui resive el valor que se devulve en val_serv que es el valor de todos los servicios
     //total = subtotal + iva + parseFloat(val_serv.toFixed(2));
     total = subtotal + iva ;
