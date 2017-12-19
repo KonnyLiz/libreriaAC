@@ -46,6 +46,13 @@
                
             </ul>
         </li>
+        <li class="sub-menu">
+            <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Reportes</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+            <ul>
+               <li><a href="<?php echo base_url();?>pdfcontroller/inventario">Inventarios</a></li>
+               
+            </ul>
+        </li>
     </ul>
 </div>
 
