@@ -523,12 +523,16 @@ $(document).ready(function (){
 
     //accion de la ventana modal para ver los detalles de venta
     $(document).on("click", ".btn-view-venta", function(){
-        valor_id = $(this).val();
+        var producto = $(this).val(); 
+        var infoproducto = producto.split("*");
+        tipo_comprobante_id = infoproducto[1];
+        valor_id = infoproducto[0];
         $.ajax({
             url: base_url+"movimientos/ventas/view",
             type:"POST",
             dataType: "html",
-            data:{id:valor_id},
+            data:{id:valor_id,
+            tipo_comprobante:tipo_comprobante_id},
             success: function(data){
                 $("#modal-default .modal-body").html(data);
             }
