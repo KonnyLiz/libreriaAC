@@ -106,7 +106,7 @@
                                         <th>Importe</th>
                                          <th>Eliminar</th>
                                     </tr>
-                                    <?php foreach($servicios as $serv):?>
+                                    <?php /*foreach($servicios as $serv):?>
                                     <tr>
                                       <td><?php echo ($serv->id_servicio);?><input type="hidden" name="precios" id="<?php echo($serv->nombre).'2';?>" value="<?php echo($serv->precio.'*'.$serv->precio2.'*'.$serv->precio3); ?>"></td>
                                        <td><?php echo ($serv->nombre);?></td>
@@ -115,7 +115,7 @@
                                        <td><input type='number'  name='' min="0" value='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
                                        <td><p id = "<?php echo($serv->nombre).'3';?>">0</p></td> 
                                       <td></td> 
-                                    </tr>  <?php endforeach;?>
+                                    </tr>  <?php endforeach;*/?>
                                     
                                 </thead>
                                 <tbody>

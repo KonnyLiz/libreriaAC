@@ -325,7 +325,7 @@ $(document).ready(function (){
 
     //************************************************ tramo para cuando se aumente el input de un servicio
 
-    $("#impresiones").on("change", function(){
+ /*   $("#impresiones").on("change", function(){
         option = $(this).val(); //optiene el valor del imput con id impresiones
         porId=$("#impresiones2").val(); //se obtiene un input de tipi hidden que contiene todos los precios de cada servicio en el foreach
         info = porId.split("*");//se separan por la identificacion *
@@ -437,7 +437,7 @@ $(document).ready(function (){
         }
         sumar();
     });
-
+*/
     $(document).on("click", ".btn-check", function(){
         cliente = $(this).val();
         infoCliente = cliente.split("*");
@@ -487,7 +487,7 @@ $(document).ready(function (){
         data = $(this).val();
         if (data != " "){
             infoProducto = data.split("*");
-             var codigo;
+            var codigo;
             var stock;
                 if (infoProducto[1] == "undefined"){
                     codigo = 1;
