@@ -665,6 +665,7 @@ function sumar(){
     $("#subtotal").val(parseFloat(des_lam + des_imp + des_ani + des_foto + des_ref+ val_serv).toFixed(2));
     $("#descuento").val( (des_lam + des_imp + des_ani + des_foto + des_ref).toFixed(2));
     //aqui resive el valor que se devulve en val_serv que es el valor de todos los servicios
+    //total = subtotal + iva + parseFloat(val_serv.toFixed(2));
     total = subtotal + iva + parseFloat(val_serv.toFixed(2));
     $("#total").val(total.toFixed(2));
 }
