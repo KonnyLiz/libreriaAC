@@ -40,15 +40,22 @@ private $permisos;
 
 	public function getProductos(){
 		$valor = $this->input->post("valor");
-		$clientes = $this->Ventas_model->getProductos($valor);
-		echo json_encode($clientes);
+		$existe = $this->Ventas_model->getSiExisteServicio($valor);
+
+		if ($existe > 0){
+			$servicio = $this->Ventas_model->getServicio($valor);
+			echo json_encode($servicio);
+		} else{
+			$productos = $this->Ventas_model->getProductos($valor);
+			echo json_encode($productos);
+		}
 	}
+
 	public function getClientes(){
 		$valor = $this->input->post("valor");
 		$clientes = $this->Ventas_model->getClientes($valor);
 		echo json_encode($clientes);
 	}
-	
 
 	//funcion para guardar la venta
 	public function store(){

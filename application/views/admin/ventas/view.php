@@ -1,7 +1,7 @@
 <div class="impresion">
 <div class="row">
 	<div class="col-xs-12 text-center">
-		<b>Libreria A&C</b><br>
+		<b>Libreria A&amp;C</b><br>
 		Centro Comercial Terminal<br>
 		Final 4ta Av. Nte, Ruta Militar<br>
 		Local:16 San Miguel, El Salvador<br>

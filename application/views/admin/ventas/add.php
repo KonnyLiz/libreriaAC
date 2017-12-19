@@ -87,7 +87,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
-                                    <label for="">productoucto:</label>
+                                    <label for="">Producto:</label>
                                     <input type="text" class="form-control" id="producto" name="valor">
                                 </div>
                                 <div class="col-md-2">
@@ -127,25 +127,25 @@
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Subtotal:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="subtotal" id="subtotal" readonly="readonly">
+                                        <input type="text" class="form-control" name="subtotal" id="subtotal" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">IVA:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="iva2" id="iva2" readonly="readonly">
+                                        <input type="text" class="form-control" name="iva2" id="iva2" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Descuento:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="descuento" id="descuento" value="0.00" readonly="readonly">
+                                        <input type="text" class="form-control" name="descuento" id="descuento" value="0.00">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Total:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="total" id="total" readonly="readonly">
+                                        <input type="text" class="form-control" name="total" id="total" readonly="readonly">
                                     </div>
                                 </div>
                             

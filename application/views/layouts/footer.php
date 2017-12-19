@@ -2,7 +2,7 @@
             <div class="pull-right hidden-xs">
                 <b>Ventas/CRM Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2017 <a href="#">Libreria A&C</a>.</strong> All rights
+            <strong>Copyright &copy; 2017 <a href="#">Libreria A&amp;C</a>.</strong> All rights
             reserved.
         </footer>
     </div>
@@ -160,15 +160,10 @@ $(document).ready(function (){
                             window.open(event.url);
                             return false;
                         }
-
                     }
-                   
-                    
                 });
             });
-    
-            
-      
+     
     $('#btnUpdEvento').click(function(){
         var nome = $('#txtBandaRP').val();
         var fi = $('#fi').val();
@@ -205,9 +200,6 @@ $(document).ready(function (){
         location.reload();
     });
 
-
-
-    
     $(".btn-remove").on("click", function(e){
         e.preventDefault();
         var ruta = $(this).attr("href");
@@ -221,6 +213,7 @@ $(document).ready(function (){
             }
         });
     });
+
     $(".btn-view-producto").on("click", function(){
         var producto = $(this).val(); 
         //alert(cliente);
@@ -252,20 +245,13 @@ $(document).ready(function (){
             type:"POST",
             success:function(resp){
                 $("#modal-default .modal-body").html(resp);
-                //alert(resp);
             }
-
         });
     });
     
     //$('.sidebar-menu').tree();
     //funcion para el select de comprobantes
     //****************servicios/**********************************************************************
-
-
-
-
-
 
     //****************Ventas/*************
     $("#comprobantes").on("change", function(){
@@ -487,11 +473,21 @@ $(document).ready(function (){
         data = $(this).val();
         if (data != " "){
             infoProducto = data.split("*");
+             var codigo;
+            var stock;
+                if (infoProducto[1] == "undefined"){
+                    codigo = 1;
+                    stock = 0;
+                } else {
+                    codigo =  infoProducto[1];
+                    stock = infoProducto[4];
+                }
+
             html = "<tr>";
-            html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
-            html += "<td>"+infoProducto[2]+"</td>";
+            html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+codigo+"</td>"; //id y codigo
+            html += "<td>"+infoProducto[2]+"</td>"; //nombre
             html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
-            html += "<td>"+infoProducto[4]+"</td>";
+            html += "<td>"+stock+"</td>";//stock
             html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
             html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
@@ -587,7 +583,6 @@ $(document).ready(function (){
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
             html += "</tr>";
             $("#tbreabastecer tbody").append(html);
-
         } else {
             alert("seleccione un producto");
         }
@@ -625,9 +620,6 @@ $(document).ready(function (){
             $("#idproveedor").val(infoProveedor[0]);
         }, 
     });
-
- 
-
 
 });
 
