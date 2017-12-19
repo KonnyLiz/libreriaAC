@@ -9,11 +9,12 @@ class Ventas_model extends CI_Model {
 	}
 
 	public function getProductos($valor){
-		$this->db->select("id, codigo, nombre as label, precio, stock");
-		$this->db->from("productos");
-		$this->db->like("nombre", $valor);
-		$resultados = $this->db->get();
-		return $resultados->result_array();
+
+			$this->db->select("id, codigo, nombre as label, precio, stock");
+			$this->db->from("productos");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+			return $resultados->result_array();
 	}
 	
 	public function getClientes($valor){
@@ -23,6 +24,23 @@ class Ventas_model extends CI_Model {
 		$resultados = $this->db->get();
 		return $resultados->result_array();
 	}
+
+	 public function getSiExisteServicio($valor){
+        $this->db->select("nombre");
+			$this->db->from("servicios");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+
+			return $resultados->num_rows();
+    }
+
+    function getServicio($valor){
+    	$this->db->select("id_servicio, nombre as label, precio");
+			$this->db->from("servicios");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+			return $resultados->result_array();
+    }
 
 	public function save($data){
 		return $this->db->insert("ventas", $data);

@@ -487,11 +487,21 @@ $(document).ready(function (){
         data = $(this).val();
         if (data != " "){
             infoProducto = data.split("*");
+             var codigo;
+            var stock;
+                if (infoProducto[1] == "undefined"){
+                    codigo = 1;
+                    stock = 0;
+                } else {
+                    codigo =  infoProducto[1];
+                    stock = infoProducto[4];
+                }
+
             html = "<tr>";
-            html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
-            html += "<td>"+infoProducto[2]+"</td>";
+            html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+codigo+"</td>"; //id y codigo
+            html += "<td>"+infoProducto[2]+"</td>"; //nombre
             html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
-            html += "<td>"+infoProducto[4]+"</td>";
+            html += "<td>"+stock+"</td>";//stock
             html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
             html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
             html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
