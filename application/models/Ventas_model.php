@@ -12,6 +12,7 @@ class Ventas_model extends CI_Model {
 
 			$this->db->select("id, codigo, nombre as label, precio, stock");
 			$this->db->from("productos");
+			$this->db->like("estado", "1");
 			$this->db->like("nombre", $valor);
 			$resultados = $this->db->get();
 			return $resultados->result_array();
