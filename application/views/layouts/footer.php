@@ -2,7 +2,7 @@
             <div class="pull-right hidden-xs">
                 <b>Ventas/CRM Version</b> 2.4.0
             </div>
-            <strong>Copyright &copy; 2017 <a href="#">Ingenieria de Software</a>.</strong> All rights
+            <strong>Copyright &copy; 2017 <a href="#">Libreria A&C</a>.</strong> All rights
             reserved.
         </footer>
     </div>
@@ -33,7 +33,7 @@
     <script src="<?php echo base_url();?>assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
     <!-- ./wrapper -->
     <script>
-$(document).ready(function () { 
+$(document).ready(function (){ 
 
     $('#example1').DataTable({
         "language": {
@@ -602,7 +602,6 @@ $(document).ready(function () {
         });
     });
 
-<<<<<<< HEAD
     $("#proveedor-reabastecer").autocomplete({
         source: function(request, response){
             $.ajax({
@@ -625,8 +624,7 @@ $(document).ready(function () {
 
  
 
-=======
->>>>>>> 70bcfe7dcd80de8e5f684f3f04e0c1b0d2ddb170
+
 });
 
 function generarNumero(numero){
@@ -684,7 +682,7 @@ function sumarReabastecimiento(){
 }
 </script>
 
-</script>
+
 <script type="text/javascript">
     function jajaja(){
       var porId=document.getElementById("nombre").value;
