@@ -47,6 +47,18 @@
 					<td><?php echo $detalle->importe;?></td>
 				</tr>
 				<?php } ?>
+
+				<?php if ($detallesServicios != "") {?>
+				<?php foreach($detallesServicios as $detalleS){?>
+				
+				<tr>
+					<td><?php echo $detalleS->cantidad;?></td>
+					<td><?php echo $detalleS->nombre;?></td>
+					<td><?php echo $detalleS->precio;?></td>
+					<td><?php echo $detalleS->importe;?></td>
+				</tr>
+				<?php } ?>
+				<?php } ?>
 			</tbody>
 			<tfoot>
 				<tr>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2017 a las 05:08:43
+-- Tiempo de generación: 20-12-2017 a las 05:54:25
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -155,13 +155,7 @@ CREATE TABLE `detalle_venta` (
 --
 
 INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
-(1, 1, 2, '0.20', '1', '0.20'),
-(2, 1, 3, '0.20', '', '0.20'),
-(3, 1, 4, '0.20', '', '0.20'),
-(4, 1, 9, '0.20', '3', '0.60'),
-(5, 1, 10, '0.20', '3', '0.60'),
-(7, 2, 12, '1', '5', '5.00'),
-(13, 2, 16, '1', '4', '4.00');
+(1, 1, 1, '0.20', '6', '1.20');
 
 -- --------------------------------------------------------
 
@@ -183,7 +177,7 @@ CREATE TABLE `detalle_venta_servicio` (
 --
 
 INSERT INTO `detalle_venta_servicio` (`id`, `servicio_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
-(3, 1, 20, 1, 44, 44);
+(1, 1, 1, 1, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -332,7 +326,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
-(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 133, 4, '2017-12-20', 1),
+(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 114, 4, '2017-12-20', 1),
 (2, '1651', 'correcto', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222213, 2, '0000-00-00', 1),
 (3, '1651', 'cuaderno', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222251, 2, '2017-12-30', 1);
 
@@ -438,8 +432,8 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 17, 13, 1),
-(2, 'Ticket', 8, 13, 5);
+(1, 'Factura', 20, 13, 1),
+(2, 'Ticket', 11, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -500,20 +494,7 @@ CREATE TABLE `ventas` (
 --
 
 INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `total`, `cliente_id`, `usuario_id`, `num_documento`, `tipo_comprobante_id`) VALUES
-(2, '2017-12-18', '1', '0.10', '0.03', '0.00', '0.33', 1, 1, '000010', 2),
-(3, NULL, '1', '0.00', '0.03', '0.00', '0.23', 1, 1, '000011', 1),
-(4, NULL, '5', '0.00', '0.03', '0.00', '0.23', 1, 1, '000003', 2),
-(9, NULL, '1', '0.6', '0.08', '0.00', '0.68', 1, 1, '000012', 1),
-(10, NULL, '5', '0.6', '0.08', '0.00', '0.68', 2, 1, '000004', 2),
-(11, NULL, '1', '1', '0.13', '0.00', '1.13', 1, 1, '000013', 1),
-(12, NULL, '1', '5', '0.65', '0.00', '5.65', 2, 1, '000014', 1),
-(13, NULL, '1', '0.6', '0.08', '0.00', '0.68', 1, 1, '000015', 1),
-(14, NULL, '5', '0.6', '0.08', '0.00', '0.68', 3, 1, '000005', 2),
-(16, NULL, '1', '4', '0.52', '0.00', '4.52', 2, 1, '000016', 1),
-(17, NULL, '5', '3.6', '0.47', '0.00', '4.07', 1, 1, '000006', 2),
-(18, NULL, '5', '4', '0.52', '0.00', '4.52', 1, 1, '000007', 2),
-(19, NULL, '1', '4', '0.52', '0.00', '4.52', 1, 1, '000017', 1),
-(20, NULL, '5', '44', '5.72', '0.00', '49.72', 1, 1, '000008', 2);
+(1, NULL, '1', '5.2', '0.68', '0.00', '5.88', 1, 1, '000020', 1);
 
 --
 -- Índices para tablas volcadas
@@ -679,12 +660,12 @@ ALTER TABLE `detalle_abastecer`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
 --
 ALTER TABLE `detalle_venta_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
@@ -744,7 +725,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Restricciones para tablas volcadas
 --

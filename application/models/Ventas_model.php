@@ -26,7 +26,7 @@ class Ventas_model extends CI_Model {
 		return $resultados->result_array();
 	}
 
-	 public function getSiExisteServicio($valor){
+	public function getSiExisteServicio($valor){
         $this->db->select("nombre");
 			$this->db->from("servicios");
 			$this->db->like("nombre", $valor);
@@ -108,6 +108,24 @@ class Ventas_model extends CI_Model {
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
+
+	public function getDetalleServicio($id){
+		$this->db->select("dts.*, s.id_servicio, s.nombre");
+		$this->db->from("detalle_venta_servicio dts");
+		$this->db->join("servicios s", "dts.servicio_id = s.id_servicio");
+		$this->db->where("dts.venta_id", $id);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	public function getSiExisteVentaServicio($valor){
+        $this->db->select("venta_id");
+			$this->db->from("detalle_venta_servicio");
+			$this->db->like("venta_id", $valor);
+			$resultados = $this->db->get();
+
+			return $resultados->num_rows();
+    }
 
 	public function save_Cliente($data){
 		return $this->db->insert("clientes",$data);

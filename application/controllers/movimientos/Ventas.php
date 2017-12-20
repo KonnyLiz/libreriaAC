@@ -17,7 +17,6 @@ private $permisos;
 		$data = array(
 			"permisos" => $this->permisos, 
 			'ventas' => $this->Ventas_model->getVentas(),
-			'servicios' => $this->Servicios_model->getServicios(),
 		);
 
 		$this->load->view("layouts/header");
@@ -153,10 +152,23 @@ private $permisos;
 	public function view(){
 		$idVenta = $this->input->post("id");
 		$comprobante = $this->input->post("tipo_comprobante");
-		$data = array(
-			"venta" => $this->Ventas_model->getVenta($idVenta),
-			"detalles" => $this->Ventas_model->getDetalle($idVenta)
-		);
+			
+		$existe = $this->Ventas_model->getSiExisteVentaServicio($idVenta);
+			
+		if ($existe > 0){
+			$data = array(
+				"venta" => $this->Ventas_model->getVenta($idVenta),
+				"detalles" => $this->Ventas_model->getDetalle($idVenta),
+				"detallesServicios" => $this->Ventas_model->getDetalleServicio($idVenta)
+			);
+		} else {
+			$data = array(
+				"venta" => $this->Ventas_model->getVenta($idVenta),
+				"detalles" => $this->Ventas_model->getDetalle($idVenta),
+				"detallesServicios" => ""
+			);
+		}
+		
 		if ($comprobante == 1) {
 			$this->load->view("admin/ventas/fc", $data);
 		}elseif($comprobante == 2){
