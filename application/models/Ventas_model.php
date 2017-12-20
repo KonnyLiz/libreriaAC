@@ -36,7 +36,7 @@ class Ventas_model extends CI_Model {
     }
 
     function getServicio($valor){
-    	$this->db->select("id_servicio, nombre as label, precio");
+    	$this->db->select("id_servicio as id, nombre as label, precio");
 			$this->db->from("servicios");
 			$this->db->like("nombre", $valor);
 			$resultados = $this->db->get();
@@ -69,6 +69,10 @@ class Ventas_model extends CI_Model {
 		$this->db->insert("detalle_venta", $data);
 	}
 
+	public function save_detalle_servicio($data){
+		$this->db->insert("detalle_venta_servicio", $data);
+	}
+
 	//consulta a la base de datos para mostrar los datos de ventas
 	public function getVentas(){
 		$this->db->select("v.*, c.nombres as nombres, tc.nombre as tipo_comprobante, u.nombres as usuNombre, u.apellidos as usuApellido");
@@ -83,7 +87,6 @@ class Ventas_model extends CI_Model {
 		 	return false;
 		 }
 	}
-
 
 	//obteniendo los datos de venta por el id de venta
 	public function getVenta($id){

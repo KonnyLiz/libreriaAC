@@ -476,12 +476,11 @@ $(document).ready(function (){
             var codigo;
             var stock;
                 if (infoProducto[1] == "undefined"){
-                    infoProducto[0] = 2;
-                    codigo = 999;
+                    codigo = 0;
                     stock = 0;
                      html = "<tr>";
                 html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+codigo+"</td>"; //id y codigo
-                html += "<td>"+infoProducto[2]+"</td>"; //nombre
+                html += "<td><input type='hidden' name='nombreProductos[]' value='"+infoProducto[2]+"'>"+infoProducto[2]+"</td>"; //nombre
                 html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
                 html += "<td>"+stock+"</td>";//stock
                 html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
@@ -489,6 +488,7 @@ $(document).ready(function (){
                 html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
                 html += "</tr>";
                 $("#tbventas tbody").append(html);
+
                 } else {
                     codigo =  infoProducto[1];
                     stock = infoProducto[4];
@@ -503,9 +503,6 @@ $(document).ready(function (){
                 html += "</tr>";
                 $("#tbventas tbody").append(html);
                 }
-
-               
-
                 sumar();
                // $("#btn-agregar").val(null);
                // $("#producto").val(null);

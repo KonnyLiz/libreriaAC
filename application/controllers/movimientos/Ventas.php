@@ -70,6 +70,8 @@ private $permisos;
 		$numero = $this->input->post("numero");
 		$serie = $this->input->post("serie");
 
+		$nombreProductos = $this->input->post("nombreProductos");
+
 		$idproductos =$this->input->post("idProductos");
 		$precios =$this->input->post("precios");
 		$cantidades =$this->input->post("cantidades");
@@ -91,7 +93,7 @@ private $permisos;
 		if ($this->Ventas_model->save($data)){
 			$idVenta = $this->Ventas_model->lastID(); 
 			$this->updateComprobante($idcomprobante); //actualizando el correlativo del comprobante
-			$this->save_detalle($idproductos, $idVenta, $precios, $cantidades, $importes); //guardando el detalle de la venta
+			$this->save_detalle($idproductos, $nombreProductos, $idVenta, $precios, $cantidades, $importes); //guardando el detalle de la venta
 			redirect(base_url()."movimientos/ventas"); //redirigiendo a la lista de ventas
 		} else {
 			redirect(base_url()."movimientos/ventas/add");
@@ -108,9 +110,24 @@ private $permisos;
 	}
 
 	//funcion para guardar el detalle de la venta
-	protected function save_detalle($productos, $idVenta, $precios, $cantidades, $importes){
+	protected function save_detalle($productos, $nombreProductos, $idVenta, $precios, $cantidades, $importes){
 		for ($i=0; $i < count($productos); $i++) { 
-			$data = array(
+			
+			$valor = $nombreProductos[$i];
+			$existe = $this->Ventas_model->getSiExisteServicio($valor);
+			
+			if ($existe > 0){
+				$data = array(
+				'servicio_id' => $productos[$i],
+				'venta_id' => $idVenta,
+				'precio' => $precios[$i],
+				'cantidad' => $cantidades[$i],
+				'importe' => $importes[$i],
+				);
+				$this->Ventas_model->save_detalle_servicio($data);
+
+			} else {
+				$data = array(
 				'producto_id' => $productos[$i],
 				'venta_id' => $idVenta,
 				'precio' => $precios[$i],
@@ -119,6 +136,7 @@ private $permisos;
 			);
 			$this->Ventas_model->save_detalle($data);
 			$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			}
 		}
 	}
 
@@ -139,13 +157,13 @@ private $permisos;
 			"venta" => $this->Ventas_model->getVenta($idVenta),
 			"detalles" => $this->Ventas_model->getDetalle($idVenta)
 		);
-if ($comprobante == 1) {
-	$this->load->view("admin/ventas/fc", $data);
-}elseif($comprobante == 2){
-	$this->load->view("admin/ventas/view", $data);
-}else{
-	echo "que pedo";
-}	
+		if ($comprobante == 1) {
+			$this->load->view("admin/ventas/fc", $data);
+		}elseif($comprobante == 2){
+			$this->load->view("admin/ventas/view", $data);
+		}else{
+			echo "que pedo";
+		}	
 	}
 
 	public function save_Cliente(){
