@@ -45,6 +45,7 @@ $nuevafecha = date ( 'j/m/Y  H:i:s' , $nuevafecha );
   <table  id="table_info" style="width: 100%; border-collapse: collapse" border>
        <thead>
            <tr>
+           <th style="border: 1px solid #000;">#</th>
                <th style="border: 1px solid #000;">Nombre</th>
                <th style="border: 1px solid #000;">Marca</th>
                <th style="border: 1px solid #000;">Stock</th>
@@ -57,6 +58,7 @@ $nuevafecha = date ( 'j/m/Y  H:i:s' , $nuevafecha );
        <?php $n=0; ?>
           <?php foreach ($resulProducto as $producto) { ?>
             <tr >
+                <td style="border: 1px solid #000;"><?php echo $n;?></td>
                 <td style="border: 1px solid #000;"><?php echo $producto->nombre;?></td>
                 <td style="border: 1px solid #000;"><?php echo $producto->id_marca;?></td>
                 <td style="border: 1px solid #000;"><?php echo $producto->stock;?></td>
@@ -65,7 +67,7 @@ $nuevafecha = date ( 'j/m/Y  H:i:s' , $nuevafecha );
             </tr>
             <?php $n++;}?>
              <tr>
-            <td colspan="5"  align="right" style="border: 1px solid #000;"><?php echo "<b>Cantidad de productos ingresados: </b>". $n;?></td>
+            <td colspan="6"  align="right" style="border: 1px solid #000;"><?php echo "<b>Cantidad de productos ingresados: </b>". $n;?></td>
             </tr>
        </tbody>
 </table>
