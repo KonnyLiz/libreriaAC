@@ -27,7 +27,7 @@ class Pdf_model extends CI_Model
  	}
  	function getPdfproductos()
  	{
-   	$this->db->select("p.*,c.nombre as categoria_id,pr.nombre as id_proveedor,m.nombre as id_marca");
+   		$this->db->select("p.*,c.nombre as categoria_id,pr.nombre as id_proveedor,m.nombre as id_marca");
       $this->db->from("productos p");
       $this->db->join("categorias c","p.categoria_id = c.id");
       $this->db->join("marca m","p.id_marca = m.id_marca");

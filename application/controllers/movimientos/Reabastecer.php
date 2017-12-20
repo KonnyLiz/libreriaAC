@@ -58,17 +58,18 @@ private $permisos;
 
 		if ($this->Reabastecer_model->save($data)){
 			$idAbastecer = $this->Reabastecer_model->lastID(); 
-			$this->save_detalle($idproductos, $idAbastecer, $cantidades, $importe); //guardando el detalle de la venta
+			$this->save_detalle($idproductos, $idAbastecer, $cantidades, $importe, $fecha); //guardando el detalle de la venta
 			redirect(base_url()."movimientos/reabastecer"); //redirigiendo a la lista de ventas
 		} else {
 			redirect(base_url()."movimientos/reabastecer/add");
 		}
 	}
 
-	protected function updateProducto($idProducto, $cantidad){
+	protected function updateProducto($idProducto, $cantidad ,$fecha){
 		$productoActual = $this->Productos_model->getProducto($idProducto);
 		$data = array(
 			'stock' => $productoActual->stock + $cantidad,
+			'fecha_i'=> $fecha
 		);
 		$this->Productos_model->update($idProducto, $data);
 	}
@@ -83,7 +84,7 @@ private $permisos;
 	}
 
 	//funcion para guardar el detalle de la venta
-	protected function save_detalle($productos, $idAbastecimiento, $cantidades, $importes){
+	protected function save_detalle($productos, $idAbastecimiento, $cantidades, $importes,$fecha ){
 		for ($i=0; $i < count($productos); $i++) { 
 			$data = array(
 				'abastecer_id' => $idAbastecimiento,
@@ -92,7 +93,7 @@ private $permisos;
 				'importe' => $importes[$i],
 			);
 			$this->Reabastecer_model->save_detalle($data);
-			$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			$this->updateProducto($productos[$i], $cantidades[$i], $fecha); //actualizamos el stock del producto
 		}
 	}
 }

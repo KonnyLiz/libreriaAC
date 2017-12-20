@@ -49,6 +49,7 @@ $nuevafecha = date ( 'j/m/Y  H:i:s' , $nuevafecha );
                <th style="border: 1px solid #000;">Marca</th>
                <th style="border: 1px solid #000;">Stock</th>
                <th style="border: 1px solid #000;">Proveedor</th>
+               <th style="border: 1px solid #000;">Ultima fecha de compra</th>
                
            </tr>
        </thead>
@@ -60,10 +61,11 @@ $nuevafecha = date ( 'j/m/Y  H:i:s' , $nuevafecha );
                 <td style="border: 1px solid #000;"><?php echo $producto->id_marca;?></td>
                 <td style="border: 1px solid #000;"><?php echo $producto->stock;?></td>
                 <td style="border: 1px solid #000;"><?php echo $producto->id_proveedor;?></td>
+                <td style="border: 1px solid #000;"><?php echo $producto->fecha_i;?></td>
             </tr>
             <?php $n++;}?>
              <tr>
-            <td colspan="4"  align="right" style="border: 1px solid #000;"><?php echo "<b>Cantidad de productos ingresados: </b>". $n;?></td>
+            <td colspan="5"  align="right" style="border: 1px solid #000;"><?php echo "<b>Cantidad de productos ingresados: </b>". $n;?></td>
             </tr>
        </tbody>
 </table>

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-12-2017 a las 04:01:08
--- Versión del servidor: 10.1.25-MariaDB
--- Versión de PHP: 7.1.7
+-- Tiempo de generación: 20-12-2017 a las 01:46:40
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -41,7 +39,11 @@ CREATE TABLE `abastecer` (
 --
 
 INSERT INTO `abastecer` (`id`, `fecha`, `total_abastecer`, `usuario_id`, `proveedor_id`) VALUES
-(1, '2017-12-16', '0.08', 7, 2);
+(1, '2017-12-16', '0.08', 7, 2),
+(2, '2017-12-12', '8.97', 7, 1),
+(3, '2017-12-19', '0.16', 7, 1),
+(4, '2017-12-20', '0.24', 7, 1),
+(5, '2017-12-30', '', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -80,7 +82,9 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
   `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `apellidos` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
   `nit` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `telefono` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `registro` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` int(11) NOT NULL
@@ -90,18 +94,18 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombres`, `nit`, `registro`, `direccion`, `estado`) VALUES
-(1, 'Hugo', '123', '123', 'sm', 1),
-(2, 'Zulmi Amaya', 'yy', 'rr', 'ee', 1),
-(3, 'dd dddd', '98989800000000', '', '', 1),
-(4, 'wenas', '1217-061296-101-0', '', '', 1),
-(5, 'ffs', '1217-061296-101-0', '987654-0', '', 1),
-(6, 'ggg', '1217-061296-101-0', '123456-0', '', 1),
-(7, 'fff fff', '1217-061296-101-0', '123456-0', '', 1),
-(8, 'eeee', '1217-061296-101-0', '123456-0', '', 1),
-(9, 'ff vvv vvv', '1217-061296-101-0', '123456-0', '', 1),
-(10, '22222', '1217-061296-101-0', '123456-0', '', 1),
-(11, 'dddd cccc2', '1217-061296-101-0', '123456-0', '', 1);
+INSERT INTO `clientes` (`id`, `nombres`, `apellidos`, `nit`, `telefono`, `registro`, `direccion`, `estado`) VALUES
+(1, 'Hugo', '', '123', '', '123', 'sm', 1),
+(2, 'Zulmi Amaya', '', 'yy', '', 'rr', 'ee', 1),
+(3, 'dd dddd', '', '98989800000000', '', '', '', 1),
+(4, 'wenas', '', '1217-061296-101-0', '', '', '', 1),
+(5, 'ffs', '', '1217-061296-101-0', '', '987654-0', '', 1),
+(6, 'ggg', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(7, 'fff fff', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(8, 'eeee', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(9, 'ff vvv vvv', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(10, '22222', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(11, 'dddd cccc2', '', '1217-061296-101-0', '', '123456-0', '', 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +126,12 @@ CREATE TABLE `detalle_abastecer` (
 --
 
 INSERT INTO `detalle_abastecer` (`id`, `abastecer_id`, `producto_id`, `cantidad_abastecer`, `importe`) VALUES
-(1, 1, 1, 1, 0.08);
+(1, 1, 1, 1, 0.08),
+(2, 2, 1, 34, 2.72),
+(3, 2, 3, 25, 6.25),
+(4, 3, 1, 2, 0.16),
+(5, 4, 1, 3, 0.24),
+(6, 5, 3, 4, 0.25);
 
 -- --------------------------------------------------------
 
@@ -138,6 +147,17 @@ CREATE TABLE `detalle_venta` (
   `cantidad` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `importe` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_venta`
+--
+
+INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
+(1, 1, 2, '0.20', '1', '0.20'),
+(2, 1, 3, '0.20', '', '0.20'),
+(3, 1, 4, '0.20', '', '0.20'),
+(4, 1, 9, '0.20', '3', '0.60'),
+(5, 1, 10, '0.20', '3', '0.60');
 
 -- --------------------------------------------------------
 
@@ -277,6 +297,7 @@ CREATE TABLE `productos` (
   `precio_mayoreo2` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `stock` int(11) DEFAULT NULL,
   `categoria_id` int(11) DEFAULT NULL,
+  `fecha_i` date NOT NULL,
   `estado` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
@@ -284,8 +305,10 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `estado`) VALUES
-(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 101, 4, 1);
+INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
+(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 133, 4, '2017-12-20', 1),
+(2, '1651', 'correcto', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222222, 2, '0000-00-00', 1),
+(3, '1651', 'cuaderno', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222251, 2, '2017-12-30', 1);
 
 -- --------------------------------------------------------
 
@@ -389,8 +412,8 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 9, 13, 1),
-(2, 'Ticket', 2, 13, 5);
+(1, 'Factura', 13, 13, 1),
+(2, 'Ticket', 4, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -445,6 +468,18 @@ CREATE TABLE `ventas` (
   `num_documento` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `tipo_comprobante_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `ventas`
+--
+
+INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `total`, `cliente_id`, `usuario_id`, `num_documento`, `tipo_comprobante_id`) VALUES
+(2, '2017-12-18', '1', '0.10', '0.03', '0.00', '0.33', 1, 1, '000010', 2),
+(3, NULL, '1', '0.00', '0.03', '0.00', '0.23', 1, 1, '000011', 1),
+(4, NULL, '5', '0.00', '0.03', '0.00', '0.23', 1, 1, '000003', 2),
+(9, NULL, '1', '0.6', '0.08', '0.00', '0.68', 1, 1, '000012', 1),
+(10, NULL, '5', '0.6', '0.08', '0.00', '0.68', 2, 1, '000004', 2),
+(11, NULL, '1', '1', '0.13', '0.00', '1.13', 1, 1, '000013', 1);
 
 --
 -- Índices para tablas volcadas
@@ -582,7 +617,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
@@ -597,12 +632,12 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
@@ -627,7 +662,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
@@ -662,7 +697,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- Restricciones para tablas volcadas
 --
@@ -716,7 +751,6 @@ ALTER TABLE `ventas`
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`tipo_comprobante_id`) REFERENCES `tipo_comprobante` (`id`),
   ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
   ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
