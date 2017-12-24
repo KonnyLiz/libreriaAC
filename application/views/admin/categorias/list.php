@@ -1,4 +1,4 @@
- <section class="main-content-wrapper">
+<section class="main-content-wrapper">
             <section id="main-content">
                 <div class="row">
                     <div class="col-md-12">
@@ -6,15 +6,12 @@
                         <ul class="breadcrumb">
                             
                             <li><a href="Dashboard">Dashboard</a></li>
-                            <li>Productos</li>
+                            <li>Inventarios</li>
                             <li class="active">Categorias</li>
                         </ul>
                     </div>
                         <h1 class="h1">Categorias</h1>
                 </div>
-                    
-                       
-
     <div class="col-md-12">
                         <div class="panel panel-default">
                             
@@ -63,14 +60,9 @@
 
                                                 <a href="<?php echo base_url();?>mantenimiento/categorias/delete/<?php echo $categoria->id;?>" class="btn btn-danger"><span class="fa fa-times" style="color: #fff"></span></a>
                                             <?php endif?>
-                    
-
-
-                                            
                                         </div>
                                         </td>
                                     </tr>
-                                
                                 <?php endforeach;?>
                             <?php endif;?>
                             </tbody>
@@ -117,4 +109,7 @@
                             </div>
                         </div>
                     </div>
+                </section>
+            </section>
+
                         
