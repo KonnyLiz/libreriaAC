@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-12-2017 a las 05:54:25
+-- Tiempo de generación: 27-12-2017 a las 04:50:16
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -73,7 +73,15 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 (6, 'Herramientas', 'De todo en herramientas', 1),
 (7, 'Patio', 'Todo lo del patio', 0),
 (8, 'Cemento', 'Gama de cemento', 0),
-(9, 'Ventanas', 'Ventanales', 1);
+(9, 'Ventanas', 'Ventanales', 1),
+(10, 'ddd', '', 1),
+(11, 'tt', '', 1),
+(12, '4', '', 0),
+(13, '55', '', 1),
+(14, 'jdj 444 ', '', 1),
+(15, '4Electronico', 'Electronica varios ', 1),
+(16, 'Electronico', '', 1),
+(19, '9988nn  ', '', 1);
 
 -- --------------------------------------------------------
 
@@ -86,7 +94,7 @@ CREATE TABLE `clientes` (
   `nombres` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
   `apellidos` varchar(150) COLLATE utf8_spanish2_ci NOT NULL,
   `nit` varchar(25) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `telefono` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
+  `telefono` varchar(10) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `registro` varchar(50) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `direccion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `estado` int(11) NOT NULL
@@ -99,15 +107,16 @@ CREATE TABLE `clientes` (
 INSERT INTO `clientes` (`id`, `nombres`, `apellidos`, `nit`, `telefono`, `registro`, `direccion`, `estado`) VALUES
 (1, 'Hugo', '', '123', '', '123', 'sm', 1),
 (2, 'Zulmi Amaya', '', 'yy', '', 'rr', 'ee', 1),
-(3, 'dd dddd', '', '98989800000000', '', '', '', 1),
-(4, 'wenas', '', '1217-061296-101-0', '', '', '', 1),
+(3, 'dd dddd', '', '98989800000000', '', '', '', 0),
+(4, 'wenas', '', '1217-061296-101-0', '', '', '', 0),
 (5, 'ffs', '', '1217-061296-101-0', '', '987654-0', '', 1),
 (6, 'ggg', '', '1217-061296-101-0', '', '123456-0', '', 1),
 (7, 'fff fff', '', '1217-061296-101-0', '', '123456-0', '', 1),
 (8, 'eeee', '', '1217-061296-101-0', '', '123456-0', '', 1),
 (9, 'ff vvv vvv', '', '1217-061296-101-0', '', '123456-0', '', 1),
 (10, '22222', '', '1217-061296-101-0', '', '123456-0', '', 1),
-(11, 'dddd cccc2', '', '1217-061296-101-0', '', '123456-0', '', 1);
+(11, 'dddd cccc2', '', '1217-061296-101-0', '', '123456-0', '', 1),
+(12, 'Midoriya', 'Izuku', '1217-061296-101-0', '8888-9999', '444433-4', 'Japon :v', 1);
 
 -- --------------------------------------------------------
 
@@ -212,7 +221,8 @@ INSERT INTO `marca` (`id_marca`, `nombre`, `estado`) VALUES
 (1, 'Pelikan', 1),
 (2, 'Bic', 1),
 (3, 'Paper', 1),
-(4, 'Matsuri', 1);
+(4, 'Matsuri', 1),
+(5, 'tt', 1);
 
 -- --------------------------------------------------------
 
@@ -328,7 +338,8 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
 (1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 114, 4, '2017-12-20', 1),
 (2, '1651', 'correcto', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222213, 2, '0000-00-00', 1),
-(3, '1651', 'cuaderno', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222251, 2, '2017-12-30', 1);
+(3, '1651', 'cuaderno', 'grande', 2, 1, '0.25', '0.5', '0.75', '1', 222251, 2, '2017-12-30', 1),
+(4, '8', 'hh', 'oj', 4, 2, '9', '8', '8', '8', 8, 4, '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -645,12 +656,12 @@ ALTER TABLE `abastecer`
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
@@ -675,7 +686,7 @@ ALTER TABLE `eventos`
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
-  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
@@ -690,7 +701,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --

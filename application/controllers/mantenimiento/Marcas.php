@@ -22,9 +22,19 @@ class Marcas extends CI_Controller {
 
 	}
 
+	public function add()
+	{
+
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/aside");
+		$this->load->view("admin/marcas/add");
+		$this->load->view("layouts/footer");
+
+	}
+
 	public function store(){
 		$nombre = $this->input->post("nombre");
-		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[categorias.nombre]");
+		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[categorias.nombre]");
 
 		if ($this->form_validation->run()) {
 				$data  = array(

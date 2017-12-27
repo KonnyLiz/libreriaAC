@@ -23,11 +23,21 @@ class Categorias extends CI_Controller {
 
 	}
 
+	public function add(){
+		$data  = array(
+			"permisos" => $this->permisos,
+		);
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/aside");
+		$this->load->view("admin/categorias/add", $data);
+		$this->load->view("layouts/footer");
+	}
+
 	public function store(){
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
 
-		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[categorias.nombre]");
+		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[categorias.nombre]");
 
 		if ($this->form_validation->run()) {
 				$data  = array(
@@ -44,7 +54,7 @@ class Categorias extends CI_Controller {
 				redirect(base_url()."mantenimiento/categorias/add");
 			}
 		}else {
-			$this->index();
+			$this->add();
 		}
 	}
 
