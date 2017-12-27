@@ -17,6 +17,7 @@ private $permisos;
 			"permisos" => $this->permisos, 
 			'usuario' => $this->Vendedores_model->getUsuarios(),
 			
+			
 			//'oportunidad' => $this->Oportunidades_model->getOportunidades(),
 		);
 		$this->load->view("layouts/header");

@@ -260,6 +260,9 @@ $(document).ready(function (){
          des_foto = 0;
          des_ani = 0;
          des_ref = 0;
+
+         varx = 0;
+         vary = 0;
         option = $(this).val();
         
         if (option != ""){
@@ -277,153 +280,8 @@ $(document).ready(function (){
         }
         sumar();
     });
-    $("#laminación").on("change", function(){
-        option = $(this).val();
-        porId=$("#laminación2").val();
-       
-       // $("#laminación3").val(lami);
-        
-        info = porId.split("*");
-         des_lam = info[0];
-        
-        if (option>=12 && option<=99 ) {
-             $("#laminación1").val(info[1]);
-             des_lam = des_lam * option;
-            lami = val("laminación");
-            des_lam = des_lam - lami;
-             document.getElementById("laminación3").innerHTML = lami;              
-        }else if(option>99){
-             $("#laminación1").val(info[2]);
-             des_lam = des_lam * option;
-             lami = val("laminación");
-               des_lam = des_lam - lami;
-             document.getElementById("laminación3").innerHTML = lami;
-        }else{
-            $("#laminación1").val(info[0]);
-            des_lam = des_lam * option;
-             lami = val("laminación");
-               des_lam = des_lam - lami;
-             document.getElementById("laminación3").innerHTML = lami;
-        }
-        sumar();
-    });
 
 
-    //************************************************ tramo para cuando se aumente el input de un servicio
-
- /*   $("#impresiones").on("change", function(){
-        option = $(this).val(); //optiene el valor del imput con id impresiones
-        porId=$("#impresiones2").val(); //se obtiene un input de tipi hidden que contiene todos los precios de cada servicio en el foreach
-        info = porId.split("*");//se separan por la identificacion *
-        des_imp = info[0];
-                
-                //tramo de condiciones para cambiar el valor de venta de servicio
-        if (option>=12 && option<=99 ) {
-             $("#impresiones1").val(info[1]); // aqui se obtiene el valor de la poscion 2 que seria el precio2 que se tiene en trabla
-             lami = val("impresiones");
-             des_imp = des_imp * option;
-             des_imp = des_imp - lami;
-             document.getElementById("impresiones3").innerHTML = lami;//aqui se manda al label importe el valor para que aparezca
-
-        }else if(option>99){
-             $("#impresiones1").val(info[2]);
-               lami = val("impresiones");
-                des_imp = des_imp * option;
-             des_imp = des_imp - lami;
-             document.getElementById("impresiones3").innerHTML = lami;
-        }else{
-            $("#impresiones1").val(info[0]);
-              lami = val("impresiones");
-             des_imp = des_imp * option;
-             des_imp = des_imp - lami;
-             document.getElementById("impresiones3").innerHTML = lami;
-        }
-        sumar();
-    });
-    //la misma estructura sigue las demas funciones
-    $("#refilado").on("change", function(){
-        option = $(this).val();
-        porId=$("#refilado2").val();
-        info = porId.split("*");
-        des_ref = info[0];
-        
-        if (option>=12 && option<=99 ) {
-             $("#refilado1").val(info[1]);
-               lami = val("refilado");
-                des_ref = des_ref * option;
-             des_ref = des_ref - lami;
-             document.getElementById("refilado3").innerHTML = lami;
-
-        }else if(option>99){
-             $("#refilado1").val(info[2]);
-              lami = val("refilado");
-              des_ref = des_ref * option;
-             des_ref = des_ref - lami;
-             document.getElementById("refilado3").innerHTML = lami;
-        }else{
-            $("#refilado1").val(info[0]);
-             lami = val("refilado");
-             des_ref = des_ref * option;
-             des_ref = des_ref - lami;
-             document.getElementById("refilado3").innerHTML = lami;
-        }
-        sumar();
-    });$("#fotocopias").on("change", function(){
-       option = $(this).val();
-        porId=$("#fotocopias2").val();
-        info = porId.split("*");
-        des_foto = info[0];
-        
-        if (option>=12 && option<=99 ) {
-             $("#fotocopias1").val(info[1]);
-              lami = val("fotocopias");
-              des_foto = des_foto * option;
-             des_foto = des_foto - lami;
-             document.getElementById("fotocopias3").innerHTML = lami;
-
-        }else if(option>99){
-             $("#fotocopias1").val(info[2]);
-             lami = val("fotocopias");
-             des_foto = des_foto * option;
-             des_foto = des_foto - lami;
-             document.getElementById("fotocopias3").innerHTML = lami;
-        }else{
-            $("#fotocopias1").val(info[0]);
-            lami = val("fotocopias");
-            des_foto = des_foto * option;
-             des_foto = des_foto - lami;
-             document.getElementById("fotocopias3").innerHTML = lami;
-        }
-        sumar();
-    });$("#anillados").on("change", function(){
-        option = $(this).val();
-        porId=$("#anillados2").val();
-        info = porId.split("*");
-        des_ani = info[0];
-        
-        if (option>=12 && option<=99 ) {
-             $("#anillados1").val(info[1]);
-             lami = val("anillados");
-             des_ani = des_ani * option;
-             des_ani = des_ani - lami;
-             document.getElementById("anillados3").innerHTML = lami;
-
-        }else if(option>99){
-             $("#anillados1").val(info[2]);
-              lami = val("anillados");
-              des_ani = des_ani * option;
-             des_ani = des_ani - lami;
-             document.getElementById("anillados3").innerHTML = lami;
-        }else{
-            $("#anillados1").val(info[0]);
-             lami = val("anillados");
-             des_ani = des_ani * option;
-             des_ani = des_ani - lami;
-             document.getElementById("anillados3").innerHTML = lami;
-        }
-        sumar();
-    });
-*/
     $(document).on("click", ".btn-check", function(){
         cliente = $(this).val();
         infoCliente = cliente.split("*");
@@ -446,7 +304,7 @@ $(document).ready(function (){
         }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
         minLength:2, //caracteres que activan el autocomplete
         select: function(event, ui){
-            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock;
+            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio + "*" + ui.item.precio2+ "*" + ui.item.precio3;
             $("#btn-agregar").val(data);
         }, 
     });
@@ -482,15 +340,19 @@ $(document).ready(function (){
                     codigo =  infoProducto[1];
                     stock = infoProducto[4];
                 }
-                    
+                varx++;
+                vary = 0;
                 html = "<tr>";
                 html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+codigo+"</td>"; //id y codigo
                 html += "<td><input type='hidden' name='nombreProductos[]' value='"+infoProducto[2]+"'>"+infoProducto[2]+"</td>"; //nombre
-                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
+                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
+                vary++;
                 html += "<td>"+stock+"</td>";//stock
                 html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
-                html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
+               
+                html += "<td><input  type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
                 html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
+                html += "<td ><input   type='hidden' id='"+infoProducto[2]+"' value='"+infoProducto[5]+"*"+infoProducto[6]+"*"+infoProducto[7] +"'></td>"; //immportes
                 html += "</tr>";
                 $("#tbventas tbody").append(html);
                 sumar();
@@ -509,7 +371,28 @@ $(document).ready(function (){
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
+        nombre = $(this).closest("tr").find("td:eq(1)").text();
+        precio=0;
+        valor =$("#"+nombre+"").val();
+        valores = valor.split("*");
+     
+        if (cantidad<12){
+             precio = valores[0];
+        }
+        else if(cantidad < 50){
+             precio = valores[1];
+        }else{
+             precio = valores[2];
+        }
+
+         $(this).closest("tr").find("td:eq(2)").children("p").text(precio);
+         $(this).closest("tr").find("td:eq(2)").children("input").val(precio);
+
+
+
         precio = $(this).closest("tr").find("td:eq(2)").text();
+
+
         importe = cantidad * precio;
         totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
@@ -517,7 +400,6 @@ $(document).ready(function (){
         sumar();
     });
 
-    //accion de la ventana modal para ver los detalles de venta
     $(document).on("click", ".btn-view-venta", function(){
         var producto = $(this).val(); 
         var infoproducto = producto.split("*");
@@ -645,11 +527,11 @@ function generarNumero(numero){
 }
 
 function sumar(){
-
-   
+  
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
         subtotal = subtotal + Number($(this).find("td:eq(5)").text());
+        subtotal = (subtotal/1.13);
     });
     
     $("#subtotal").val(parseFloat(subtotal.toFixed(2)));

@@ -105,6 +105,7 @@
                                         <th>Cantidad</th>
                                         <th>Importe</th>
                                          <th>Eliminar</th>
+                                        
                                     </tr>
                                     <?php /*foreach($servicios as $serv):?>
                                     <tr>

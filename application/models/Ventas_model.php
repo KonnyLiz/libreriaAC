@@ -10,13 +10,14 @@ class Ventas_model extends CI_Model {
 
 	public function getProductos($valor){
 
-			$this->db->select("id, codigo, nombre as label, precio, stock");
+			$this->db->select("id, codigo, nombre as label, precio, stock, precio_mayoreo1 as precio2, precio_mayoreo2 as precio3");
 			$this->db->from("productos");
 			$this->db->like("estado", "1");
 			$this->db->like("nombre", $valor);
 			$resultados = $this->db->get();
 			return $resultados->result_array();
 	}
+	
 	
 	public function getClientes($valor){
 		$this->db->select("id, nombres");
@@ -36,7 +37,7 @@ class Ventas_model extends CI_Model {
     }
 
     function getServicio($valor){
-    	$this->db->select("id_servicio as id, nombre as label, precio");
+    	$this->db->select("id_servicio as id, nombre as label, precio, precio2, precio3");
 			$this->db->from("servicios");
 			$this->db->like("nombre", $valor);
 			$resultados = $this->db->get();
