@@ -40,17 +40,19 @@
                             
                             <div class="panel-body">
                                 <div class="tab-wrapper tab-primary">
-                                    <ul class="nav nav-tabs">
-                                        <li class="active"><a href="#home1" data-toggle="tab">Lista</a>
-                                        </li>
-
-                                        <?php if($permisos->insert == 1):?>
-
-                                        <li><a href="#profile1" data-toggle="tab">Nuevo</a>
-                                        </li><?php endif?>
-                                    </ul>
+                                    
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home1">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <?php if($permisos->insert == 1):?>
+
+                        <a href="<?php echo base_url();?>mantenimiento/clientes/add" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span> Agregar Cliente</a>
+                    <?php endif?>
+                </div>
+
+                </div>
                                             
                                             <div class="row">
                     <div class="col-md-12">
@@ -62,6 +64,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
+                                     <th>Apellidos</th>
+                                      <th>Telefono</th>
                                     <th>NIT</th>
                                     <th>Registro</th>
                                     <th>Direccion</th>
@@ -74,10 +78,12 @@
                                         <tr>
                                             <td><?php echo $clientes->id;?></td>
                                             <td><?php echo $clientes->nombres;?></td>
+                                             <td><?php echo $clientes->apellidos;?></td>
+                                              <td><?php echo $clientes->telefono;?></td>
                                             <td><?php echo $clientes->nit;?></td>
                                             <td><?php echo $clientes->registro;?></td>
                                             <td><?php echo $clientes->direccion;?></td>
-                                            <?php $datacliente = $clientes->id."*".$clientes->nombres."*".$clientes->nit."*".$clientes->registro."*".$clientes->direccion."*".$clientes->estado;?>
+                                            <?php $datacliente = $clientes->id."*".$clientes->nombres."*".$clientes->nit."*".$clientes->registro."*".$clientes->direccion."*".$clientes->estado."*".$clientes->apellidos."*".$clientes->telefono;?>
                                             <td>
                                                 <div class="btn-group">
                                                     <button type="button" class="btn btn-info btn-view-cliente" data-toggle="modal" data-target="#modal-default" value="<?php echo $datacliente;?>">
@@ -118,33 +124,7 @@
                                 
                              </div>
                         <?php endif;?>
-                         <form action="<?php echo base_url();?>mantenimiento/Clientes/store" method="POST">
-                            <!--<div class="form-group">
-                                <label for="codigo">Reunion:</label>
-                                <input type="date" class="form-control"  name="reunion" >
-                            </div>-->
-                             <div class="form-group">
-                                <label for="codigo">Nombre:</label>
-                                <input type="text" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control" name="r2" required>
                             </div>
-                            <div class="form-group">
-                                <label for="codigo">NIT</label>
-                                <input type="text" title="Formato: ####-######-###-#" class="form-control" pattern="[0-9]{4}-[0-9]{6}-[0-9]{3}-[0-9]{1}" name="r5" >
-                            </div>
-                            <div class="form-group">
-                                <label for="codigo">Registro</label>
-                                <input title="Formato: ######-#" pattern="[0-9]{6}-[0-9]{1}" type="text" class="form-control"  name="r6" >
-                            </div>
-                            <div class="form-group">
-                                <label for="codigo">Direccion:</label>
-                                <input type="text" class="form-control"  name="r7" >
-                            </div>
-                                <div class="form-group">
-                                <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                            </div>
-                            
-                        </form>
-                                    </div>
                                         </div>
                                     </div>
                                 </div>

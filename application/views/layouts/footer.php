@@ -232,6 +232,8 @@ $(document).ready(function (){
         //alert(cliente);
         var infocliente = cliente.split("*");
         html = "<p><strong>Nombres: </strong>"+infocliente[1]+"</p>"
+        html += "<p><strong>Apellidos: </strong>"+infocliente[6]+"</p>"
+        html += "<p><strong>Telefono: </strong>"+infocliente[7]+"</p>"
         html += "<p><strong>NIT: </strong>"+infocliente[2]+"</p>"
         html += "<p><strong>Registro: </strong>"+infocliente[3]+"</p>"
         html += "<p><strong>Direccion: </strong>"+infocliente[4]+"</p>";
@@ -555,26 +557,5 @@ function sumarReabastecimiento(){
     $("#total-reabastecer").val(total.toFixed(2));
 }
 </script>
-
-
-<script type="text/javascript">
-    function jajaja(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#grupo").val(res[1]);
-    }
-    function raro(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#nombre2").val(res[0]);
-    }
-    function raro2(){
-      var porId=document.getElementById("nombre").value;
-      var res = porId.split("*");
-        $("#gru2").val(res[1]);
-    }
-
-</script>
-
 </body>
 </html>

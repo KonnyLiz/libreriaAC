@@ -1,75 +1,80 @@
-<?php
+-<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Marcas extends CI_Controller {
+class Categorias extends CI_Controller {
 	private $permisos;
 	public function __construct(){
 		parent::__construct();
-		//$this->permisos = $this->backend_lib->control();
-		$this->load->model("Marcas_model");
+		$this->permisos = $this->backend_lib->control();
+		$this->load->model("Categorias_model");
 	}
 
 	
 	public function index()
 	{
 		$data  = array(
-			'marca' => $this->Marcas_model->getMarcas(), 
+			"permisos" => $this->permisos,
+			'categorias' => $this->Categorias_model->getCategorias(), 
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/marcas/list",$data);
+		$this->load->view("admin/categorias/list",$data);
 		$this->load->view("layouts/footer");
 
 	}
 
-	public function add()
-	{
-
+	public function add(){
+		$data  = array(
+			"permisos" => $this->permisos,
+		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/marcas/add");
+		$this->load->view("admin/categorias/add", $data);
 		$this->load->view("layouts/footer");
-
 	}
 
 	public function store(){
 		$nombre = $this->input->post("nombre");
+		$descripcion = $this->input->post("descripcion");
+
 		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[categorias.nombre]");
 
 		if ($this->form_validation->run()) {
 				$data  = array(
 				'nombre' => $nombre, 
+				'descripcion' => $descripcion,
 				'estado' => "1"
 			);
 
-			if ($this->Marcas_model->save($data)) {
-				redirect(base_url()."mantenimiento/marcas");
+			if ($this->Categorias_model->save($data)) {
+				redirect(base_url()."mantenimiento/categorias");
 			}
 			else{
 				$this->session->set_flashdata("error","No se pudo guardar la informacion");
-				redirect(base_url()."mantenimiento/marcas");
+				redirect(base_url()."mantenimiento/categorias/add");
 			}
 		}else {
-			$this->index();
+			$this->add();
 		}
 	}
 
 	public function edit($id){
 		$data  = array(
-			'marca' => $this->Marcas_model->getMarca($id), 
+			'categoria' => $this->Categorias_model->getCategoria($id), 
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/marcas/edit",$data);
+		$this->load->view("admin/categorias/edit",$data);
 		$this->load->view("layouts/footer");
 	}
 
 	public function update(){
-		$idmarca = $this->input->post("idmarca");
+		$idCategoria = $this->input->post("idCategoria");
 		$nombre = $this->input->post("nombre");
+		$descripcion = $this->input->post("descripcion");
 
-		$marcaActual = $this->Marcas_model->getMarca($idmarca);
-		if ($nombre == $marcaActual->nombre){
+		$categoriaActual = $this->Categorias_model->getCategoria($idCategoria);
+		if ($nombre == $categoriaActual->nombre){
 			$unique = "";
 		} else {
 			$unique = "|is_unique[categorias.nombre]";
@@ -79,18 +84,19 @@ class Marcas extends CI_Controller {
 
 		if ($this->form_validation->run()) {
 				$data = array(
-				'nombre' => $nombre,
+				'nombre' => $nombre, 
+				'descripcion' => $descripcion,
 			);
 
-			if ($this->Marcas_model->update($idmarca,$data)) {
-				redirect(base_url()."mantenimiento/marcas");
+			if ($this->Categorias_model->update($idCategoria,$data)) {
+				redirect(base_url()."mantenimiento/categorias");
 			}
 			else{
 				$this->session->set_flashdata("error","No se pudo actualizar la informacion");
-				redirect(base_url()."mantenimiento/marcas/edit/".$idmarca);
+				redirect(base_url()."mantenimiento/categorias/edit/".$idCategoria);
 			}
 		} else {
-			$this->edit($idmarca);
+			$this->edit($idCategoria);
 		}
 		
 	}
@@ -106,7 +112,7 @@ class Marcas extends CI_Controller {
 		$data  = array(
 			'estado' => "0", 
 		);
-		$this->Marcas_model->update($id,$data);
-		redirect(base_url()."mantenimiento/marcas");
+		$this->Categorias_model->update($id,$data);
+		echo "mantenimiento/categorias";
 	}
 }

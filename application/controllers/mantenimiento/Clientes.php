@@ -23,8 +23,22 @@ private $permisos;
 
 	}
 
+	public function add()
+	{
+		$data  = array(
+			"permisos" => $this->permisos
+		);
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/aside");
+		$this->load->view("admin/clientes/add",$data);
+		$this->load->view("layouts/footer");
+
+	}
+
 	public function store(){
 		$nombres =  $this->input->post("r2");
+		$apellidos = $this->input->post("apellido");
+		$telefono = $this->input->post("telefono");
 		$nit = $this->input->post("r5");
 		$registro = $this->input->post("r6");
 		$direccion = $this->input->post("r7");
@@ -32,6 +46,8 @@ private $permisos;
 
 			$data  = array(
 				'nombres' => $nombres, 
+				'apellidos' => $apellidos,
+				'telefono' => $telefono,
 				'nit' => $nit,
 				'direccion' => $direccion,
 				'registro' => $registro,
