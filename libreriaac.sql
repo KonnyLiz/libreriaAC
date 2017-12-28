@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2017 a las 04:50:16
+-- Tiempo de generación: 28-12-2017 a las 05:37:42
 -- Versión del servidor: 10.1.25-MariaDB
 -- Versión de PHP: 7.1.7
 
@@ -454,31 +454,38 @@ INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALU
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `grupo` int(11) NOT NULL,
   `nombres` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `dui` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `nit` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
-  `email` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `username` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `password` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `rol_id` int(11) DEFAULT NULL,
-  `estado` tinyint(1) DEFAULT NULL
+  `estado` tinyint(1) DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `grupo`, `nombres`, `apellidos`, `dui`, `nit`, `telefono`, `email`, `username`, `password`, `rol_id`, `estado`) VALUES
-(1, 1, 'Carlos Ferminnnn', 'Padilla Ferrufino', '05431598-6', '1217-151096-102-6', '61099440', 'email@yo.com', 'Padillon', '12', 1, 0),
-(2, 1, 'edward', 'her', '789987', '87879', '77594592', 'baoionz_hg@hotmail.com', 'baionz', NULL, 1, 0),
-(3, 1, 'fabiola', 'garcia', '65415161', '1+56165161', '77564+498', 'fabu@hotmail.com', 'fab', NULL, 1, 0),
-(4, 2, 'konny', 'amaya', '7897', '54656', '778888999', 'sama', 'liz', NULL, 3, 0),
-(5, 1, 'edw', 'her', '889', '54657', '7878', '7878', 'baioz', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1),
-(6, 1, 'gustavo', 'rojas', '8989', '8889', '2648', 'rojas@jah', 'rojas', 'fc6fea5b0c058716683a5ec0cf63833ba7a72bca', 3, 1),
-(7, 1, 'Ligia', 'Astrid', '7897', '456789', '789456232', 'astrid@hotmail.com', 'ingeniera', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1);
+INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `dui`, `nit`, `telefono`, `username`, `password`, `rol_id`, `estado`, `email`) VALUES
+(1, 'Carlos Ferminnnn', 'Padilla Ferrufino', '05431598-6', '1217-151096-102-6', '61099440', 'Padillon', '12', 1, 0, NULL),
+(2, 'edward', 'her', '789987', '87879', '77594592', 'baionz', NULL, 1, 0, NULL),
+(3, 'fabiola', 'garcia', '65415161', '1+56165161', '77564+498', 'fab', NULL, 1, 0, NULL),
+(4, 'konny', 'amaya', '7897', '54656', '778888999', 'liz', NULL, 3, 0, NULL),
+(5, 'edw', 'her', '889', '54657', '7878', 'baioz', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1, NULL),
+(6, 'gustavo', 'rojas', '8989', '8889', '2648', 'rojas', 'fc6fea5b0c058716683a5ec0cf63833ba7a72bca', 3, 1, NULL),
+(7, 'Ligia', 'Astrid', '7897', '456789', '789456232', 'ingeniera', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1, NULL),
+(9, 'r', 'g', '5', '5', '5', 'Liza', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1, NULL),
+(14, 'konny', 'amaya', '287267', '5', '5', 'lizas', '12c6fc06c99a462375eeb3f43dfd832b08ca9e17', 2, 1, NULL),
+(15, 'konny', 'amaya', '44', '44', '44', '44', '98fbc42faedc02492397cb5962ea3a3ffc0a9243', 1, 1, NULL),
+(16, 'kk', 'hh', '44444444-4', '4444-444444-444-4', '', 't34', 'cfa1150f1787186742a9a884b73a43d8cf219f9b', 2, 1, NULL),
+(17, 'hh', 'hh', '55555555-5', '1217-061296-101-1', '5555-5555', '6666666', '8c1017982b2032cc059203e3d83dd0ee2e7a86b3', 2, 1, ''),
+(18, 'hh', 'hh', '55555555-6', '5555-555555-555-5', '5555-5555', '55555', 'ab874467a7d1ff5fc71a4ade87dc0e098b458aae', 1, 1, NULL),
+(20, 'kkk', '88888888-8', '1217-061296-101-9', '', '', '5c2dd944dde9e08881bef0894fe7b22a5c9c4b06', '5c2dd944dde9e08881bef0894fe7b22a5c9c4b06', NULL, NULL, 't38'),
+(21, 'Amaya', '88888888-0', '1217-061296-101-0', '', '', 'afc97ea131fd7e2695a98ef34013608f97f34e1d', 'afc97ea131fd7e2695a98ef34013608f97f34e1d', NULL, NULL, '8898');
 
 -- --------------------------------------------------------
 
@@ -631,7 +638,6 @@ ALTER TABLE `tipo_comprobante`
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username_UNIQUE` (`username`),
-  ADD UNIQUE KEY `email_UNIQUE` (`email`),
   ADD KEY `fk_rol_usuarios_idx` (`rol_id`);
 
 --
@@ -731,7 +737,7 @@ ALTER TABLE `tipo_comprobante`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --

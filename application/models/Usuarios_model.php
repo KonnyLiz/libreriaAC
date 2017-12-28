@@ -14,21 +14,27 @@ class Usuarios_model extends CI_Model {
 			return false;
 		}
 	}
+
 	public function getRoles(){
 		$resultados = $this->db->get("roles");
 		return $resultados ->result();
 	}
 
 	public function getUsuarios(){
+		$this->db->select("u.*, r.nombre as rol");
+		$this->db->from("usuarios u");
+		$this->db->join("roles r", "u.rol_id = r.id");
 		$this->db->where("estado","1");
-		$resultados = $this->db->get("usuarios");
+		$resultados = $this->db->get();
 		return $resultados->result();
 	}
+
 	public function getUsuario($id){
 		$this->db->where("id",$id);
 		$resultado = $this->db->get("usuarios");
 		return $resultado->row();
 	}
+	
 	public function save($data){
 		return $this->db->insert("usuarios",$data);
 	}

@@ -22,7 +22,6 @@
     <script src="<?php echo base_url(); ?>assets/js/application.js"></script>
     <!--Page Level JS-->
     <script src="<?php echo base_url(); ?>assets/plugins/countTo/jquery.countTo.js"></script>
-    <script src="<?php echo base_url(); ?>assets/plugins/weather/js/skycons.js"></script>
     <script src="<?php echo base_url(); ?>assets/templates/jquery-ui/jquery-ui.js"></script>
     <script src="<?php echo base_url(); ?>assets/templates/jquery-print/jquery.print.js"></script>
 
@@ -257,14 +256,6 @@ $(document).ready(function (){
 
     //****************Ventas/*************
     $("#comprobantes").on("change", function(){
-         des_imp = 0;
-         des_lam = 0;
-         des_foto = 0;
-         des_ani = 0;
-         des_ref = 0;
-
-         varx = 0;
-         vary = 0;
         option = $(this).val();
         
         if (option != ""){
@@ -503,6 +494,35 @@ $(document).ready(function (){
             infoProveedor = data.split("*");
             $("#idproveedor").val(infoProveedor[0]);
         }, 
+    });
+
+    //roles de usuarios
+    $("#roles").on("change", function(){
+        option = $(this).val();
+        
+        if (option != ""){
+            infoRol = option.split("*");
+            $("#idRol").val(infoRol[0]);
+        }
+        else{
+            $("#idRol").val(null);
+        }
+    });
+
+    $(".btn-view-usuario").on("click", function(){
+        var usuario = $(this).val(); 
+        //alert(cliente);
+        var infousuario = usuario.split("*");
+        html = "<p><strong>ID: </strong>"+infousuario[0]+"</p>"
+        html += "<p><strong>Nombres: </strong>"+infousuario[1]+"</p>"
+        html += "<p><strong>Apellidos: </strong>"+infousuario[2]+"</p>"
+        html += "<p><strong>DUI: </strong>"+infousuario[3]+"</p>"
+        html += "<p><strong>NIT: </strong>"+infousuario[4]+"</p>"
+        html += "<p><strong>Telefono: </strong>"+infousuario[5]+"</p>";
+        html += "<p><strong>Email: </strong>"+infousuario[6]+"</p>";
+        html += "<p><strong>Nmbre de Usuario: </strong>"+infousuario[7]+"</p>";
+        html += "<p><strong>Rol: </strong>"+infousuario[8]+"</p>";
+        $("#modal-default .modal-body").html(html);
     });
 
 });

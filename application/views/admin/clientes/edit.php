@@ -42,7 +42,7 @@
 
                              <div class="form-group">
                                 <label for="codigo">Nombre:</label>
-                                <input value="<?php echo $cliente->nombre?>" type="text" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control" name="r2" required>
+                                <input value="<?php echo $cliente->nombres?>" type="text" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control" name="r2" required>
                             </div>
 
                              <div class="form-group">
