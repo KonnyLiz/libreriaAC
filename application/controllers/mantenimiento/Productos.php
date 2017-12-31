@@ -16,14 +16,25 @@ class Productos extends CI_Controller {
 	{
 		$data  = array(
 			"permisos" => $this->permisos,
-			'productos' => $this->Productos_model->getProductos(),
+			'productos' => $this->Productos_model->getProductos()
+		);
+		$this->load->view("layouts/header");
+		$this->load->view("layouts/aside");
+		$this->load->view("admin/productos/list",$data);
+		$this->load->view("layouts/footer");
+
+	}
+
+	public function add() {
+		$data  = array(
+			"permisos" => $this->permisos,
 			"categorias" => $this->Categorias_model->getCategorias(),
 			"marca" => $this->Marcas_model->getMarcas() ,
 			"proveedor" => $this->Proveedores_model->getProveedores()  
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
-		$this->load->view("admin/productos/list",$data);
+		$this->load->view("admin/productos/add",$data);
 		$this->load->view("layouts/footer");
 
 	}
@@ -41,12 +52,8 @@ class Productos extends CI_Controller {
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
 
-		$this->form_validation->set_rules("codigo", "Codigo", "integer|is_natural_no_zero|required|is_unique[productos.codigo]");
-		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[productos.nombre]");
-		$this->form_validation->set_rules("precio_e", "Entrada", "decimal|required");
-		$this->form_validation->set_rules("precio", "Precio", "decimal|required");
-		$this->form_validation->set_rules("precio_m", "Mayoreo", "decimal|required");
-		$this->form_validation->set_rules("stock", "Stock", "is_natural_no_zero|integer|required");
+		$this->form_validation->set_rules("codigo", "Codigo", "required|is_unique[productos.codigo]");
+		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[productos.nombre]");
 
 		if ($this->form_validation->run()){
 			$data  = array(
@@ -72,7 +79,7 @@ class Productos extends CI_Controller {
 				redirect(base_url()."mantenimiento/productos/add");
 			}
 		}else {
-			$this->index();
+			$this->add();
 		}
 
 		
@@ -106,18 +113,20 @@ class Productos extends CI_Controller {
 		$categoria = $this->input->post("categoria");
 
 		$productoActual = $this->Productos_model->getProducto($idproducto);
-		if ($codigo == $productoActual->nombre){
+		if ($codigo == $productoActual->codigo){
 			$unique = '';
 		} else {
-			$unique = "|is_unique[productos.nombre]";
+			$unique = "|is_unique[productos.codigo]";
 		}
 
-		$this->form_validation->set_rules("codigo", "Codigo", "integer|is_natural_no_zero|required|is_unique[productos.codigo]");
-		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required".$unique);
-		$this->form_validation->set_rules("precio_e", "Entrada", "decimal|required");
-		$this->form_validation->set_rules("precio", "Precio", "decimal|required");
-		$this->form_validation->set_rules("precio_m", "Mayoreo", "decimal|required");
-		$this->form_validation->set_rules("stock", "Stock", "is_natural_no_zero|integer|required");
+		if ($nombre == $productoActual->nombre){
+			$unique2 = '';
+		} else {
+			$unique2 = "|is_unique[productos.nombre]";
+		}
+
+		$this->form_validation->set_rules("codigo", "Codigo", "required".$unique);
+		$this->form_validation->set_rules("nombre", "Nombre", "required".$unique2);
 
 		if ($this->form_validation->run()){
 			$data  = array(

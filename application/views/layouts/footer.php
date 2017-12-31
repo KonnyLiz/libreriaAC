@@ -217,12 +217,16 @@ $(document).ready(function (){
         var producto = $(this).val(); 
         //alert(cliente);
         var infoproducto = producto.split("*");
-        html = "<p><strong>Codigo:</strong>"+infoproducto[1]+"</p>"
-        html += "<p><strong>Nombre:</strong>"+infoproducto[2]+"</p>"
-        html += "<p><strong>Descripcion:</strong>"+infoproducto[3]+"</p>"
-        html += "<p><strong>Precio:</strong>"+infoproducto[4]+"</p>"
-        html += "<p><strong>Stock:</strong>"+infoproducto[5]+"</p>"
-        html += "<p><strong>Categoria:</strong>"+infoproducto[6]+"</p>";
+        html = "<p><strong>Codigo: </strong>"+infoproducto[0]+"</p>"
+        html += "<p><strong>Nombre: </strong>"+infoproducto[1]+"</p>"
+        html += "<p><strong>Descripcion: </strong>"+infoproducto[2]+"</p>"
+        html += "<p><strong>Marca: </strong>"+infoproducto[3]+"</p>"
+        html += "<p><strong>Proveedor: </strong>"+infoproducto[4]+"</p>"
+        html += "<p><strong>Precio: </strong>"+infoproducto[5]+"</p>"
+        html += "<p><strong>Precio Mayoreo 1: </strong>"+infoproducto[6]+"</p>"
+        html += "<p><strong>Precio Mayoreo 2: </strong>"+infoproducto[7]+"</p>"
+        html += "<p><strong>Stock: </strong>"+infoproducto[8]+"</p>"
+        html += "<p><strong>Categoria: </strong>"+infoproducto[9]+"</p>";
         $("#modal-default .modal-body").html(html);
     });
   
@@ -256,6 +260,14 @@ $(document).ready(function (){
 
     //****************Ventas/*************
     $("#comprobantes").on("change", function(){
+         des_imp = 0;
+         des_lam = 0;
+         des_foto = 0;
+         des_ani = 0;
+         des_ref = 0;
+
+         varx = 0;
+         vary = 0;
         option = $(this).val();
         
         if (option != ""){

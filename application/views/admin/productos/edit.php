@@ -3,7 +3,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
-                        <ul class="breadcrumb">
+                        <ul class="breadcrumb"> 
                             
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Productos</li>
@@ -38,7 +38,9 @@
                              </div>
                         <?php endif;?>
                         <form action="<?php echo base_url();?>mantenimiento/productos/update" method="POST">
+                            
                             <input type="hidden" name="idproducto" value="<?php echo $producto->id;?>">
+                            
                             <div class="form-group <?php echo !empty(form_error("codigo"))? 'has-error':'' ?>">
                                 <label for="codigo">Codigo:</label>
                                 <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo !empty(form_error("codigo"))? set_value("codigo"):$producto->codigo?>">
