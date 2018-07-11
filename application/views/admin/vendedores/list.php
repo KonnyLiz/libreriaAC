@@ -6,11 +6,11 @@
                         <ul class="breadcrumb">
                             
                             <li><a href="Dashboard">Dashboard</a></li>
-                            <li>Usuarios</li>
-                            <li class="active">Usuarios</li>
+                            <li>Vendedores</li>
+                            <li class="active">Vendedores</li>
                         </ul>
                     </div>
-                        <h1 class="h1">Usuarios</h1>
+                        <h1 class="h1">Vendedores</h1>
                 </div>
                     
 <!-- Content Wrapper. Contains page content -->
@@ -23,7 +23,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Informacion de los Usuarios/h4>
+        <h4 class="modal-title">Informacion de los Vendedores/h4>
       </div>
       <div class="modal-body">
         
@@ -92,11 +92,11 @@
                                                     <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $datausuario;?>">
                                                         <span class="fa fa-search"></span>
                                                     </button>
-                                                    <?php if($permisos->update == 1):?>  <a href="<?php echo base_url()?>mantenimiento/usuarios/edit/<?php echo $usuarios->id;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
+                                                    <?php if($permisos->update == 1):?><a href="<?php echo base_url()?>mantenimiento/Vendedores/edit/<?php echo $usuarios->id;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
 <?php endif?>
- <?php if($permisos->delete == 1):?><a href="<?php echo base_url();?>mantenimiento/Usuarios/delete/<?php echo $usuarios->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
+ <?php if($permisos->delete == 1):?><a href="<?php echo base_url();?>mantenimiento/Vendedores/delete/<?php echo $usuarios->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
 <?php endif?>
-                                                  
+                                                    
                                                     
                                                 </div>
                                             </td>
@@ -105,7 +105,7 @@
                                 <?php endif;?>
                             </tbody>
                         </table>
-                        <a href="<?php echo base_url();?>pdfcontroller/usuarios" target="_blank">
+                        <a href="<?php echo base_url();?>pdfcontroller/vendedores" target="_blank">
                         <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte General</button>
                         </a>
                        </div>
@@ -124,7 +124,7 @@
                                 
                              </div>
                         <?php endif;?>
-                            <form action="<?php echo base_url();?>mantenimiento/usuarios/store" method="POST">
+                            <form action="<?php echo base_url();?>mantenimiento/Vendedores/store" method="POST">
 
                             <div class="form-group">
                                <label for="categoria">grupo</label>

@@ -8,15 +8,14 @@ class Productos extends CI_Controller {
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Productos_model");
 		$this->load->model("Categorias_model");
-		$this->load->model("Marcas_model");
-		$this->load->model("Proveedores_model");
 	}
 
 	public function index()
 	{
 		$data  = array(
 			"permisos" => $this->permisos,
-			'productos' => $this->Productos_model->getProductos()
+			'productos' => $this->Productos_model->getProductos(),
+			"categorias" => $this->Categorias_model->getCategorias() 
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -25,47 +24,31 @@ class Productos extends CI_Controller {
 
 	}
 
-	public function add() {
-		$data  = array(
-			"permisos" => $this->permisos,
-			"categorias" => $this->Categorias_model->getCategorias(),
-			"marca" => $this->Marcas_model->getMarcas() ,
-			"proveedor" => $this->Proveedores_model->getProveedores()  
-		);
-		$this->load->view("layouts/header");
-		$this->load->view("layouts/aside");
-		$this->load->view("admin/productos/add",$data);
-		$this->load->view("layouts/footer");
-
-	}
-
 	public function store(){
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
 		$descripcion = $this->input->post("descripcion");
-		$marca = $this->input->post("marca");
-		$proveedor = $this->input->post("proveedor");
 		$precio_e = $this->input->post("precio_e");
 		$precio = $this->input->post("precio");
 		$precio_m = $this->input->post("precio_m");
-		$precio_m1 = $this->input->post("precio_m1");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
 
-		$this->form_validation->set_rules("codigo", "Codigo", "required|is_unique[productos.codigo]");
-		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[productos.nombre]");
+		$this->form_validation->set_rules("codigo", "Codigo", "integer|is_natural_no_zero|required|is_unique[productos.codigo]");
+		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[productos.nombre]");
+		$this->form_validation->set_rules("precio_e", "Entrada", "decimal|required");
+		$this->form_validation->set_rules("precio", "Precio", "decimal|required");
+		$this->form_validation->set_rules("precio_m", "Mayoreo", "decimal|required");
+		$this->form_validation->set_rules("stock", "Stock", "is_natural_no_zero|integer|required");
 
 		if ($this->form_validation->run()){
 			$data  = array(
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
-				'id_marca' => $marca,
-				'id_proveedor' => $proveedor,
 				'precio_entrada' => $precio_e,
 				'precio' => $precio,
-				'precio_mayoreo1' => $precio_m,
-				'precio_mayoreo2' => $precio_m1,
+				'precio_mayoreo' => $precio_m,
 				'stock' => $stock,
 				'categoria_id' => $categoria,
 				'estado' => "1"
@@ -79,7 +62,7 @@ class Productos extends CI_Controller {
 				redirect(base_url()."mantenimiento/productos/add");
 			}
 		}else {
-			$this->add();
+			$this->index();
 		}
 
 		
@@ -88,9 +71,7 @@ class Productos extends CI_Controller {
 	public function edit($id){
 		$data =array( 
 			"producto" => $this->Productos_model->getProducto($id),
-			"categorias" => $this->Categorias_model->getCategorias(),
-			"marca" => $this->Marcas_model->getMarcas() ,
-			"proveedor" => $this->Proveedores_model->getProveedores(), 
+			"categorias" => $this->Categorias_model->getCategorias()
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");
@@ -102,43 +83,35 @@ class Productos extends CI_Controller {
 		$idproducto = $this->input->post("idproducto");
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
-		$marca = $this->input->post("marca");
-		$prov = $this->input->post("proveedor");
 		$descripcion = $this->input->post("descripcion");
 		$precio_e = $this->input->post("precio_e");
 		$precio = $this->input->post("precio");
 		$precio_m = $this->input->post("precio_m");
-		$precio_m1 = $this->input->post("precio_m1");
 		$stock = $this->input->post("stock");
 		$categoria = $this->input->post("categoria");
 
 		$productoActual = $this->Productos_model->getProducto($idproducto);
-		if ($codigo == $productoActual->codigo){
+		if ($codigo == $productoActual->nombre){
 			$unique = '';
 		} else {
-			$unique = "|is_unique[productos.codigo]";
+			$unique = "|is_unique[productos.nombre]";
 		}
 
-		if ($nombre == $productoActual->nombre){
-			$unique2 = '';
-		} else {
-			$unique2 = "|is_unique[productos.nombre]";
-		}
-
-		$this->form_validation->set_rules("codigo", "Codigo", "required".$unique);
-		$this->form_validation->set_rules("nombre", "Nombre", "required".$unique2);
+		$this->form_validation->set_rules("codigo", "Codigo", "integer|is_natural_no_zero|required|is_unique[productos.codigo]");
+		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required".$unique);
+		$this->form_validation->set_rules("precio_e", "Entrada", "decimal|required");
+		$this->form_validation->set_rules("precio", "Precio", "decimal|required");
+		$this->form_validation->set_rules("precio_m", "Mayoreo", "decimal|required");
+		$this->form_validation->set_rules("stock", "Stock", "is_natural_no_zero|integer|required");
 
 		if ($this->form_validation->run()){
 			$data  = array(
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
 				'descripcion' => $descripcion,
-				'id_proveedor' => $prov,
-				'id_marca' => $marca,
 				'precio_entrada' => $precio_e,
 				'precio' => $precio,
-				'precio_mayoreo1' => $precio_m,
-				'precio_mayoreo2' => $precio_m1,
+				'precio_mayoreo' => $precio_m,
 				'stock' => $stock,
 				'categoria_id' => $categoria,
 			);
@@ -161,28 +134,5 @@ class Productos extends CI_Controller {
 		$this->Productos_model->update($id,$data);
 		echo "mantenimiento/productos";
 	}
-
-	public function save_Marca(){
-		$nombre = $this->input->post("nombre");
-		$this->form_validation->set_rules("nombre", "Nombre", "alpha|required|is_unique[categorias.nombre]");
-
-		if ($this->form_validation->run()) {
-				$data  = array(
-				'nombre' => $nombre, 
-				'estado' => "1"
-			);
-
-			if ($this->Marcas_model->save($data)) {
-				redirect(base_url()."mantenimiento/productos");
-			}
-			else{
-				$this->session->set_flashdata("error","No se pudo guardar la informacion");
-				redirect(base_url()."mantenimiento/productos");
-			}
-		}else {
-			$this->index();
-		}
-	}
-
 
 }

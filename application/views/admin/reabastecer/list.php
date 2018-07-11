@@ -53,7 +53,6 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Fecha</th>
-                                    <th>Proveedor</th>
                                     <th>Encargado</th>
                                     <th>Total</th>
                                     <th>Opciones</th>
@@ -65,7 +64,6 @@
                                     <tr>
                                         <td><?php echo $reabastecimiento->id;?></td>
                                         <td><?php echo $reabastecimiento->fecha;?></td>
-                                        <td><?php echo $reabastecimiento->nombre;?></td>
                                         <td><?php echo $reabastecimiento->nombres." ".$reabastecimiento->apellidos;?></td>
                                         <td><?php echo $reabastecimiento->total_abastecer;?></td>
                                         <td><button type="button" class="btn btn-info btn-view-reabastecimiento" value="<?php echo $reabastecimiento->id;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button></td>

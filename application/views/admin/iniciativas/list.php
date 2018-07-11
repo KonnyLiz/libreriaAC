@@ -1,4 +1,4 @@
-<section class="main-content-wrapper">
+ <section class="main-content-wrapper">
             <section id="main-content">
                 <div class="row">
                     <div class="col-md-12">
@@ -7,10 +7,10 @@
                             
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Registros</li>
-                            <li class="active">Proveedores</li>
+                            <li class="active">Inciativas</li>
                         </ul>
                     </div>
-                        <h1 class="h1">Proveedores</h1>
+                        <h1 class="h1">Iniciativas</h1>
                 </div>
                     
 <!-- Content Wrapper. Contains page content -->
@@ -23,7 +23,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Informacion de los Vendedores/h4>
+        <h4 class="modal-title">Informacion de la Categoria</h4>
       </div>
       <div class="modal-body">
         
@@ -46,11 +46,10 @@
                                 <div class="tab-wrapper tab-primary">
                                     <ul class="nav nav-tabs">
                                         <li class="active"><a href="#home1" data-toggle="tab">Lista</a>
-                                        </li>
-                                        <li>
-                                           
-<a href="#profile1" data-toggle="tab">Nuevo</a>
-                                       
+                                        </li><?php if($permisos->insert == 1):?>
+
+                                        <li><a href="#profile1" data-toggle="tab">Nuevo</a>
+                                        </li><?php endif?>
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home1">
@@ -65,24 +64,30 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>Telefono</th>
-                                    <th>Direcciom</th>
+                                    <th>Contacto</th>
+                                    <th>Grupo</th>
                                     <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php if(!empty($proveedor)):?>
-                                    <?php foreach($proveedor as $proveedores):?>
+                                <?php if(!empty($iniciativa)):?>
+                                    <?php foreach($iniciativa as $iniciativas):?>
                                         <tr>
-                                            <td><?php echo $proveedores->id_proveedor;?></td>
-                                            <td><?php echo $proveedores->nombre;?></td>
-                                            <td><?php echo $proveedores->telefono;?></td>
-                                            <td><?php echo $proveedores->direccion;?></td>
+                                            <td><?php echo $iniciativas->id_iniciativa;?></td>
+                                            <td><?php echo $iniciativas->nombre;?></td>
+                                            <td><?php echo $iniciativas->contacto;?></td>
+                                            <td><?php echo $iniciativas->grupo;?></td>
+                                            <?php $datainiciativa = $iniciativas->id_iniciativa."*".$iniciativas->nombre."*".$iniciativas->contacto."*".$iniciativas->grupo;?>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="<?php echo base_url()?>mantenimiento/proveedores/edit/<?php echo $proveedores->id_proveedor;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
-                                                    <a href="<?php echo base_url()?>mantenimiento/proveedores/delete/<?php echo $proveedores->id_proveedor;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
+                                                    <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $datainiciativa;?>">
+                                                        <span class="fa fa-search"></span>
+                                                    </button>
 
+                                                    <?php if($permisos->update == 1):?><a href="<?php echo base_url()?>mantenimiento/iniciativas/edit/<?php echo $iniciativas->id_iniciativa;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
+<?php endif?>
+ <?php if($permisos->delete == 1):?><a href="<?php echo base_url();?>mantenimiento/iniciativas/delete/<?php echo $iniciativas->id_iniciativa;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
+<?php endif?>
                                                     
                                                     
                                                 </div>
@@ -92,8 +97,17 @@
                                 <?php endif;?>
                             </tbody>
                         </table>
-                        <a href="<?php echo base_url();?>pdfcontroller/vendedores" target="_blank">
+                        <a href="<?php echo base_url();?>pdfcontroller/iniciativa" target="_blank">
                         <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte General</button>
+                        </a>
+                        <a href="<?php echo base_url();?>pdfcontroller/iniciativa1" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte Grupo #1</button>
+                        </a>
+                        <a href="<?php echo base_url();?>pdfcontroller/iniciativa2" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte Grupo #2</button>
+                        </a>
+                         <a href="<?php echo base_url();?>pdfcontroller/iniciativa3" target="_blank">
+                        <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Reporte Grupo #3</button>
                         </a>
                        </div>
                      </div>
@@ -111,20 +125,30 @@
                                 
                              </div>
                         <?php endif;?>
-                            <form action="<?php echo base_url();?>mantenimiento/proveedores/store" method="POST">                    
+                                <form action="<?php echo base_url();?>mantenimiento/iniciativas/store" method="POST">
                             <div class="form-group">
                                 <label for="codigo">Nombre:</label>
-                                <input type="text" class="form-control"  name="nombre" >
+                                <input type="text" class="form-control" id="codigo" name="nombre">
                             </div>
+                            
                             <div class="form-group">
-                                <label for="codigo">Telefono:</label>
-                                <input type="text" class="form-control"  name="telefono" >
+                                <label for="categoria">Categoria:</label>
+                                <select name="grupo" id="grupo" class="form-control">
+                                    <?php foreach($grupo as $grupos):?>
+                                        <option value="<?php echo $grupos->idgrupo?>"><?php echo $grupos->descripcion;?></option>
+                                    <?php endforeach;?>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label for="codigo">Direccion:</label>
-                                <input type="text" class="form-control"  name="direccion"  >
-                            </div>
-                                                                                        
+                         <div class="form-group">
+                         <label for="categoria">Contacto:</label>
+                            <select class="form-control" name="contacto">
+                                        <option value="" disabled="" selected="">Tipo de contacto</option>
+                                        <option value="Redes">Redes Sociales</option>
+                                        <option value="Correo">Correo Electronico</option>
+                                        <option value="Pagina web">Pagina Web</option>
+                                        <option value="Cotizacion">Cotizacion</option>
+                                    </select>
+                         </div>           
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                             </div>
@@ -136,3 +160,5 @@
                             </div>
                         </div>
                     </div>
+                        
+

@@ -14,7 +14,7 @@
 		<b>ID reabastecimiento:</b> <?php echo $datos->id;?> <br>
 		<b>Fecha:</b> <?php echo $datos->fecha;?> <br>
 		<b>Encargado:</b> <?php echo $datos->nombres." ".$datos->apellidos;?> <br>
-		<b>Proveedor:</b> <?php echo $datos->nombre;?> <br>
+
 	</div>	
 </div>
 <br>

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Libreria A&amp;C</title>
+<title>Ferreteria xyz</title>
    <?php
+   
     require_once('flyweit.php');
    ?>
+
 </head>
 <section id="container">
-        <header id="header">
+                <header id="header">
             <!--logo start-->
             <div class="brand">
                 <a href="index.html" class="logo"><span>Ferreteria</span></a>
@@ -46,3 +48,5 @@
             </div>
         </header>
         </section>
+        </body>
+        </header>

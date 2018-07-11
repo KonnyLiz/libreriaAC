@@ -11,23 +11,14 @@ class Reabastecer_model extends CI_Model {
 		return $resultados->result_array();
 	}
 
-	public function getProveedor($valor){
-		$this->db->select("id_proveedor, nombre as label");
-		$this->db->from("proveedor");
-		$this->db->like("nombre", $valor);
-		$resultados = $this->db->get();
-		return $resultados->result_array();
-	}
-
 	public function save($data){
 		return $this->db->insert("abastecer", $data);
 	}
 
 	public function getAbastecimientos(){
-		$this->db->select("a.*, u.nombres, u.apellidos, p.nombre");
+		$this->db->select("a.*, u.nombres, u.apellidos");
 		 $this->db->from("abastecer a");
 		 $this->db->join("usuarios u", "a.usuario_id = u.id");
-		  $this->db->join("proveedor p", "a.proveedor_id = p.id_proveedor");
 		 $resultados = $this->db->get();
 		 if ($resultados->num_rows() > 0){
 		 	return $resultados->result();
@@ -46,10 +37,9 @@ class Reabastecer_model extends CI_Model {
 
 	//obteniendo los datos de abastecimuento por el id 
 	public function getAbastecimiento($id){
-		$this->db->select("a.*, u.nombres, u.apellidos, p.nombre");
+		$this->db->select("a.*, u.nombres, u.apellidos");
 		 $this->db->from("abastecer a");
 		 $this->db->join("usuarios u", "a.usuario_id = u.id");
-		  $this->db->join("proveedor p", "a.proveedor_id = p.id_proveedor");
 		 $this->db->where("a.id", $id);
 		 $resultado = $this->db->get();
 		 return $resultado->row();

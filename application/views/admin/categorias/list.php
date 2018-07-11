@@ -1,4 +1,4 @@
-<section class="main-content-wrapper">
+ <section class="main-content-wrapper">
             <section id="main-content">
                 <div class="row">
                     <div class="col-md-12">
@@ -6,25 +6,28 @@
                         <ul class="breadcrumb">
                             
                             <li><a href="Dashboard">Dashboard</a></li>
-                            <li>Inventarios</li>
+                            <li>Productos</li>
                             <li class="active">Categorias</li>
                         </ul>
                     </div>
                         <h1 class="h1">Categorias</h1>
                 </div>
+                    
+                       
+
     <div class="col-md-12">
                         <div class="panel panel-default">
                             
                             <div class="panel-body">
                                 <div class="tab-wrapper tab-primary">
-                                       <div class="row">
-                    <div class="col-md-12">
-                        <?php if($permisos->insert == 1):?>
-
-                        <a href="<?php echo base_url();?>mantenimiento/categorias/add" class="btn btn-primary btn-flat"><span class="fa fa-plus"></span> Agregar Categoria</a>
-                    <?php endif?></div>
-                </div>
-                                   
+                                    <ul class="nav nav-tabs">
+                                        <li class="active"><a href="#home1" data-toggle="tab">Lista</a>
+                                        </li>
+                                        <?php if($permisos->insert == 1):?>
+                                        <li><a href="#profile1" data-toggle="tab">Nuevo</a>
+                                        </li>
+                                    <?php endif?>
+                                    </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home1">
                                             
@@ -60,9 +63,14 @@
 
                                                 <a href="<?php echo base_url();?>mantenimiento/categorias/delete/<?php echo $categoria->id;?>" class="btn btn-danger"><span class="fa fa-times" style="color: #fff"></span></a>
                                             <?php endif?>
+                    
+
+
+                                            
                                         </div>
                                         </td>
                                     </tr>
+                                
                                 <?php endforeach;?>
                             <?php endif;?>
                             </tbody>
@@ -79,14 +87,34 @@
                                         </div>
                                         <div class="tab-pane" id="profile1">
 
-
+                                           <div class="panel-body">
+                                <form class="form-horizontal form-border" action="<?php echo base_url();?>mantenimiento/categorias/store" method="POST">
+                                
+                                    <div class="form-group <?php echo !empty(form_error("nombre"))? 'has-error':'' ?> " >
+                                        <label class="col-sm-3 control-label">Nombre</label>
+                                        <div class="col-sm-6">
+                                            <input value="<?php echo set_value("nombre")?>" type="text" class="form-control" placeholder="Nombre de la categoria" name="nombre">
+                                            <?php echo form_error("nombre", "<span class='help-block'>", "</span>");?>
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                        <label class="col-sm-3 control-label">Descripcion</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" placeholder="Descripcion de la categoria" name="descripcion">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6 col-md-4 " style="position: relative;">
+                                        <!-- Button trigger modal -->
+                                        <button class="btn btn-primary btn-lg" type="submit"><i class=" fa fa-plus"></i>
+                                            Guardar
+                                        </button>
+                                    </div>
+                                    </form>
+                                    </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </section>
-
                         

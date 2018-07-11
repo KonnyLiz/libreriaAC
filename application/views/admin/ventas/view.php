@@ -1,72 +1,71 @@
-<div class="impresion">
+
 <div class="row">
 	<div class="col-xs-12 text-center">
-		<b>Libreria A&amp;C</b><br>
-		Centro Comercial Terminal<br>
-		Final 4ta Av. Nte, Ruta Militar<br>
-		Local:16 San Miguel, El Salvador<br>
-		Ferrufino de Padilla, Iris Yolanda<br>
-		NIT: 1417-260464-001-7<br>
-		NRC: 138513-0<br>
-		Giro: Venta de papel, carton, libros, revistas y utiles escolares y de escritorio, actividades de fotocopias y de servicios de escritorios
+		<b>Ferreteria</b><br>
+		Barrio La Merced, San Miguel <br>
+		Tel. 481890 <br>
+		Email:ferreteria@gmail.com
 	</div>
 </div> <br>
 <div class="row">
-		
-	<div class="">	
+	<div class="col-xs-6">	
+		<b>CLIENTE</b><br>
+		<b>Nombre:</b> <?php echo $venta->nombres." ".$venta->apellidos;?> <br>
+		<b>Telefono:</b> <?php echo $venta->telefono;?> <br>
+		<b>Direccion</b> <?php echo $venta->direccion;?><br>
+	</div>	
+	<div class="col-xs-6">	
 		<b>COMPROBANTE</b> <br>
 		<b>Tipo de Comprobante:</b> <?php echo $venta->tipo_comprobante;?><br>
 		<b>Serie:</b> <?php echo $venta->serie;?><br>
 		<b>Nro de Comprobante:</b> <?php echo $venta->num_documento;?><br>
-		<b>Fecha</b> <?php echo $venta->fecha;?><br>
-		<b>Cajero:</b> <?php echo $venta->usuNombre." ".$venta->usuApellido;?>
+		<b>Fecha</b> <?php echo $venta->fecha;?>
 	</div>	
-
-
+</div>
+<b>Vendedor</b> <?php echo $venta->usuNombre." ".$venta->usuApellido;?>
 
 <br>
-
-		<table class="table">
+<div class="row">
+	<div class="col-xs-12">
+		<table class="table table-bordered">
 			<thead>
 				<tr>
-					<th>Cantidad</th>
+					<th>Codigo</th>
 					<th>Nombre</th>
 					<th>Precio</th>
-					<th>Total</th>
+					<th>Cantidad</th>
+					<th>Importe</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php foreach($detalles as $detalle){?>
 				<tr>
-					<td><?php echo $detalle->cantidad;?></td>
+					<td><?php echo $detalle->codigo;?></td>
 					<td><?php echo $detalle->nombre;?></td>
 					<td><?php echo $detalle->precio;?></td>
+					<td><?php echo $detalle->cantidad;?></td>
 					<td><?php echo $detalle->importe;?></td>
 				</tr>
-
 				<?php } ?>
-
-				<?php if ($detallesServicios != "") {?>
-					<?php foreach($detallesServicios as $detalleS){?>
-					
-					<tr>
-						<td><?php echo $detalleS->cantidad;?></td>
-						<td><?php echo $detalleS->nombre;?></td>
-						<td><?php echo $detalleS->precio;?></td>
-						<td><?php echo $detalleS->importe;?></td>
-					</tr>
-					<?php } ?>
-				<?php } ?>
-
 			</tbody>
-			</table>
-			<div style="text-align: left;">
-					<h5>Exento: <?php echo "Esto aun no existe"?><h5>
-					<h5>Subtotal No sujeto: <?php echo "Esto aun no existe"?><h5>
-					<h5>Subtotal: <?php echo $venta->subtotal;?><h5>
-					<h5>Total:<?php echo $venta->total;?><h5>			
-
-			</div>
-	</div>	
-
+			<tfoot>
+				<tr>
+					<td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+					<td><?php echo $venta->subtotal;?></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><strong>IVA:</strong></td>
+					<td><?php echo $venta->iva;?></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><strong>Descuento:</strong></td>
+					<td><?php echo $venta->descuento;?></td>
+				</tr>
+				<tr>
+					<td colspan="4" class="text-right"><strong>Total:</strong></td>
+					<td><?php echo $venta->total;?></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 </div>

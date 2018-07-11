@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Usuarios_model extends CI_Model {
+class Vendedores_model extends CI_Model {
  
 	public function login($username, $password){
 		$this->db->where("username", $username);
@@ -21,6 +21,7 @@ class Usuarios_model extends CI_Model {
 
 	public function getUsuarios(){
 		$this->db->where("estado","1");
+		$this->db->where("rol_id","3");
 		$resultados = $this->db->get("usuarios");
 		return $resultados->result();
 	}

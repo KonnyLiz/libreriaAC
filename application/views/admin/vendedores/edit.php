@@ -36,7 +36,7 @@
                                 
                              </div>
                         <?php endif;?>
-                       <form action="<?php echo base_url();?>mantenimiento/Usuarios/update" method="POST">
+                       <form action="<?php echo base_url();?>mantenimiento/Vendedores/update" method="POST">
                             <input type="hidden" name="id_usuario" value="<?php echo $usuario->id;?>">
                             <div class="form-group">
                                <label for="categoria">grupo</label>
