@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
                         <ul class="breadcrumb">
-                            
+
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Registros</li>
                             <li class="active">Usuarios</li>
@@ -16,12 +16,12 @@
 <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Datos</h3>
-                                
+
                             </div>
                             <div class="panel-body">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
@@ -33,31 +33,11 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                                
+
                              </div>
                         <?php endif;?>
                        <form action="<?php echo base_url();?>mantenimiento/Usuarios/update" method="POST">
                             <input type="hidden" name="id_usuario" value="<?php echo $usuario->id;?>">
-                            <div class="form-group">
-                               <label for="categoria">grupo</label>
-                               <select  name=""   onblur="vendedor2()" id="grupo_vendedor" class="form-control" >
-                                    <?php foreach($grupo as $grupos):?>
-                                        <?php if($grupos->idgrupo == $usuario->grupo):?>
-                                            <?php $name = $grupos->descripcion;?>
-                                        <option value="<?php echo $grupos->descripcion?>" selected><?php echo $grupos->descripcion;?></option>
-                                    <?php else:?>
-                                        <option value="<?php echo $grupos->descripcion?>"><?php echo $grupos->descripcion;?></option>
-                                        <?php endif;?>
-                                    <?php endforeach;?>
-                                </select>
-                            </div> 
-                            <script type="text/javascript">
-                                function vendedor2(){  
-                                    var porId=document.getElementById("grupo_vendedor").value;
-                                    $("#grupo3").val(porId);
-                                }
-                            </script>                     
-                            <input type="hidden" name="grupo3" id="grupo3" value="<?php echo $name?>">
                             <div class="form-group">
                                 <label for="codigo">Nombre:</label>
                                 <input type="text" class="form-control" id="grupo" name="r2"  value="<?php echo $usuario->nombres?>">
@@ -99,7 +79,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                             </div>
-                        </form> 
+                        </form>
                     </div>
                 </div>
             </div>

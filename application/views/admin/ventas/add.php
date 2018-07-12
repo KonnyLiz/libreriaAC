@@ -11,20 +11,20 @@
                             <li class="active">Agregar Venta</li>
                         </ul>
 
- 
+
  <h1 class="">Ventas</h1>
- 
+
 
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   
+
     <!-- Main content -->
 
     <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Datos</h3>
-                                
+
     </div>
     <div class="panel-body">
 <div class="content-wrapper">
@@ -37,14 +37,15 @@
                 <div class="row">
 
 
-                    
-                        <div class="col-md-3" style="padding-bottom: 12px">
-                                    <label for="">Fecha:</label>
-                                    <input type="date" class="form-control" name="fecha" required>
-                                </div>
-                        <div class="col-md-12">
+
+
 
                         <form action="<?php echo base_url();?>movimientos/ventas/store" method="POST" class="form-horizontal">
+                          <div class="col-md-3" style="padding-bottom: 12px">
+                                      <label for="">Fecha:</label>
+                                      <input type="date" class="form-control" id="fecha" name="fecha" required>
+                                  </div>
+                          <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-md-3">
                                     <label for="">Comprobante:</label>
@@ -66,7 +67,7 @@
                                     <label for="">Numero:</label>
                                     <input type="text" class="form-control" id="numero" name="numero" readonly>
                                 </div>
-                                 
+
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
@@ -84,8 +85,8 @@
                                             <button id="btn-agregar-Cliente" type="button" class="btn btn-success btn-flat btn-block" data-toggle="modal" data-target="#modal-agregarCliente"><span class="fa fa-plus"></span> Agregar Cliente</button>
                                         </span>
                                     </div><!-- /input-group -->
-                                </div> 
-                                
+                                </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6">
@@ -102,16 +103,15 @@
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Nombre</th>
-
                                         <th>Precio</th>
-                                        <th>Stock Max.</th>
+                                        <th>Stock</th>
                                         <th>Cantidad</th>
                                         <th>Importe</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                
+
                                 </tbody>
                             </table>
 
@@ -141,12 +141,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                                 </div>
-                                
+
                             </div>
                         </form>
                         </div></div></div></div>
@@ -213,9 +213,9 @@
             </div>
             <div class="modal-body">
                 <form action="<?php echo base_url();?>movimientos/ventas/save_Cliente" method="POST">
-                    
+
                             <div class="form-group">
-                                <label for="categoria">Nombre:</label> 
+                                <label for="categoria">Nombre:</label>
                             <input class="form-control" id="nombre2" name="nombre2" >
                             <div>
                                 <label for="codigo">Apellidos:</label>
@@ -248,7 +248,7 @@
                                 <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                             </div>
-                            
+
                         </form>
             </div>
             <div class="modal-footer">

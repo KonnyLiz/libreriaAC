@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
                         <ul class="breadcrumb">
-                            
+
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Registros</li>
                             <li class="active">Clientes</li>
@@ -16,12 +16,12 @@
 <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h3 class="panel-title">Datos</h3>
-                                
+
                             </div>
                             <div class="panel-body">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
+
     <!-- Main content -->
     <section class="content">
         <!-- Default box -->
@@ -33,29 +33,23 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                                
+
                              </div>
                         <?php endif;?>
                         <form action="<?php echo base_url();?>mantenimiento/clientes/update" method="POST">
                             <input type="hidden" name="id_cliente" value="<?php echo $cliente->id;?>">
                             <div class="form-group">
-
-                            <div class="form-group">
-                            
-                                <label for="codigo">Grupo:</label>
-                                <input type="text" class="form-control" value="<?php echo $cliente->grupo?>" id="r1" name="r1"  > 
-                            </div> 
                             <div class="form-group <?php echo !empty(form_error("nom"))? 'has-error':'' ?>">
                                 <label for="codigo">Nombre:</label>
                                 <input  type="text" class="form-control" value="<?php echo !empty(form_error("nom"))? set_value("nom"):$cliente->nombres?>" id="r2" name="nom">
                                 <?php echo form_error("nom", "<span class='help-block'>", "</span>");?>
-                            </div> 
+                            </div>
                              <div class="form-group <?php echo !empty(form_error("r2"))? 'has-error':'' ?>">
                                 <label for="codigo">Apellido:</label>
-                                <input  type="text" class="form-control" value="<?php echo !empty(form_error("r2"))? set_value("r2"):$cliente->r2bres?>" id="r2" name="r2">
+                                <input  type="text" class="form-control" value="<?php echo !empty(form_error("r2"))? set_value("r2"):$cliente->apellidos?>" id="r2" name="r2">
                                 <?php echo form_error("r2", "<span class='help-block'>", "</span>");?>
-                            </div> 
-                           
+                            </div>
+
                                                         <div class="form-group <?php echo !empty(form_error("r3"))? 'has-error':'' ?>">
                                 <label for="codigo">Telefono</label>
                                 <input type="text" class="form-control" value="<?php echo !empty(form_error("r3"))? set_value("r3"):$cliente->telefono?>"  name="r3" >

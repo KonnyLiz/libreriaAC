@@ -2,21 +2,21 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuarios extends CI_Controller {
-private $permisos;      
+private $permisos;
 	public function __construct(){
 		parent::__construct();
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Usuarios_model");
 		//$this->load->model("Oportunidades_model");
-		$this->load->model("Grupos_model");
+
 	}
 
 	public function index()
 	{
 		$data  = array(
-			"permisos" => $this->permisos, 
+			"permisos" => $this->permisos,
 			'usuario' => $this->Usuarios_model->getUsuarios(),
-			"grupo" => $this->Grupos_model->getGrupos(),
+
 			//'oportunidad' => $this->Oportunidades_model->getOportunidades(),
 		);
 		$this->load->view("layouts/header");
@@ -35,7 +35,6 @@ private $permisos;
 	}
 
 	public function store(){
-		$grupo =explode(" ",$this->input->post("grupo3"));
 		$nombres  =  $this->input->post("r1");
 		$apellidos = $this->input->post("r2");
 		$dui = $this->input->post("r3");
@@ -49,8 +48,7 @@ private $permisos;
 
 
 		$data  = array(
-			'grupo' =>$grupo[1],
-			'nombres' => $nombres, 
+			'nombres' => $nombres,
 			'apellidos' => $apellidos,
 			'dui' => $dui,
 			'nit' => $nit,
@@ -73,8 +71,8 @@ private $permisos;
 
 	public function edit($id){
 		$data  = array(
-			'usuario' => $this->Usuarios_model->getUsuario($id), 
-			"grupo" => $this->Grupos_model->getGrupos(),
+			'usuario' => $this->Usuarios_model->getUsuario($id),
+
 
 		);
 		$this->load->view("layouts/header");
@@ -85,7 +83,6 @@ private $permisos;
 
 	public function update(){
 		$idusuario = $this->input->post("id_usuario");
-		$grupo =explode(" ",$this->input->post("grupo3"));
 		$nombres  =  $this->input->post("r2");
 		$apellidos = $this->input->post("r3");
 		$dui = $this->input->post("r4");
@@ -99,8 +96,7 @@ private $permisos;
 
  			echo idusuario;
 		$data  = array(
-			'grupo' =>$grupo[1],
-			'nombres' => $nombres, 
+			'nombres' => $nombres,
 			'apellidos' => $apellidos,
 			'dui' => $dui,
 			'nit' => $nit,
@@ -122,7 +118,7 @@ private $permisos;
 
 	public function delete($id){
 		$data  = array(
-			'estado' => "0", 
+			'estado' => "0",
 		);
 		$this->Usuarios_model->update($id,$data);
 		echo "mantenimiento/usuarios";

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<title>Ferreteria xyz</title>
+<title>Libreria A&C</title>
    <?php
-   
+
     require_once('flyweit.php');
    ?>
 
@@ -12,7 +12,7 @@
                 <header id="header">
             <!--logo start-->
             <div class="brand">
-                <a href="index.html" class="logo"><span>Ferreteria</span></a>
+                <a href="index.html" class="logo"><span>Libreria</span></a>
             </div>
             <!--logo end-->
             <div class="toggle-navigation toggle-left">
@@ -23,7 +23,7 @@
             <div class="user-nav">
                 <ul>
                     <li class="dropdown messages">
-                       
+
                     <li class="profile-photo">
                         <img src="<?php echo base_url(); ?>assets/img/avatar.png" alt="" class="img-circle">
                     </li>

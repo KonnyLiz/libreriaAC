@@ -11,10 +11,7 @@ class Dashboard extends CI_Controller {
 		$this->load->model("Usuarios_model");
 		$this->load->model("Ventas_model");
 		$this->load->model("Productos_model");
-		$this->load->model("Campana_model");
-		$this->load->model("Iniciativas_model");
-			$this->load->model("Oportunidades_model");
-			$this->load->model("Clientes_model"); 
+		$this->load->model("Clientes_model");
 	}
 	public function index()
 	{
@@ -22,11 +19,8 @@ class Dashboard extends CI_Controller {
 			'usuario' => $this->Usuarios_model->getUsuarios(),
 			'productos' => $this->Productos_model->getProductos(),
 			'ventas' => $this->Ventas_model->getVentas(),
-			'campanas' => $this->Campana_model->getCampanas(),
-			"iniciativas" => $this->Iniciativas_model->getIniciativas(),
-			"oportunidades" => $this->Oportunidades_model->getOportunidades(),
 			'cliente' => $this->Clientes_model->getClientes(),
-	
+
 		);
 		$this->load->view("layouts/header");
 		$this->load->view("layouts/aside");

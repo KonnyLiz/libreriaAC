@@ -2,10 +2,10 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ventas extends CI_Controller {
-private $permisos;      
+private $permisos;
 	public function __construct(){
 		parent::__construct();
-		
+
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Ventas_model");
 		$this->load->model("Clientes_model");
@@ -14,7 +14,7 @@ private $permisos;
 
 	public function index(){
 		$data = array(
-			"permisos" => $this->permisos, 
+			"permisos" => $this->permisos,
 			'ventas' => $this->Ventas_model->getVentas(),
 		);
 
@@ -23,7 +23,7 @@ private $permisos;
 		$this->load->view("admin/ventas/list", $data);
 		$this->load->view("layouts/footer");
 	}
- 
+
 	public function add(){
 		$data = array(
 			"tipoComprobantes" => $this->Ventas_model->getComprobantes(),
@@ -53,7 +53,6 @@ private $permisos;
 		$idusuario = 1;
 		$numero = $this->input->post("numero");
 		$serie = $this->input->post("serie");
-
 		$idproductos =$this->input->post("idProductos");
 		$precios =$this->input->post("precios");
 		$cantidades =$this->input->post("cantidades");
@@ -73,7 +72,7 @@ private $permisos;
 		);
 
 		if ($this->Ventas_model->save($data)){
-			$idVenta = $this->Ventas_model->lastID(); 
+			$idVenta = $this->Ventas_model->lastID();
 			$this->updateComprobante($idcomprobante); //actualizando el correlativo del comprobante
 			$this->save_detalle($idproductos, $idVenta, $precios, $cantidades, $importes); //guardando el detalle de la venta
 			redirect(base_url()."movimientos/ventas"); //redirigiendo a la lista de ventas
@@ -93,7 +92,7 @@ private $permisos;
 
 	//funcion para guardar el detalle de la venta
 	protected function save_detalle($productos, $idVenta, $precios, $cantidades, $importes){
-		for ($i=0; $i < count($productos); $i++) { 
+		for ($i=0; $i < count($productos); $i++) {
 			$data = array(
 				'producto_id' => $productos[$i],
 				'venta_id' => $idVenta,
@@ -139,8 +138,8 @@ private $permisos;
 
 
 		$data  = array(
-			'grupo' => $grupo, 
-			'nombres' => $nombres, 
+			'grupo' => $grupo,
+			'nombres' => $nombres,
 			'apellidos' => $apellidos,
 			'telefono' => $telefono,
 			'dui' => $dui,

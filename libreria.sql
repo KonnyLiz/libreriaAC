@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
+-- version 4.8.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-12-2017 a las 05:45:01
--- Versión del servidor: 10.1.21-MariaDB
--- Versión de PHP: 5.6.30
+-- Tiempo de generación: 13-07-2018 a las 00:36:00
+-- Versión del servidor: 10.1.34-MariaDB
+-- Versión de PHP: 7.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `ferreteria2`
+-- Base de datos: `libreria`
 --
 
 -- --------------------------------------------------------
@@ -42,32 +44,6 @@ INSERT INTO `abastecer` (`id`, `fecha`, `total_abastecer`, `usuario_id`) VALUES
 (3, '2017-11-28', '0.08', 1),
 (4, '2017-11-28', '0.08', 1),
 (5, '2017-11-30', '24.00', 5);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `campanas`
---
-
-CREATE TABLE `campanas` (
-  `id` int(11) NOT NULL,
-  `nombre` varchar(30) COLLATE utf8_spanish2_ci NOT NULL,
-  `producto` varchar(50) COLLATE utf8_spanish2_ci NOT NULL,
-  `fecha_i` date NOT NULL,
-  `fecha_f` date NOT NULL,
-  `estado` tinyint(1) NOT NULL,
-  `cantidad_a_vender` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `campanas`
---
-
-INSERT INTO `campanas` (`id`, `nombre`, `producto`, `fecha_i`, `fecha_f`, `estado`, `cantidad_a_vender`) VALUES
-(1, 'Navidad', 'clavos', '2017-11-20', '2017-11-21', 1, 0),
-(2, 'Semana Santa', '2', '2017-11-20', '2017-11-30', 1, 0),
-(3, 'Dia de los enamorados', 'clavos', '2018-02-01', '2018-02-15', 1, 0),
-(4, 'llave', 'Llave inglesa', '2017-11-30', '2017-12-02', 1, 500);
 
 -- --------------------------------------------------------
 
@@ -105,7 +81,6 @@ INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
 
 CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
-  `grupo` int(11) DEFAULT NULL,
   `nombres` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellidos` varchar(100) CHARACTER SET utf8 COLLATE utf8_spanish_ci DEFAULT NULL,
   `telefono` varchar(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -121,11 +96,12 @@ CREATE TABLE `clientes` (
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `grupo`, `nombres`, `apellidos`, `telefono`, `dui`, `nit`, `direccion`, `registro`, `empresa`, `estado`) VALUES
-(2, 1, 'kony', '', '08098', '90809', '66', 'sm', '', '', 1),
-(3, 0, 'Hugo', '', '098', '8778', '09809', 'hj', NULL, '', 1),
-(4, NULL, 'Edward', 'Hernandez', '908989', '09809090', '09809', 'Conchagua', 'ih', 'klk', 1),
-(5, NULL, 'ING', 'asksk7773', '36363', '73733838', '77594592', 'San ', '34', 'chilin', 1);
+INSERT INTO `clientes` (`id`, `nombres`, `apellidos`, `telefono`, `dui`, `nit`, `direccion`, `registro`, `empresa`, `estado`) VALUES
+(2, 'kony', '', '08098', '90809', '66', 'sm', '', '', 1),
+(3, 'Hugo', '', '098', '8778', '09809', 'hj', NULL, '', 1),
+(4, 'Edward', 'Hernandez', '908989', '09809090', '09809', 'Conchagua', 'ih', 'klk', 1),
+(5, 'ING', 'asksk7773', '36363', '73733838', '77594592', 'San ', '34', 'chilin', 1),
+(6, 'Carlos fermin ', 'Padilla Ferrufino', '61099440', '05431598-6', '16161684', 'San Miguel', '138513-0', 'Libreria', 1);
 
 -- --------------------------------------------------------
 
@@ -180,7 +156,14 @@ INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantida
 (7, 3, 11, '5.0', '8', '40.00'),
 (8, 2, 11, '3.00', '9', '27.00'),
 (9, 6, 12, '20.0', '1', '20.00'),
-(10, 2, 13, '3.00', '4', '12.00');
+(10, 2, 13, '3.00', '4', '12.00'),
+(11, 1, 14, '0.05', '6', '0.30'),
+(12, 2, 14, '3.00', '2', '6.00'),
+(13, 1, 15, '0.05', '5', '0.25'),
+(14, 2, 16, '3.00', '3', '9.00'),
+(15, 1, 17, '0.05', '98', '4.90'),
+(16, 1, 18, '0.05', '100', '5.00'),
+(17, 1, 19, '0.05', '3', '0.15');
 
 -- --------------------------------------------------------
 
@@ -215,49 +198,6 @@ INSERT INTO `eventos` (`id_evento`, `nombre`, `fecha_i`, `fecha_f`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `grupo`
---
-
-CREATE TABLE `grupo` (
-  `idgrupo` int(11) NOT NULL,
-  `descripcion` varchar(45) COLLATE utf8_spanish2_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
-
---
--- Volcado de datos para la tabla `grupo`
---
-
-INSERT INTO `grupo` (`idgrupo`, `descripcion`) VALUES
-(1, 'Grupo 1'),
-(2, 'Grupo 2'),
-(3, 'Grupo 3');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `iniciativa`
---
-
-CREATE TABLE `iniciativa` (
-  `id_iniciativa` int(11) NOT NULL,
-  `grupo` int(11) NOT NULL,
-  `nombre` text NOT NULL,
-  `contacto` text NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `iniciativa`
---
-
-INSERT INTO `iniciativa` (`id_iniciativa`, `grupo`, `nombre`, `contacto`, `estado`) VALUES
-(1, 1, 'Carlos Fermin Padilla Ferrufino', 'Redes', 1),
-(2, 3, 'Edward Hernandez', 'Pagina web', 1),
-(3, 1, 'Ing', 'Redes', 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `menus`
 --
 
@@ -287,31 +227,6 @@ INSERT INTO `menus` (`id`, `nombre`, `link`) VALUES
 (13, 'Vendedores', 'mantenimiento/Vendedores'),
 (14, 'Permisos', 'mantenimiento/permisos'),
 (15, 'Reclamos', 'mantenimiento/Reclamos');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `oportunidad`
---
-
-CREATE TABLE `oportunidad` (
-  `id_oportunidad` int(11) NOT NULL,
-  `nombre` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `llamada` date NOT NULL,
-  `respuesta1` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `reunion` date NOT NULL,
-  `respuesta2` text CHARACTER SET utf8 COLLATE utf8_spanish2_ci NOT NULL,
-  `id_grupo` int(11) NOT NULL,
-  `estado` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Volcado de datos para la tabla `oportunidad`
---
-
-INSERT INTO `oportunidad` (`id_oportunidad`, `nombre`, `llamada`, `respuesta1`, `reunion`, `respuesta2`, `id_grupo`, `estado`) VALUES
-(6, 'Edward Hernandez', '2017-11-23', 'j', '2017-11-24', 'mvg', 3, 1),
-(7, 'Carlos Fermin Padilla Ferrufino', '2017-11-23', 'sgbsdgb', '2017-11-25', 'asdas', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -388,11 +303,11 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `precio_entrada`, `precio`, `precio_mayoreo`, `stock`, `categoria_id`, `estado`) VALUES
-(1, '02534', 'clavos', 'clavo de hierro ferroso', '0.01', '0.05', '0.03', 994, 3, 1),
-(2, '3665', 'Llave inglesa', 'Llave de tuerca', '1.25', '3.00', '2.25', 479, 1, 1),
+(1, '02534', 'clavos', 'clavo de hierro ferroso', '0.01', '0.05', '0.03', 782, 3, 1),
+(2, '3665', 'Llave inglesa', 'Llave de tuerca', '1.25', '3.00', '2.25', 474, 1, 1),
 (3, '555', 'Martillo', '', '3.0', '5.0', '4.0', 50, 1, 1),
 (4, '111', 'PAPA', '', '2.0', '5.0', '3.0', 15, 1, 1),
-(5, '465465', 'adsd', 'asdasdkasndñkjasndjnasdn', '2.0', '5.0', '3.0', 23, 1, 1),
+(5, '465465', 'adsd', 'asdasdkasndñkjasndjnasdn', '2.0', '5.0', '3.0', 23, 1, 0),
 (6, '0029', 'CableUTP', 'Cable bonito', '10.0', '20.0', '15.0', 99, 1, 1);
 
 -- --------------------------------------------------------
@@ -469,8 +384,8 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 9, 13, 1),
-(2, 'Ticket', 2, 13, 5);
+(1, 'Factura', 14, 13, 1),
+(2, 'Ticket', 3, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -492,7 +407,6 @@ CREATE TABLE `tipo_documento` (
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
-  `grupo` int(11) NOT NULL,
   `nombres` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `apellidos` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `dui` varchar(20) COLLATE utf8_spanish2_ci NOT NULL,
@@ -509,14 +423,14 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `grupo`, `nombres`, `apellidos`, `dui`, `nit`, `telefono`, `email`, `username`, `password`, `rol_id`, `estado`) VALUES
-(1, 1, 'Carlos Ferminnnn', 'Padilla Ferrufino', '05431598-6', '1217-151096-102-6', '61099440', 'email@yo.com', 'Padillon', '12', 1, 0),
-(2, 1, 'edward', 'her', '789987', '87879', '77594592', 'baoionz_hg@hotmail.com', 'baionz', NULL, 1, 0),
-(3, 1, 'fabiola', 'garcia', '65415161', '1+56165161', '77564+498', 'fabu@hotmail.com', 'fab', NULL, 1, 0),
-(4, 2, 'konny', 'amaya', '7897', '54656', '778888999', 'sama', 'liz', NULL, 3, 0),
-(5, 1, 'edw', 'her', '889', '54657', '7878', '7878', 'baioz', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1),
-(6, 1, 'gustavo', 'rojas', '8989', '8889', '2648', 'rojas@jah', 'rojas', 'fc6fea5b0c058716683a5ec0cf63833ba7a72bca', 3, 1),
-(7, 1, 'Ligia', 'Astrid', '7897', '456789', '789456232', 'astrid@hotmail.com', 'ingeniera', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1);
+INSERT INTO `usuarios` (`id`, `nombres`, `apellidos`, `dui`, `nit`, `telefono`, `email`, `username`, `password`, `rol_id`, `estado`) VALUES
+(1, 'Carlos Ferminnnn', 'Padilla Ferrufino', '05431598-6', '1217-151096-102-6', '61099440', 'email@yo.com', 'Padillon', '12', 1, 0),
+(2, 'edward', 'her', '789987', '87879', '77594592', 'baoionz_hg@hotmail.com', 'baionz', NULL, 1, 0),
+(3, 'fabiola', 'garcia', '65415161', '1+56165161', '77564+498', 'fabu@hotmail.com', 'fab', NULL, 1, 0),
+(4, 'konny', 'amaya', '7897', '54656', '778888999', 'sama', 'liz', NULL, 3, 0),
+(5, 'edw', 'hernan', '889', '54657', '7878', '7878', 'baioz', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1),
+(6, 'gustavo', 'rojas', '8989', '8889', '2648', 'rojas@jah', 'rojas', 'fc6fea5b0c058716683a5ec0cf63833ba7a72bca', 3, 1),
+(7, 'Ligia', 'Astrid', '7897', '456789', '789456232', 'astrid@hotmail.com', 'ingeniera', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -547,7 +461,13 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (10, '2017-11-28', '1', '0.25', '0.03', '0.00', '0.28', 2, 1, '000007', 1),
 (11, NULL, '1', '67', '8.71', '0.00', '75.71', 4, 1, '000008', 1),
 (12, NULL, '5', '20', '2.60', '0.00', '22.60', 5, 1, '000002', 2),
-(13, NULL, '1', '12', '1.56', '0.00', '13.56', 4, 1, '000009', 1);
+(13, NULL, '1', '12', '1.56', '0.00', '13.56', 4, 1, '000009', 1),
+(14, NULL, '1', '6.3', '0.82', '0.00', '7.12', 4, 1, '000010', 1),
+(15, NULL, '1', '0.25', '0.03', '0.00', '0.28', 6, 1, '000011', 1),
+(16, NULL, '1', '9', '1.17', '0.00', '10.17', 4, 1, '000012', 1),
+(17, NULL, '1', '4.9', '0.64', '0.00', '5.54', 2, 1, '000013', 1),
+(18, '2018-07-12', '1', '5', '0.65', '0.00', '5.65', 3, 1, '000014', 1),
+(19, '2018-07-03', '5', '0.15', '0.02', '0.00', '0.17', 6, 1, '000003', 2);
 
 --
 -- Índices para tablas volcadas
@@ -559,12 +479,6 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 ALTER TABLE `abastecer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_usuario_id` (`usuario_id`);
-
---
--- Indices de la tabla `campanas`
---
-ALTER TABLE `campanas`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -603,32 +517,10 @@ ALTER TABLE `eventos`
   ADD PRIMARY KEY (`id_evento`);
 
 --
--- Indices de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  ADD PRIMARY KEY (`idgrupo`),
-  ADD UNIQUE KEY `descripcion` (`descripcion`);
-
---
--- Indices de la tabla `iniciativa`
---
-ALTER TABLE `iniciativa`
-  ADD PRIMARY KEY (`id_iniciativa`),
-  ADD KEY `grupo` (`grupo`),
-  ADD KEY `grupo_2` (`grupo`);
-
---
 -- Indices de la tabla `menus`
 --
 ALTER TABLE `menus`
   ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `oportunidad`
---
-ALTER TABLE `oportunidad`
-  ADD PRIMARY KEY (`id_oportunidad`),
-  ADD KEY `id_grupo` (`id_grupo`);
 
 --
 -- Indices de la tabla `permisos`
@@ -708,101 +600,97 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `abastecer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT de la tabla `campanas`
---
-ALTER TABLE `campanas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT de la tabla `grupo`
---
-ALTER TABLE `grupo`
-  MODIFY `idgrupo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT de la tabla `iniciativa`
---
-ALTER TABLE `iniciativa`
-  MODIFY `id_iniciativa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
---
--- AUTO_INCREMENT de la tabla `oportunidad`
---
-ALTER TABLE `oportunidad`
-  MODIFY `id_oportunidad` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_cliente`
 --
 ALTER TABLE `tipo_cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
 -- AUTO_INCREMENT de la tabla `tipo_documento`
 --
 ALTER TABLE `tipo_documento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -819,12 +707,7 @@ ALTER TABLE `abastecer`
 ALTER TABLE `detalle_abastecer`
   ADD CONSTRAINT `detalle_abastecer_ibfk_1` FOREIGN KEY (`abastecer_id`) REFERENCES `abastecer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `detalle_abastecer_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
---
--- Filtros para la tabla `iniciativa`
---
-ALTER TABLE `iniciativa`
-  ADD CONSTRAINT `iniciativa_ibfk_1` FOREIGN KEY (`grupo`) REFERENCES `grupo` (`idgrupo`) ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
