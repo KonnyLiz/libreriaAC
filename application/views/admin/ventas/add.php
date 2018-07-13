@@ -44,7 +44,7 @@
                           <div class="col-md-3" style="padding-bottom: 12px">
                                       <label for="">Fecha:</label>
                                       <input type="date" class="form-control" id="fecha" name="fecha" required>
-                                  </div>
+                            </div>
                           <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-md-3">

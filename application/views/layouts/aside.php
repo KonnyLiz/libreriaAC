@@ -22,6 +22,7 @@
             <ul>
                 <li><a href="<?php echo base_url();?>mantenimiento/categorias">Categorias</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/productos">Productos</a></li>
+                <li><a href="<?php echo base_url();?>mantenimiento/Salidas">Salidas</a></li>
             </ul>
         </li>
         <li class="sub-menu">
