@@ -73,8 +73,8 @@ private $permisos;
 
 		if ($this->Ventas_model->save($data)){
 			$idVenta = $this->Ventas_model->lastID();
+			$this->save_detalle($idproductos, $idVenta, $precios, $cantidades, $importes, $idcomprobante); //guardando el detalle de la venta
 			$this->updateComprobante($idcomprobante); //actualizando el correlativo del comprobante
-			$this->save_detalle($idproductos, $idVenta, $precios, $cantidades, $importes); //guardando el detalle de la venta
 			redirect(base_url()."movimientos/ventas"); //redirigiendo a la lista de ventas
 		} else {
 			redirect(base_url()."movimientos/ventas/add");
@@ -91,7 +91,7 @@ private $permisos;
 	}
 
 	//funcion para guardar el detalle de la venta
-	protected function save_detalle($productos, $idVenta, $precios, $cantidades, $importes){
+	protected function save_detalle($productos, $idVenta, $precios, $cantidades, $importes, $idcomprobante){
 		for ($i=0; $i < count($productos); $i++) {
 			$data = array(
 				'producto_id' => $productos[$i],
@@ -101,7 +101,9 @@ private $permisos;
 				'importe' => $importes[$i],
 			);
 			$this->Ventas_model->save_detalle($data);
-			$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			if ($idcomprobante != 3) {
+				$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			}
 		}
 	}
 
