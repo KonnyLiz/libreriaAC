@@ -395,10 +395,11 @@ $(document).ready(function () {
        
         if (compr == 5){
             var precio2;
-            precio2 = (precio - (precio * 0.13));
+            precio2 = dosDecimales(precio/1.13);
             importe =  precio2 * cantidad;
             if (f == 0){
-                precioSI = parseFloat(precio2).toFixed(2);
+                precioSI = parseFloat(precio2);
+                precioSI = dosDecimales(precioSI);
                 $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
                 $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
                 f += 1;
@@ -408,11 +409,18 @@ $(document).ready(function () {
             f=0;
         }
         
-        totalImporte = parseFloat(importe).toFixed(2);
+        totalImporte = parseFloat(importe);
+        totalImporte = dosDecimales(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
         sumar();
     });
+
+    function dosDecimales(n) {
+        let t=n.toString();
+        let regex=/(\d*.\d{0,2})/;
+        return t.match(regex)[0];
+    }
 
     //accion de la ventana modal para ver los detalles de venta
     $(document).on("click", ".btn-view-venta", function(){
