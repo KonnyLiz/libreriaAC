@@ -73,7 +73,7 @@
                                 <?php if(!empty($salida)):?>
                                     <?php foreach($salida as $salidas):?>
                                         <tr>
-                                            <td><?php echo $salidas->id;?></td>
+                                            <td><?php echo $salidas->fecha;?></td>
                                             <td><?php echo $salidas->producto_id;?></td>
                                             <td><?php echo $salidas->usuario_id ;?></td>
                                             <?php $datasalida = $salidas->id."*".$salidas->fecha."*".$salidas->producto_id."*".$salidas->cantidad."*".$salidas->descripcion."*".$salidas->usuario_id;?>

@@ -43,6 +43,12 @@
                 <li><a href="<?php echo base_url();?>movimientos/reabastecer">Reabastecimientos</a></li>
             </ul>
         </li>
+        <li class="sub-menu">
+            <a href="javascript:void(0);"><i class="fa fa-desktop"></i><span>Caja</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+            <ul>
+                <li><a href="<?php echo base_url();?>movimientos/cajas">Caja</a></li>
+            </ul>
+        </li>
 
     </ul>
 </div>

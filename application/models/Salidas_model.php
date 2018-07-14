@@ -11,7 +11,7 @@ class Salidas_model extends CI_Model {
 	public function save($data){
 		return $this->db->insert("salida", $data);
 	}
-
+	
 	/*public function getSalidas(){
 		$this->db->select("a.*, u.nombres, u.apellidos");
 		 $this->db->from("salida a");
