@@ -389,7 +389,12 @@ $(document).ready(function () {
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
         precio = $(this).closest("tr").find("td:eq(2)").text();
-        importe = cantidad * precio;
+        if (compr == 5){
+            importe = (precio - (precio * 0.13)) * cantidad; 
+        } else {
+            importe = cantidad * precio;
+        }
+        
         totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
