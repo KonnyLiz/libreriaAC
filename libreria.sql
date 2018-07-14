@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2018 a las 00:36:00
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
+-- Tiempo de generación: 14-07-2018 a las 02:01:50
+-- Versión del servidor: 10.1.25-MariaDB
+-- Versión de PHP: 7.1.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -43,7 +43,8 @@ INSERT INTO `abastecer` (`id`, `fecha`, `total_abastecer`, `usuario_id`) VALUES
 (2, '2017-11-27', '250.33', 1),
 (3, '2017-11-28', '0.08', 1),
 (4, '2017-11-28', '0.08', 1),
-(5, '2017-11-30', '24.00', 5);
+(5, '2017-11-30', '24.00', 5),
+(6, '2018-07-12', '440.00', 7);
 
 -- --------------------------------------------------------
 
@@ -125,7 +126,8 @@ INSERT INTO `detalle_abastecer` (`id`, `abastecer_id`, `producto_id`, `cantidad_
 (3, 2, 1, 33, 0.33),
 (4, 2, 2, 200, 250),
 (5, 3, 1, 8, 0.08),
-(6, 5, 3, 8, 24);
+(6, 5, 3, 8, 24),
+(7, 6, 6, 44, 440);
 
 -- --------------------------------------------------------
 
@@ -163,7 +165,10 @@ INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantida
 (14, 2, 16, '3.00', '3', '9.00'),
 (15, 1, 17, '0.05', '98', '4.90'),
 (16, 1, 18, '0.05', '100', '5.00'),
-(17, 1, 19, '0.05', '3', '0.15');
+(17, 1, 19, '0.05', '3', '0.15'),
+(18, 6, 20, '20.0', '22', '440.00'),
+(19, 6, 21, '20.0', '3', '60.00'),
+(20, 6, 23, '20.0', '5', '100.00');
 
 -- --------------------------------------------------------
 
@@ -308,7 +313,7 @@ INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `precio_entrad
 (3, '555', 'Martillo', '', '3.0', '5.0', '4.0', 50, 1, 1),
 (4, '111', 'PAPA', '', '2.0', '5.0', '3.0', 15, 1, 1),
 (5, '465465', 'adsd', 'asdasdkasndñkjasndjnasdn', '2.0', '5.0', '3.0', 23, 1, 0),
-(6, '0029', 'CableUTP', 'Cable bonito', '10.0', '20.0', '15.0', 99, 1, 1);
+(6, '0029', 'CableUTP', 'Cable bonito', '10.0', '20.0', '15.0', 118, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -384,8 +389,10 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 14, 13, 1),
-(2, 'Ticket', 3, 13, 5);
+(1, 'Factura', 15, 13, 1),
+(2, 'Ticket', 4, 13, 5),
+(3, 'Cotizacion', 2, 13, 2),
+(5, 'Credito Fiscal', 0, 13, 3);
 
 -- --------------------------------------------------------
 
@@ -467,7 +474,11 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (16, NULL, '1', '9', '1.17', '0.00', '10.17', 4, 1, '000012', 1),
 (17, NULL, '1', '4.9', '0.64', '0.00', '5.54', 2, 1, '000013', 1),
 (18, '2018-07-12', '1', '5', '0.65', '0.00', '5.65', 3, 1, '000014', 1),
-(19, '2018-07-03', '5', '0.15', '0.02', '0.00', '0.17', 6, 1, '000003', 2);
+(19, '2018-07-03', '5', '0.15', '0.02', '0.00', '0.17', 6, 1, '000003', 2),
+(20, '2018-07-12', '5', '440', '57.20', '0.00', '497.20', 4, 1, '000004', 2),
+(21, '2018-07-12', '1', '60', '7.80', '0.00', '67.80', 3, 1, '000015', 1),
+(22, '2018-07-12', '2', '0', '0.00', '0.00', '0.00', 0, 1, '000002', 0),
+(23, '2018-07-12', '2', '100', '13.00', '0.00', '113.00', 4, 1, '000002', 3);
 
 --
 -- Índices para tablas volcadas
@@ -599,98 +610,82 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_cliente`
 --
 ALTER TABLE `tipo_cliente`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `tipo_documento`
 --
 ALTER TABLE `tipo_documento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- Restricciones para tablas volcadas
 --
