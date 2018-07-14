@@ -36,6 +36,7 @@
     var contador=0;
     var sigue;
     var compr = 0;
+    var f = 0;
 $(document).ready(function () { 
 
     $('#example1').DataTable({
@@ -315,6 +316,7 @@ $(document).ready(function () {
 
     $("#btn-agregar").on("click", function(){
         contador =contador + 1;
+        f=0;
         if (compr == 1){
             sigue = verificarContadorConsFinal(contador);
             if (sigue == 1){
@@ -364,7 +366,7 @@ $(document).ready(function () {
                 html = "<tr>";
                 html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
                 html += "<td>"+infoProducto[2]+"</td>";
-                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
+                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
                 html += "<td>"+infoProducto[4]+"</td>";
                 html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
                 html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
@@ -383,16 +385,27 @@ $(document).ready(function () {
     $(document).on("click", ".btn-remove-producto", function(){
         $(this).closest("tr").remove();
         contador = contador - 1
+        f=0;
         sumar();
     });
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
         precio = $(this).closest("tr").find("td:eq(2)").text();
+       
         if (compr == 5){
-            importe = (precio - (precio * 0.13)) * cantidad; 
+            var precio2;
+            precio2 = (precio - (precio * 0.13));
+            importe =  precio2 * cantidad;
+            if (f == 0){
+                precioSI = parseFloat(precio2).toFixed(2);
+                $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
+                $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
+                f += 1;
+            }
         } else {
             importe = cantidad * precio;
+            f=0;
         }
         
         totalImporte = parseFloat(importe).toFixed(2);
