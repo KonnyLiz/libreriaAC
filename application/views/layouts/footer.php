@@ -394,33 +394,26 @@ $(document).ready(function () {
         precio = $(this).closest("tr").find("td:eq(2)").text();
        
         if (compr == 5){
-            var precio2;
-            precio2 = dosDecimales(precio/1.13);
-            importe =  precio2 * cantidad;
             if (f == 0){
-                precioSI = parseFloat(precio2);
-                precioSI = dosDecimales(precioSI);
-                $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
-                $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
+                var precio2;
+                precio2 = (precio/1.13);
+                importe =  precio2 * cantidad;
+                $(this).closest("tr").find("td:eq(2)").children("p").text( parseFloat(precio2).toFixed(4));
+                $(this).closest("tr").find("td:eq(2)").children("input").val(parseFloat(precio2).toFixed(4));
                 f += 1;
+            } else {
+                importe = cantidad * precio;
             }
         } else {
             importe = cantidad * precio;
             f=0;
         }
         
-        totalImporte = parseFloat(importe);
-        totalImporte = dosDecimales(totalImporte);
+        totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
         sumar();
     });
-
-    function dosDecimales(n) {
-        let t=n.toString();
-        let regex=/(\d*.\d{0,2})/;
-        return t.match(regex)[0];
-    }
 
     //accion de la ventana modal para ver los detalles de venta
     $(document).on("click", ".btn-view-venta", function(){
@@ -532,10 +525,10 @@ function sumar(){
     $("#tbventas tbody tr").each(function(){
         subtotal = subtotal + Number($(this).find("td:eq(5)").text());
     });
-    $("#subtotal").val(parseFloat(subtotal.toFixed(2)));
+    $("#subtotal").val(parseFloat(subtotal.toFixed(4)));
     porcentaje = $("#iva").val();
     iva = subtotal * (porcentaje/100);
-    $("#iva2").val(iva.toFixed(2));
+    $("#iva2").val(iva.toFixed(4));
     descuento = parseInt($("#descuento").val());
     total = subtotal + iva - descuento;
     $("#total").val(total.toFixed(2));
