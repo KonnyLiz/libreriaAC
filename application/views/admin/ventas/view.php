@@ -8,19 +8,19 @@
 	</div>
 </div> <br>
 <div class="row">
-	<div class="col-xs-6">	
+	<div class="col-xs-6">
 		<b>CLIENTE</b><br>
 		<b>Nombre:</b> <?php echo $venta->nombres." ".$venta->apellidos;?> <br>
 		<b>Telefono:</b> <?php echo $venta->telefono;?> <br>
 		<b>Direccion</b> <?php echo $venta->direccion;?><br>
-	</div>	
-	<div class="col-xs-6">	
+	</div>
+	<div class="col-xs-6">
 		<b>COMPROBANTE</b> <br>
 		<b>Tipo de Comprobante:</b> <?php echo $venta->tipo_comprobante;?><br>
 		<b>Serie:</b> <?php echo $venta->serie;?><br>
 		<b>Nro de Comprobante:</b> <?php echo $venta->num_documento;?><br>
 		<b>Fecha</b> <?php echo $venta->fecha;?>
-	</div>	
+	</div>
 </div>
 <b>Vendedor</b> <?php echo $venta->usuNombre." ".$venta->usuApellido;?>
 

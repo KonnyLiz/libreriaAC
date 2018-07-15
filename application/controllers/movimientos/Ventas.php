@@ -160,4 +160,18 @@ private $permisos;
 			redirect(base_url()."movimientos/ventas/add");
 		}
 	}
+	public function imprimir(){
+		$idVenta = $this->input->post("id");
+		$data = array(
+			"venta" => $this->Ventas_model->getfactura($idVenta),
+			"detalles" => $this->Ventas_model->getfacturadetalle(11)
+		);
+		$this->load->library('pdf');
+		/*$paper_size = array(0,0,360,360);
+		$this->pdf->set_paper($paper_size);*/
+		$this->pdf->load_view('admin/ventas/factura',$data,true);
+		$this->pdf->render();
+		$this->pdf->output();
+		$this->pdf->stream("factura");
+ }
 }

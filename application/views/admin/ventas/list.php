@@ -14,21 +14,21 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   
 
-    
+
+
      <!--main content start Inicio de pagina agregar venta-->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   
+
     <!-- Main content -->
 
     <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Datos</h3>
-                                
+
     </div>
-    <div class="panel-body">       
+    <div class="panel-body">
 
     <!-- Main content -->
     <section class="content">
@@ -69,7 +69,9 @@
                                         <td><?php echo $venta->usuNombre." ".$venta->usuApellido;?></td>
                                         <td><?php echo $venta->fecha;?></td>
                                         <td><?php echo $venta->total;?></td>
-                                        <td><button type="button" class="btn btn-info btn-view-venta" value="<?php echo $venta->id;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button></td>
+                                        <td><button type="button" class="btn btn-info btn-view-venta" value="<?php echo $venta->id;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button>
+                                            <a href="<?php echo base_url()?>movimientos/Ventas/imprimir/<?php echo $venta->id;?>" class="btn btn-danger">imprimir</a>
+                                        </td>
                                     </tr>
                                     <?php }?>
                                 <?php } ?>
@@ -103,7 +105,7 @@
         <h4 class="modal-title">Informacion de Venta</h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
