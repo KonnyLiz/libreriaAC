@@ -78,23 +78,6 @@ class Ventas_model extends CI_Model {
 		return $resultados->result();
 	}
 
-	function getfactura($id)
-	{
-				$query = $this->db->get_where('ventas' , array('id' => $id ));
-				if($query->num_rows() > 0 )
-				{
-					 return $query->result();
-				}
-	}
-
-	function getfacturadetalle($id)
-	{
-				$query = $this->db->get_where('detalle_venta' , array('venta_id' => $id ));
-				if($query->num_rows() > 0 )
-				{
-					 return $query->result();
-				}
-	}
 
 	public function save_Cliente($data){
 		return $this->db->insert("clientes",$data);

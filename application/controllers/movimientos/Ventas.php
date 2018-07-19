@@ -163,14 +163,13 @@ private $permisos;
 	public function imprimir(){
 		$idVenta = $this->input->post("id");
 		$data = array(
-			"venta" => $this->Ventas_model->getfactura($idVenta),
-			"detalles" => $this->Ventas_model->getfacturadetalle(11)
+			"venta" => $this->Ventas_model->getVenta(24),
+			"detalles" => $this->Ventas_model->getDetalle(24)
 		);
 		$this->load->library('pdf');
-		/*$paper_size = array(0,0,360,360);
-		$this->pdf->set_paper($paper_size);*/
-		$this->pdf->load_view('admin/ventas/factura',$data,true);
-		$this->pdf->render();
+		$paper_size = array(0,0,560,860);
+		$this->pdf->set_paper($paper_size);
+		$this->pdf->load_view('admin/ventas/factura',$data);
 		$this->pdf->output();
 		$this->pdf->stream("factura");
  }
