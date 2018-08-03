@@ -6,15 +6,15 @@
             reserved.
         </footer>
     </div>
-   
+
 
     <!-- jQuery 3 -->
 
 <!-- jQuery 3 -->
     <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/moment.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
-<script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>   
-<script src='<?php echo base_url(); ?>assets/fullcalendar/locale/es.js'></script> 
+<script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
+<script src='<?php echo base_url(); ?>assets/fullcalendar/locale/es.js'></script>
 
 
 
@@ -37,7 +37,7 @@
     var sigue;
     var compr = 0;
     var f = 0;
-$(document).ready(function () { 
+$(document).ready(function () {
 
     $('#example1').DataTable({
         "language": {
@@ -55,14 +55,14 @@ $(document).ready(function () {
                 "previous": "Anterior"
             },
         }
-    });     
+    });
 
     var base_url= "<?php echo base_url();?>";
 
     //calendario
     $.post('<?php echo base_url();?>Calendarios/getEventos',
             function(data){
-                
+
                 $('#calendar').fullCalendar({
                     header: {
                         left: 'prev,next today',
@@ -80,7 +80,7 @@ $(document).ready(function () {
                         var id = event.id;
                         var ff = event.end.format('YYYY-MM-DD HH:mm');
                         var fi = event.start.format('YYYY-MM-DD HH:mm');
-                        
+
 
                         if (!confirm("Esta seguro de cambiar la fecha?")) {
                             revertFunc();
@@ -101,7 +101,7 @@ $(document).ready(function () {
                         var id = event.id;
                         var ff = event.end.format('YYYY-MM-DD HH:mm');
                         var fi = event.start.format('YYYY-MM-DD HH:mm');
-                        
+
 
                         if (!confirm("Esta seguro??")) {
                             revertFunc();
@@ -121,7 +121,7 @@ $(document).ready(function () {
 
                     dayClick: function(date, jsEvent, view) {
 
-                    
+
                         $('#modalEvento2').modal();
 
                         if (event.url) {
@@ -133,13 +133,13 @@ $(document).ready(function () {
 
                      eventRender: function(event, element) {
                         var el = element.html();
-                        element.html("<div style='width:80%;float:left;'>" + el + "</div>" + 
+                        element.html("<div style='width:80%;float:left;'>" + el + "</div>" +
                                     "<div style='color:#fff;text-align:right;' class='closeE'>" +
                                         "<i class='fa fa-times'></i>" +
                                     "</div>");
 
                         element.find('.closeE').click(function(){
-                            
+
                                 var id = event.id;
                                 $.post("<?php echo base_url();?>Calendarios/deleteEvento",
                                 {
@@ -166,13 +166,13 @@ $(document).ready(function () {
                         }
 
                     }
-                   
-                    
+
+
                 });
             });
-    
-            
-      
+
+
+
     $('#btnUpdEvento').click(function(){
         var nome = $('#txtBandaRP').val();
         var fi = $('#fi').val();
@@ -211,7 +211,7 @@ $(document).ready(function () {
 
 
 
-    
+
     $(".btn-remove").on("click", function(e){
         e.preventDefault();
         var ruta = $(this).attr("href");
@@ -226,7 +226,7 @@ $(document).ready(function () {
         });
     });
     $(".btn-view-producto").on("click", function(){
-        var producto = $(this).val(); 
+        var producto = $(this).val();
         //alert(cliente);
         var infoproducto = producto.split("*");
         html = "<p><strong>Codigo:</strong>"+infoproducto[1]+"</p>"
@@ -237,9 +237,9 @@ $(document).ready(function () {
         html += "<p><strong>Categoria:</strong>"+infoproducto[6]+"</p>";
         $("#modal-default .modal-body").html(html);
     });
-  
+
     $(".btn-view-cliente").on("click", function(){
-        var cliente = $(this).val(); 
+        var cliente = $(this).val();
         //alert(cliente);
         var infocliente = cliente.split("*");
         html = "<p><strong>Nombres:</strong>"+infocliente[1]+"</p>"
@@ -262,14 +262,14 @@ $(document).ready(function () {
 
         });
     });
-    
+
     //$('.sidebar-menu').tree();
     //funcion para el select de comprobantes
 
     //****************Ventas
     $("#comprobantes").on("change", function(){
         option = $(this).val();
-        
+
         if (option != ""){
             infoComprobante = option.split("*");
             $("#idcomprobante").val(infoComprobante[0]);
@@ -311,7 +311,7 @@ $(document).ready(function () {
         select: function(event, ui){
             data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock;
             $("#btn-agregar").val(data);
-        }, 
+        },
     });
 
     $("#btn-agregar").on("click", function(){
@@ -337,7 +337,7 @@ $(document).ready(function () {
             data = $(this).val();
             tablaDeProductos(data);
         }
-        
+
     });
 
     function verificarContadorConsFinal(contador){
@@ -392,7 +392,7 @@ $(document).ready(function () {
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
         precio = $(this).closest("tr").find("td:eq(2)").text();
-       
+
         if (compr == 5){
             if (f == 0){
                 var precio2;
@@ -408,7 +408,7 @@ $(document).ready(function () {
             importe = cantidad * precio;
             f=0;
         }
-        
+
         totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
@@ -428,6 +428,15 @@ $(document).ready(function () {
             }
         });
     });
+
+    /*$("#btn-imprimir").on("click", function(){
+        var id = $(this).val();
+        alert(id);
+        $.ajax({
+            url: base_url + "movimientos/Ventas/imprimir/" + id,
+            type:"POST",
+        });
+    });*/
 
      $(document).on("click", ".btn-print", function(){
         $("#modal-default .modal-body").print();
@@ -450,7 +459,7 @@ $(document).ready(function () {
         select: function(event, ui){
             data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio_entrada + "*" + ui.item.stock;
             $("#btn-agregar-abast").val(data);
-        }, 
+        },
     });
 
       $(document).on("keyup", "#tbreabastecer input.cantidades", function(){
@@ -561,7 +570,7 @@ function sumarReabastecimiento(){
         $("#gru2").val(res[1]);
     }
 
-    
+
 
 </script>
 

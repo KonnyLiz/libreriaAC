@@ -59,6 +59,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <?php if (!empty($ventas)){ ?>
                                     <?php foreach($ventas as $venta) {?>
                                     <tr>
@@ -70,6 +71,7 @@
                                         <td><?php echo $venta->fecha;?></td>
                                         <td><?php echo $venta->total;?></td>
                                         <td><button type="button" class="btn btn-info btn-view-venta" value="<?php echo $venta->id;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button>
+                                          <!--<button type="button" class="btn btn-danger" id="btn-imprimir" value="<?php echo $venta->id;?>" >Imprimir</button>-->
                                             <a href="<?php echo base_url()?>movimientos/Ventas/imprimir/<?php echo $venta->id;?>" class="btn btn-danger">imprimir</a>
                                         </td>
                                     </tr>
