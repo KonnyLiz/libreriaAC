@@ -10,6 +10,7 @@ private $permisos;
 		$this->load->model("Ventas_model");
 		$this->load->model("Clientes_model");
 		$this->load->model("Productos_model");
+		$this->load->model("Cajas_model");
 	}
 
 	public function index(){
@@ -70,8 +71,14 @@ private $permisos;
 			'num_documento' => $numero,
 			'tipo_comprobante_id' => $idcomprobante
 		);
+		$data2 = array(
+			'usuario' => $idusuario,
+			'transaccion' => "1",
+			'fecha' => $fecha,
+			'monto' => $total,
+		);
 
-		if ($this->Ventas_model->save($data)){
+		if ($this->Ventas_model->save($data) && $this->Cajas_model->transaccionCaja($data2)){
 			$idVenta = $this->Ventas_model->lastID();
 			$this->save_detalle($idproductos, $idVenta, $precios, $cantidades, $importes, $idcomprobante); //guardando el detalle de la venta
 			$this->updateComprobante($idcomprobante); //actualizando el correlativo del comprobante
@@ -80,7 +87,6 @@ private $permisos;
 			redirect(base_url()."movimientos/ventas/add");
 		}
 	}
-
 	//funcion para actualizar el correlativo de los comprobantes
 	protected function updateComprobante($idComprobante){
 		$comprobanteActual = $this->Ventas_model->getComprobante($idComprobante);
