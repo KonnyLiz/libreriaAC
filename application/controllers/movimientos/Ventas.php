@@ -40,7 +40,6 @@ private $permisos;
 	public function getProductos(){
 		$valor = $this->input->post("valor");
 		$existe = $this->Ventas_model->getSiExisteServicio($valor);
-
 		if ($existe > 0){
 			$servicio = $this->Ventas_model->getServicio($valor);
 			echo json_encode($servicio);
