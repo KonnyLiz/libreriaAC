@@ -10,19 +10,15 @@
         <li>
             <a href="<?php echo base_url();?>dashboard"><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
         </li>
+      
         <li class="sub-menu">
-            <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Configuración</span><i class="arrow fa fa-angle-right pull-right"></i></a>
-            <ul>
-               <li><a href="<?php echo base_url();?>mantenimiento/permisos">Permisos</a></li>
-
-            </ul>
-        </li>
-        <li class="sub-menu">
-            <a href="javascript:void(0);"><i class="fa fa-tag"></i><span>Productos</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+            <a href="javascript:void(0);"><i class="fa fa-tag"></i><span>Inventarios</span><i class="arrow fa fa-angle-right pull-right"></i></a>
             <ul>
                 <li><a href="<?php echo base_url();?>mantenimiento/categorias">Categorias</a></li>
+                <li><a href="<?php echo base_url();?>mantenimiento/marcas">Marcas</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/productos">Productos</a></li>
-                <li><a href="<?php echo base_url();?>mantenimiento/Salidas">Salidas</a></li>
+                <li><a href="<?php echo base_url();?>movimientos/reabastecer/add">Abastecer</a></li>
+                <li><a href="<?php echo base_url();?>movimientos/reabastecer">Abastecimientos</a></li>
             </ul>
         </li>
         <li class="sub-menu">
@@ -31,25 +27,32 @@
                 <li><a href="<?php echo base_url();?>mantenimiento/clientes">Clientes</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/Usuarios">Usuario</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/Reclamos">Reclamos</a></li>
-
+                <li><a href="<?php echo base_url();?>mantenimiento/Vendedores">Vendedores</a></li>
+                <li><a href="<?php echo base_url();?>mantenimiento/Proveedores">Proveedores</a></li>
             </ul>
         </li>
        <li class="sub-menu">
             <a href="javascript:void(0);"><i class="fa fa-money"></i><span>Movimientos</span><i class="arrow fa fa-angle-right pull-right"></i></a>
             <ul>
+               
                 <li><a href="<?php echo base_url();?>movimientos/ventas/add">Realizar Venta</a></li>
                 <li><a href="<?php echo base_url();?>movimientos/ventas">Registro de Ventas</a></li>
-                <li><a href="<?php echo base_url();?>movimientos/reabastecer/add">Reabastecer</a></li>
-                <li><a href="<?php echo base_url();?>movimientos/reabastecer">Reabastecimientos</a></li>
+            </ul>
+        </li>
+           <li class="sub-menu">
+            <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Configuración</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+            <ul>
+               <li><a href="<?php echo base_url();?>mantenimiento/permisos">Permisos</a></li>
+               
             </ul>
         </li>
         <li class="sub-menu">
-            <a href="javascript:void(0);"><i class="fa fa-desktop"></i><span>Caja</span><i class="arrow fa fa-angle-right pull-right"></i></a>
+            <a href="javascript:void(0);"><i class="fa fa-cogs"></i><span>Reportes</span><i class="arrow fa fa-angle-right pull-right"></i></a>
             <ul>
-                <li><a href="<?php echo base_url();?>movimientos/cajas">Caja</a></li>
+               <li><a href="<?php echo base_url();?>pdfcontroller/inventario">Inventarios</a></li>
+               
             </ul>
         </li>
-
     </ul>
 </div>
 

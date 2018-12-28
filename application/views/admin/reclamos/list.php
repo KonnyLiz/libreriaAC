@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
                         <ul class="breadcrumb">
-                            
+
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Registros</li>
                             <li class="active">Reclamos</li>
@@ -12,7 +12,7 @@
                     </div>
                         <h1 class="h1">Reclamos</h1>
                 </div>
-                    
+
 <!-- Content Wrapper. Contains page content -->
 
 <!-- /.content-wrapper -->
@@ -26,7 +26,7 @@
         <h4 class="modal-title">Informacion del Reclamo</h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
@@ -41,7 +41,7 @@
 
  <div class="col-md-12">
                         <div class="panel panel-default">
-                            
+
                             <div class="panel-body">
                                 <div class="tab-wrapper tab-primary">
                                     <ul class="nav nav-tabs">
@@ -54,13 +54,13 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home1">
-                                            
+
                                             <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                           <div class="panel-body">
-                            <table id="example1" class="table table-striped table-bordered" >
-                            
+                            <table id="example1" class="table table-striped table-bordered" width= 100%>
+
                      <thead>
                                 <tr>
                                     <th>#</th>
@@ -84,8 +84,8 @@
 <?php endif?>
  <?php if($permisos->delete == 1):?><a href="<?php echo base_url();?>mantenimiento/reclamos/delete/<?php echo $reclamos->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
 <?php endif?>
-                                                    
-                                                    
+
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -109,12 +109,10 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                                
+
                              </div>
                         <?php endif;?>
-
-                        
-                            <form action="<?php echo base_url();?>mantenimiento/reclamos/store" method="POST">
+                                <form action="<?php echo base_url();?>mantenimiento/reclamos/store" method="POST">
                             <div class="form-group">
                                 <label for="productos">Vendedor:</label>
                                 <select name="vendedor" id="producto" class="form-control">
@@ -135,7 +133,7 @@
                                 <label for="reclamo">Reclamo:</label>
                                 <input type="text" class="form-control" id="nombre" name="reclamo">
                             </div>
-                            
+
                             <div class="form-group">
                                 <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                             </div>
@@ -147,5 +145,3 @@
                             </div>
                         </div>
                     </div>
-                        
-

@@ -15,22 +15,22 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   
+
     <!-- Main content -->
 
     <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">Datos</h3>
-                                
+
     </div>
     <div class="panel-body">
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    
 
-    
+
+
      <!--main content start Inicio de pagina agregar venta-->
-         
+
 
     <!-- Main content -->
     <section class="content">
@@ -48,11 +48,12 @@
                 <hr>
                 <div class="row">
                     <div class="col-md-12">
-                        <table id="example1" class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-hover" width= 100%>
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Fecha</th>
+                                    <th>Proveedor</th>
                                     <th>Encargado</th>
                                     <th>Total</th>
                                     <th>Opciones</th>
@@ -64,6 +65,7 @@
                                     <tr>
                                         <td><?php echo $reabastecimiento->id;?></td>
                                         <td><?php echo $reabastecimiento->fecha;?></td>
+                                        <td><?php echo $reabastecimiento->nombre;?></td>
                                         <td><?php echo $reabastecimiento->nombres." ".$reabastecimiento->apellidos;?></td>
                                         <td><?php echo $reabastecimiento->total_abastecer;?></td>
                                         <td><button type="button" class="btn btn-info btn-view-reabastecimiento" value="<?php echo $reabastecimiento->id;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button></td>
@@ -96,7 +98,7 @@
         <h4 class="modal-title">Informacion de Abastecimiento</h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>

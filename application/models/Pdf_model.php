@@ -27,8 +27,12 @@ class Pdf_model extends CI_Model
  	}
  	function getPdfproductos()
  	{
-   		$this->db->from('productos');
-   		//$this->db->order_by("id");
+   		$this->db->select("p.*,c.nombre as categoria_id,pr.nombre as id_proveedor,m.nombre as id_marca");
+      $this->db->from("productos p");
+      $this->db->join("categorias c","p.categoria_id = c.id");
+      $this->db->join("marca m","p.id_marca = m.id_marca");
+      $this->db->join("proveedor pr","p.id_proveedor = pr.id_proveedor");
+      $this->db->where("p.estado","1");
    		$query = $this->db->get();
    		return $query->result();
  	}

@@ -3,7 +3,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
-                        <ul class="breadcrumb">
+                        <ul class="breadcrumb"> 
                             
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Productos</li>
@@ -38,7 +38,9 @@
                              </div>
                         <?php endif;?>
                         <form action="<?php echo base_url();?>mantenimiento/productos/update" method="POST">
+                            
                             <input type="hidden" name="idproducto" value="<?php echo $producto->id;?>">
+                            
                             <div class="form-group <?php echo !empty(form_error("codigo"))? 'has-error':'' ?>">
                                 <label for="codigo">Codigo:</label>
                                 <input type="text" class="form-control" id="codigo" name="codigo" value="<?php echo !empty(form_error("codigo"))? set_value("codigo"):$producto->codigo?>">
@@ -53,6 +55,30 @@
                                 <label for="descripcion">Descripcion:</label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion" value="<?php echo $producto->descripcion?>">
                             </div>
+                            <div class="form-group">
+                                <label for="categoria">Marca:</label>
+                                <select name="marca" id="categoria" class="form-control">
+                                    <?php foreach($marca as $marcas):?>
+                                        <?php if($marcas->id_marca == $producto->id_marca):?>
+                                        <option value="<?php echo $marcas->id_marca?>" selected><?php echo $marcas->nombre;?></option>
+                                    <?php else:?>
+                                        <option value="<?php echo $marcas->id_marca?>"><?php echo $marcas->nombre;?></option>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="categoria">Proveedor:</label>
+                                <select name="proveedor" id="categoria" class="form-control">
+                                    <?php foreach($proveedor as $proveedores):?>
+                                        <?php if($proveedores->id_proveedor == $producto->id_proveedor):?>
+                                        <option value="<?php echo $proveedores->id_proveedor?>" selected><?php echo $proveedores->nombre;?></option>
+                                    <?php else:?>
+                                        <option value="<?php echo $proveedores->id_proveedor?>"><?php echo $proveedores->nombre;?></option>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
                             <div class="form-group <?php echo !empty(form_error("precio_e"))? 'has-error':'' ?>">
                                 <label for="precio">Precio de entrada:</label>
                                 <input type="text" class="form-control" id="precio_e" name="precio_e" value="<?php echo !empty(form_error("precio_e"))? set_value("precio_e"):$producto->precio_entrada?>">
@@ -64,8 +90,13 @@
                                 <?php echo form_error("precio", "<span class='help-block'>", "</span>");?>
                             </div>
                             <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
-                                <label for="precio">Precio de mayoreo:</label>
-                                <input type="text" class="form-control" id="precio_m" name="precio_m" value="<?php echo !empty(form_error("precio_m"))? set_value("precio_m"):$producto->precio_mayoreo?>">
+                                <label for="precio">Precio de mayoreo 1:</label>
+                                <input type="text" class="form-control" id="precio_m" name="precio_m" value="<?php echo !empty(form_error("precio_m"))? set_value("precio_m"):$producto->precio_mayoreo1?>">
+                                <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
+                            </div>
+                            <div class="form-group <?php echo !empty(form_error("precio_m"))? 'has-error':'' ?>">
+                                <label for="precio">Precio de mayoreo 2:</label>
+                                <input type="text" class="form-control" id="precio_m" name="precio_m1" value="<?php echo !empty(form_error("precio_m"))? set_value("precio_m"):$producto->precio_mayoreo2?>">
                                 <?php echo form_error("precio_m", "<span class='help-block'>", "</span>");?>
                             </div>
                             <div class="form-group <?php echo !empty(form_error("stock"))? 'has-error':'' ?>">

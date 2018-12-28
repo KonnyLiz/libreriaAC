@@ -8,6 +8,7 @@
     <!-- CSS Animate -->
     <link rel='stylesheet' href='<?php echo base_url();?>assets/css/animate.css'>
     <link rel="stylesheet" href="<?php echo base_url();?>assets/templates/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/print.css" media="print" />
     <!-- Custom styles for this theme -->
     <link rel='stylesheet' href='<?php echo base_url();?>assets/css/main.css'>
     <link rel='stylesheet' href='<?php echo base_url();?>assets/plugins/dataTables/css/dataTables.css'>
@@ -24,3 +25,4 @@
     <script src='assets/js/html5shiv.js'></script>
     <script src='assets/js/respond.min.js'></script>
     <![endif]-->
+    

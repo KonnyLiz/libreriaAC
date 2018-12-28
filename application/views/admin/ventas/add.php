@@ -35,16 +35,11 @@
         <div class="box box-solid">
             <div class="box-body">
                 <div class="row">
-
-
-
-
-
                         <form action="<?php echo base_url();?>movimientos/ventas/store" method="POST" class="form-horizontal">
                           <div class="col-md-3" style="padding-bottom: 12px">
                                       <label for="">Fecha:</label>
-                                      <input type="date" class="form-control" id="fecha" name="fecha" required>
-                            </div>
+                                      <input type="date" class="form-control" name="fechas" value="<?php echo date("Y-m-d");?>" required>
+                                  </div>
                           <div class="col-md-12">
                             <div class="form-group">
                                 <div class="col-md-3">
@@ -104,11 +99,23 @@
                                         <th>Codigo</th>
                                         <th>Nombre</th>
                                         <th>Precio</th>
-                                        <th>Stock</th>
+                                        <th>Stock Max.</th>
                                         <th>Cantidad</th>
                                         <th>Importe</th>
-                                        <th></th>
+                                         <th>Eliminar</th>
+
                                     </tr>
+                                    <?php /*foreach($servicios as $serv):?>
+                                    <tr>
+                                      <td><?php echo ($serv->id_servicio);?><input type="hidden" name="precios" id="<?php echo($serv->nombre).'2';?>" value="<?php echo($serv->precio.'*'.$serv->precio2.'*'.$serv->precio3); ?>"></td>
+                                       <td><?php echo ($serv->nombre);?></td>
+                                       <td ><input id="<?php echo($serv->nombre).'1';?>" value="<?php echo($serv->precio);?>"></td>
+                                       <td>-------</td>
+                                       <td><input type='number'  name='' min="0" value='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
+                                       <td><p id = "<?php echo($serv->nombre).'3';?>">0</p></td>
+                                      <td></td>
+                                    </tr>  <?php endforeach;*/?>
+
                                 </thead>
                                 <tbody>
 
@@ -119,28 +126,27 @@
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Subtotal:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="subtotal" id="subtotal" readonly="readonly">
+                                        <input type="text" class="form-control" name="subtotal" id="subtotal" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">IVA:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="iva2" id="iva2" readonly="readonly">
+                                        <input type="text" class="form-control" name="iva2" id="iva2" readonly="readonly">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Descuento:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="descuento" id="descuento" value="0.00" readonly="readonly">
+                                        <input type="text" class="form-control" name="descuento" id="descuento" value="0.00">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Total:</span>
-                                        <input type="text" class="form-control" placeholder="Username" name="total" id="total" readonly="readonly">
+                                        <input type="text" class="form-control" name="total" id="total" readonly="readonly">
                                     </div>
                                 </div>
-                            </div>
 
                             <div class="form-group">
                                 <div class="col-md-12">
@@ -184,7 +190,7 @@
                                         <tr>
                                             <td><?php echo $cliente->id;?></td>
                                             <td><?php echo $cliente->nombres;?></td>
-                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->dui."*".$cliente->nit."*".$cliente->telefono."*".$cliente->direccion?>
+                                            <?php $datacliente = $cliente->id."*".$cliente->nombres."*".$cliente->nit."*".$cliente->direccion?>
                                             <td>
                                                 <button type="button" class="btn btn-success btn-check" value="<?php echo $datacliente;?>"><span class="fa fa-check"></span></button>
                                             </td>

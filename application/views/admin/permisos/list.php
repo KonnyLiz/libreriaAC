@@ -4,7 +4,7 @@
                     <div class="col-md-12">
                         <!--breadcrumbs start -->
                         <ul class="breadcrumb">
-                            
+
                             <li><a href="Dashboard">Dashboard</a></li>
                             <li>Permisos</li>
                             <li class="active">Permisos</li>
@@ -12,7 +12,7 @@
                     </div>
                         <h1 class="h1">Permisos</h1>
                 </div>
-                    
+
 <!-- Content Wrapper. Contains page content -->
 
 <!-- /.content-wrapper -->
@@ -26,7 +26,7 @@
         <h4 class="modal-title"></h4>
       </div>
       <div class="modal-body">
-        
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
@@ -41,7 +41,7 @@
 
  <div class="col-md-12">
                         <div class="panel panel-default">
-                            
+
                             <div class="panel-body">
                                 <div class="tab-wrapper tab-primary">
                                     <ul class="nav nav-tabs">
@@ -52,13 +52,13 @@
                                     </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane active" id="home1">
-                                            
+
                                             <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
                           <div class="panel-body">
-                            <table id="example1" class="table table-striped table-bordered" >
-                            
+                            <table id="example1" class="table table-striped table-bordered" width= 100% >
+
                      <thead>
                                 <tr>
                                     <th>#</th>
@@ -76,7 +76,7 @@
                                     <?php foreach($permisos as $permiso):?>
                                         <tr>
                                             <td><?php echo $permiso->id;?></td>
-                                             
+
                                              <?php foreach($menus as $menu):?>
                                                 <?php if($menu->id == $permiso->menu_id):?>
                                                     <td><?php echo $menu->nombre;?></td>
@@ -134,8 +134,8 @@
                                                     <button type="button" class="btn btn-info btn-view-producto" data-toggle="modal" data-target="#modal-default" value="<?php echo $datapermisos;?>">
                                                         <span class="fa fa-search"></span>
                                                     </button>
-                                                    
-                                                    
+
+
                                                     <a href="<?php echo base_url()?>mantenimiento/permisos/edit/<?php echo $permiso->id;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
                                                     <a href="<?php echo base_url();?>mantenimiento/permisos/delete/<?php echo $permiso->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
                                                 </div>
@@ -159,7 +159,7 @@
                             <div class="alert alert-danger alert-dismissible">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 <p><i class="icon fa fa-ban"></i><?php echo $this->session->flashdata("error"); ?></p>
-                                
+
                              </div>
                         <?php endif;?>
                                 <form action="<?php echo base_url();?>mantenimiento/permisos/store" method="POST">
@@ -167,19 +167,19 @@
                              <div class="form-group">
                                 <label for="categoria">Roles:</label>
                                 <select name="rol" id="rol" class="form-control">
-                                <<?php foreach ($roles as $rol ):?> 
+                                <<?php foreach ($roles as $rol ):?>
                                     <option value="<?php echo $rol->id;?>"> <?php echo $rol->nombre;?></option>
                                 <?php endforeach;?>
                                 </select>
-                            </div>  
+                            </div>
                              <div class="form-group">
                                 <label for="categoria">Menus:</label>
                                 <select name="menu" id="menu" class="form-control">
-                                <<?php foreach ($menus as $menu ):?> 
+                                <<?php foreach ($menus as $menu ):?>
                                     <option value="<?php echo $menu->id;?>"> <?php echo $menu->nombre;?></option>
                                 <?php endforeach;?>
                                 </select>
-                            </div> 
+                            </div>
                             <div class="form-group">
                                 <label for="read">Leer</label>
                                 <label class="radio-inline">

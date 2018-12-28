@@ -2,19 +2,47 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Ventas_model extends CI_Model {
-
+	
 	public function getComprobantes(){
 		$resultados = $this->db->get("tipo_comprobante");
 		return $resultados->result();
 	}
 
 	public function getProductos($valor){
-		$this->db->select("id, codigo, nombre as label, precio, stock");
-		$this->db->from("productos");
-		$this->db->like("nombre", $valor);
+
+			$this->db->select("id, codigo, nombre as label, precio, stock, precio_mayoreo1 as precio2, precio_mayoreo2 as precio3");
+			$this->db->from("productos");
+			$this->db->like("estado", "1");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+			return $resultados->result_array();
+	}
+	
+	
+	public function getClientes($valor){
+		$this->db->select("id, nombres");
+		$this->db->from("clientes");
+		$this->db->like("nombres", $valor);
 		$resultados = $this->db->get();
 		return $resultados->result_array();
 	}
+
+	public function getSiExisteServicio($valor){
+        $this->db->select("nombre");
+			$this->db->from("servicios");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+
+			return $resultados->num_rows();
+    }
+
+    function getServicio($valor){
+    	$this->db->select("id_servicio as id, nombre as label, precio, precio2, precio3");
+			$this->db->from("servicios");
+			$this->db->like("nombre", $valor);
+			$resultados = $this->db->get();
+			return $resultados->result_array();
+    }
 
 	public function save($data){
 		return $this->db->insert("ventas", $data);
@@ -42,9 +70,13 @@ class Ventas_model extends CI_Model {
 		$this->db->insert("detalle_venta", $data);
 	}
 
+	public function save_detalle_servicio($data){
+		$this->db->insert("detalle_venta_servicio", $data);
+	}
+
 	//consulta a la base de datos para mostrar los datos de ventas
 	public function getVentas(){
-		$this->db->select("v.*, c.nombres as nombres, c.apellidos as apellidos, tc.nombre as tipo_comprobante, u.nombres as usuNombre, u.apellidos as usuApellido");
+		$this->db->select("v.*, c.nombres as nombres, tc.nombre as tipo_comprobante, u.nombres as usuNombre, u.apellidos as usuApellido");
 		 $this->db->from("ventas v");
 		 $this->db->join("clientes c", "v.cliente_id = c.id");
 		 $this->db->join("usuarios u", "v.usuario_id = u.id");
@@ -66,7 +98,7 @@ class Ventas_model extends CI_Model {
 		 $this->db->join("tipo_comprobante tc", "v.tipo_comprobante_id = tc.id");
 		 $this->db->where("v.id", $id);
 		 $resultado = $this->db->get();
-		 return $resultado->row();
+		 return $resultado->row(); 
 	}
 
 	public function getDetalle($id){
@@ -78,6 +110,23 @@ class Ventas_model extends CI_Model {
 		return $resultados->result();
 	}
 
+	public function getDetalleServicio($id){
+		$this->db->select("dts.*, s.id_servicio, s.nombre");
+		$this->db->from("detalle_venta_servicio dts");
+		$this->db->join("servicios s", "dts.servicio_id = s.id_servicio");
+		$this->db->where("dts.venta_id", $id);
+		$resultados = $this->db->get();
+		return $resultados->result();
+	}
+
+	public function getSiExisteVentaServicio($valor){
+        $this->db->select("venta_id");
+			$this->db->from("detalle_venta_servicio");
+			$this->db->like("venta_id", $valor);
+			$resultados = $this->db->get();
+
+			return $resultados->num_rows();
+    }
 
 	public function save_Cliente($data){
 		return $this->db->insert("clientes",$data);
