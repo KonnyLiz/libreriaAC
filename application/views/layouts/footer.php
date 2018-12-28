@@ -354,6 +354,7 @@ $(document).ready(function (){
             }
         } else if(compr == 5){
             sigue = verificarContadorCredFiscal(contador);
+            //aqui hacer el arreglo de los precios de productos
             if (sigue == 1){
                 data = $(this).val();
                 tablaDeProductos(data);
@@ -371,11 +372,8 @@ $(document).ready(function (){
         var sigue2;
         if (contador >= 13){
             sigue2 = 0;
-
-            
         } else {
             sigue2 = 1;
-            
         }
         return sigue2;
     }
@@ -418,8 +416,6 @@ $(document).ready(function (){
         f=0;
         sumar();
     });
-
-
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
@@ -620,10 +616,6 @@ function sumar(){
     iva = subtotal * (porcentaje/100);
     $("#iva2").val(iva.toFixed(2));
     //descuento = parseInt($("#descuento").val()));
-   // $("#subtotal").val(parseFloat(des_lam + des_imp + des_ani + des_foto + des_ref+ val_serv).toFixed(2));
-    //$("#descuento").val( (des_lam + des_imp + des_ani + des_foto + des_ref).toFixed(2));
-    //aqui resive el valor que se devulve en val_serv que es el valor de todos los servicios
-    //total = subtotal + iva + parseFloat(val_serv.toFixed(2));
     total = subtotal + iva ;
     $("#total").val(total.toFixed(2));
 }
