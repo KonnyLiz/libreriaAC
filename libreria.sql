@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 27-12-2018 a las 23:23:43
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.7
+-- Servidor: localhost
+-- Tiempo de generación: 28-12-2018 a las 04:58:39
+-- Versión del servidor: 10.1.35-MariaDB
+-- Versión de PHP: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -42,7 +42,22 @@ CREATE TABLE `abastecer` (
 
 INSERT INTO `abastecer` (`id`, `fecha`, `total_abastecer`, `usuario_id`, `proveedor_id`) VALUES
 (2, '2018-12-26', '64.00', 7, 1),
-(3, '2018-12-26', '64.00', 7, 1);
+(3, '2018-12-26', '64.00', 7, 1),
+(4, '2018-12-27', '3456.00', 7, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `caja`
+--
+
+CREATE TABLE `caja` (
+  `id` int(11) NOT NULL,
+  `usuario` int(11) NOT NULL,
+  `transaccion` double NOT NULL,
+  `fecha` date NOT NULL,
+  `monto` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 -- --------------------------------------------------------
 
@@ -62,10 +77,10 @@ CREATE TABLE `categorias` (
 --
 
 INSERT INTO `categorias` (`id`, `nombre`, `descripcion`, `estado`) VALUES
-(1, 'Fontaneria', 'sins, tuberias pvc y mas ', 1),
-(2, 'Electricas', 'Conexiones, switch, tomas extenciones y mas', 1),
-(3, 'Construccion', 'Todo lo relasionado a contruccion', 1),
-(4, 'Hogar', 'Camas y mas', 1),
+(1, 'Fontaneria', 'sins, tuberias pvc y mas ', 0),
+(2, 'Electricas', 'Conexiones, switch, tomas extenciones y mas', 0),
+(3, 'Construccion', 'Todo lo relasionado a contruccion', 0),
+(4, 'Hogar', 'Camas y mas', 0),
 (5, 'Pintura', 'Cubetas, galones, medios, cuartos y octavos', 1),
 (6, 'Herramientas', 'De todo en herramientas', 1),
 (7, 'Patio', 'Todo lo del patio', 0),
@@ -95,7 +110,8 @@ CREATE TABLE `clientes` (
 
 INSERT INTO `clientes` (`id`, `nombres`, `apellidos`, `nit`, `telefono`, `registro`, `direccion`, `estado`) VALUES
 (1, 'Hugo', NULL, '123', NULL, '123', 'sm', 1),
-(2, 'Zulmi Amaya', NULL, 'yy', NULL, 'rr', 'ee', 1);
+(2, 'Zulmi Amaya', NULL, 'yy', NULL, 'rr', 'ee', 1),
+(3, 'Midoriya', 'Izuku', '1217-061296-101-6', '1232-2222', '223336-8', 'Japon :v', 1);
 
 -- --------------------------------------------------------
 
@@ -117,7 +133,8 @@ CREATE TABLE `detalle_abastecer` (
 
 INSERT INTO `detalle_abastecer` (`id`, `abastecer_id`, `producto_id`, `cantidad_abastecer`, `importe`) VALUES
 (1, 2, 1, 800, 64),
-(2, 3, 1, 800, 64);
+(2, 3, 1, 800, 64),
+(3, 4, 3, 432, 3456);
 
 -- --------------------------------------------------------
 
@@ -148,7 +165,8 @@ INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantida
 (10, 1, 24, '0.12', '25', '3.00'),
 (11, 1, 25, '0.15', '12', '1.80'),
 (12, 1, 26, '0.15', '12', '1.80'),
-(13, 1, 27, '0.15', '12', '1.80');
+(13, 1, 27, '0.15', '12', '1.80'),
+(14, 3, 31, '5', '44', '220.00');
 
 -- --------------------------------------------------------
 
@@ -170,8 +188,7 @@ CREATE TABLE `detalle_venta_servicio` (
 --
 
 INSERT INTO `detalle_venta_servicio` (`id`, `servicio_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
-(0, 4, 27, 4, 2, 8),
-(1, 1, 1, 1, 4, 4);
+(1, 4, 31, 4, 3, 12);
 
 -- --------------------------------------------------------
 
@@ -203,7 +220,7 @@ CREATE TABLE `marca` (
 --
 
 INSERT INTO `marca` (`id_marca`, `nombre`, `estado`) VALUES
-(1, 'Pelikan', 1),
+(1, 'Pelikano', 1),
 (2, 'Bic', 1),
 (3, 'varios', 1);
 
@@ -320,7 +337,8 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
 (1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 819, 4, '2018-12-26', 1),
-(2, '999', 'servicio', 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0);
+(2, '999', 'servicio', 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
+(3, '99', 'clip', 'hierro', 2, 2, '8', '5', '5', '5', 30431, 6, '2018-12-27', 1);
 
 -- --------------------------------------------------------
 
@@ -343,7 +361,8 @@ CREATE TABLE `proveedor` (
 INSERT INTO `proveedor` (`id_proveedor`, `nombre`, `telefono`, `direccion`, `estado`) VALUES
 (1, 'disasa', '61099440', '22 calle oriente pol e casa # 2 col. esperanza San salvador', 1),
 (2, 'sony', '76636542', 'sivar', 1),
-(3, 'varios', '---------', '---------', 1);
+(3, 'varios', '---------', '---------', 1),
+(4, 'hers', '7777-2020', 'Sivar', 1);
 
 -- --------------------------------------------------------
 
@@ -425,8 +444,8 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 19, 13, 1),
-(2, 'Ticket', 7, 13, 5);
+(1, 'Factura', 21, 13, 1),
+(2, 'Ticket', 9, 13, 5);
 
 -- --------------------------------------------------------
 
@@ -501,7 +520,11 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (24, '0000-00-00', '1', '2.65', '0.35', '0.25', '3.00', 1, 1, '000016', 1),
 (25, '0000-00-00', '1', '1.59', '0.21', '0.00', '1.80', 1, 1, '000017', 1),
 (26, '2018-12-26', '1', '1.59', '0.21', '0.00', '1.80', 1, 1, '000018', 1),
-(27, '2018-12-27', '1', '8.49', '1.10', '0.00', '9.59', 1, 1, '000019', 1);
+(27, '2018-12-27', '1', '8.49', '1.10', '0.00', '9.59', 1, 1, '000019', 1),
+(28, '2018-12-27', '1', '14.16', '1.84', '0.00', '16.00', 3, 1, '000020', 1),
+(29, '2018-12-27', '1', '14.16', '1.84', '0.00', '16.00', 3, 1, '000020', 1),
+(30, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2),
+(31, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2);
 
 --
 -- Índices para tablas volcadas
@@ -514,6 +537,12 @@ ALTER TABLE `abastecer`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_usuario_id` (`usuario_id`),
   ADD KEY `proveedor_id` (`proveedor_id`);
+
+--
+-- Indices de la tabla `caja`
+--
+ALTER TABLE `caja`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `categorias`
@@ -647,7 +676,7 @@ ALTER TABLE `ventas`
 -- AUTO_INCREMENT de la tabla `abastecer`
 --
 ALTER TABLE `abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -659,19 +688,25 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
+--
+ALTER TABLE `detalle_venta_servicio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -701,13 +736,13 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
@@ -743,7 +778,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restricciones para tablas volcadas
