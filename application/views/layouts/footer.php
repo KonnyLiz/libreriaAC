@@ -32,6 +32,12 @@
     <script src="<?php echo base_url();?>assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
     <!-- ./wrapper -->
     <script>
+
+    var contador=0;
+    var sigue;
+    var compr = 0;
+    var f = 0;
+
 $(document).ready(function (){
 
     $('#example1').DataTable({
@@ -274,6 +280,7 @@ $(document).ready(function (){
         if (option != ""){
             infoComprobante = option.split("*");
             $("#idcomprobante").val(infoComprobante[0]);
+            compr = infoComprobante[0];
             $("#iva").val(infoComprobante[2]);
             $("#serie").val(infoComprobante[3]);
             $("#numero").val(generarNumero(infoComprobante[1]));
@@ -333,47 +340,86 @@ $(document).ready(function (){
         // $("#btn-agregar").val(data);
         },
     });
-    $("#btn-agregar").on("click", function(){
-        data = $(this).val();
-        if (data != " "){
-            infoProducto = data.split("*");
-            var codigo;
-            var stock;
-                if (infoProducto[1] == "undefined"){
-                    codigo = 0;
-                    stock = 0;
-                } else {
-                    codigo =  infoProducto[1];
-                    stock = infoProducto[4];
-                }
-                varx++;
-                vary = 0;
-                html = "<tr>";
-                html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+codigo+"</td>"; //id y codigo
-                html += "<td><input type='hidden' name='nombreProductos[]' value='"+infoProducto[2]+"'>"+infoProducto[2]+"</td>"; //nombre
-                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
-                vary++;
-                html += "<td>"+stock+"</td>";//stock
-                html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
 
-                html += "<td><input  type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
-                html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
-                html += "<td ><input   type='hidden' id='"+infoProducto[2]+"' value='"+infoProducto[5]+"*"+infoProducto[6]+"*"+infoProducto[7] +"'></td>"; //immportes
-                html += "</tr>";
-                $("#tbventas tbody").append(html);
-                sumar();
-               // $("#btn-agregar").val(null);
-               // $("#producto").val(null);
+    $("#btn-agregar").on("click", function(){
+        contador =contador + 1;
+        f=0;
+        if (compr == 1){
+            sigue = verificarContadorConsFinal(contador);
+            if (sigue == 1){
+                data = $(this).val();
+                tablaDeProductos(data);
+            } else {
+                 alert("No puede ingresar mas de 12 productos!");
+            }
+        } else if(compr == 5){
+            sigue = verificarContadorCredFiscal(contador);
+            if (sigue == 1){
+                data = $(this).val();
+                tablaDeProductos(data);
+            } else {
+                 alert("No puede ingresar mas de 8 productos!");
+            }
         } else {
-            alert("seleccione un producto");
+            data = $(this).val();
+            tablaDeProductos(data);
         }
 
     });
 
-    $(document).on("click", ".btn-remove-producto", function(){
+    function verificarContadorConsFinal(contador){
+        var sigue2;
+        if (contador >= 13){
+            sigue2 = 0;
+
+            
+        } else {
+            sigue2 = 1;
+            
+        }
+        return sigue2;
+    }
+
+    function verificarContadorCredFiscal(contador){
+        var sigue2;
+        if (contador >= 9){
+            sigue2 = 0;
+        } else {
+            sigue2 = 1;
+        }
+        return sigue2;
+    }
+
+    function tablaDeProductos(data){
+        if (data != " "){
+                infoProducto = data.split("*");
+                html = "<tr>";
+                html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
+                html += "<td>"+infoProducto[2]+"</td>";
+                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
+                html += "<td>"+infoProducto[4]+"</td>";
+                html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
+                html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
+                html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
+                html += "</tr>";
+                $("#tbventas tbody").append(html);
+
+                sumar();
+               // $("#btn-agregar").val(null);
+               // $("#producto").val(null);
+            } else {
+                alert("seleccione un producto");
+            }
+    }
+    
+     $(document).on("click", ".btn-remove-producto", function(){
         $(this).closest("tr").remove();
+        contador = contador - 1;
+        f=0;
         sumar();
     });
+
+
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();

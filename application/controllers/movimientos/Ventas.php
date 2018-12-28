@@ -132,7 +132,9 @@ private $permisos;
 				'importe' => $importes[$i],
 			);
 			$this->Ventas_model->save_detalle($data);
-			$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			if ($idcomprobante != 3) {
+				$this->updateProducto($productos[$i], $cantidades[$i]); //actualizamos el stock del producto
+			}
 			}
 		}
 	}
