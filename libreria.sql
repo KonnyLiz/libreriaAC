@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-12-2018 a las 04:58:39
+-- Tiempo de generación: 28-12-2018 a las 22:59:17
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -166,7 +166,9 @@ INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantida
 (11, 1, 25, '0.15', '12', '1.80'),
 (12, 1, 26, '0.15', '12', '1.80'),
 (13, 1, 27, '0.15', '12', '1.80'),
-(14, 3, 31, '5', '44', '220.00');
+(14, 3, 31, '5', '44', '220.00'),
+(15, 1, 32, '0.15', '15', '1.80'),
+(16, 3, 33, '5', '8', '40.00');
 
 -- --------------------------------------------------------
 
@@ -188,7 +190,9 @@ CREATE TABLE `detalle_venta_servicio` (
 --
 
 INSERT INTO `detalle_venta_servicio` (`id`, `servicio_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
-(1, 4, 31, 4, 3, 12);
+(1, 4, 31, 4, 3, 12),
+(2, 1, 32, 1, 3, 3),
+(3, 1, 33, 1, 7, 7);
 
 -- --------------------------------------------------------
 
@@ -336,9 +340,10 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
-(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 819, 4, '2018-12-26', 1),
+(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 804, 4, '2018-12-26', 1),
 (2, '999', 'servicio', 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
-(3, '99', 'clip', 'hierro', 2, 2, '8', '5', '5', '5', 30431, 6, '2018-12-27', 1);
+(3, '99', 'clip', 'hierro', 2, 2, '8', '5', '5', '5', 30423, 6, '2018-12-27', 1),
+(4, '44', 'hjhj', 'jnj', 1, 1, '88', '8.09', '9,09', '7.09', 44, 5, '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -444,8 +449,10 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 21, 13, 1),
-(2, 'Ticket', 9, 13, 5);
+(1, 'Factura', 22, 13, 1),
+(2, 'Ticket', 9, 13, 5),
+(3, 'Cotizacion', 1, 0, 8),
+(5, 'Credito Fiscal', 0, 13, 9);
 
 -- --------------------------------------------------------
 
@@ -524,7 +531,9 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (28, '2018-12-27', '1', '14.16', '1.84', '0.00', '16.00', 3, 1, '000020', 1),
 (29, '2018-12-27', '1', '14.16', '1.84', '0.00', '16.00', 3, 1, '000020', 1),
 (30, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2),
-(31, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2);
+(31, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2),
+(32, '2018-12-28', '1', '3.94', '0.51', '0.00', '4.45', 3, 1, '000022', 1),
+(33, '2018-12-28', '8', '40.88', '0.00', '0.00', '40.88', 2, 1, '000001', 3);
 
 --
 -- Índices para tablas volcadas
@@ -700,13 +709,13 @@ ALTER TABLE `detalle_abastecer`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
 --
 ALTER TABLE `detalle_venta_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -736,7 +745,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -766,7 +775,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -778,7 +787,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- Restricciones para tablas volcadas
