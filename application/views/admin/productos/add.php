@@ -77,27 +77,27 @@
 
                              <div class="form-group col-md-3">
                                 <label for="precio">Precio de entrada:</label>
-                                <input type="number" step="0.01" value="<?php echo set_value("precio_e")?>" class="form-control" id="precio" name="precio_e">
+                                <input value="<?php echo set_value("precio_e")?>" class="form-control" id="precio" name="precio_e">
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="precio">Precio de salida:</label>
-                                <input type="number" step="0.01" value="<?php echo set_value("precio")?>" class="form-control" id="precio" name="precio">
+                                <input value="<?php echo set_value("precio")?>" class="form-control" id="precio" name="precio">
                             </div>
 
                              <div class="form-group col-md-3">
                                 <label for="precio">Precio de mayoreo1:</label>
-                                <input type="number" step="0.01" class="form-control" value="<?php echo set_value("precio_m")?>" id="precio" name="precio_m">
+                                <input class="form-control" value="<?php echo set_value("precio_m")?>" id="precio" name="precio_m">
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="precio">Precio de mayoreo2:</label>
-                                <input type="number" step="0.01" class="form-control" value="<?php echo set_value("precio_m1")?>" id="precio" name="precio_m1">
+                                <input class="form-control" value="<?php echo set_value("precio_m1")?>" id="precio" name="precio_m1">
                             </div>
 
                             <div class="form-group col-md-3">
                                 <label for="stock">Stock:</label>
-                                <input type="number" class="form-control" value="<?php echo set_value("stock")?>" id="stock" name="stock">
+                                <input class="form-control" value="<?php echo set_value("stock")?>" id="stock" name="stock">
                             </div>
 
                             <div class="form-group col-md-9">

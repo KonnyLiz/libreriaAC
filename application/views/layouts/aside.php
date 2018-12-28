@@ -25,9 +25,7 @@
              <a href="javascript:void(0);"><i class="fa fa-desktop"></i><span>Registros</span><i class="arrow fa fa-angle-right pull-right"></i></a>
             <ul>
                 <li><a href="<?php echo base_url();?>mantenimiento/clientes">Clientes</a></li>
-                <li><a href="<?php echo base_url();?>mantenimiento/Usuarios">Usuario</a></li>
-                <li><a href="<?php echo base_url();?>mantenimiento/Reclamos">Reclamos</a></li>
-                <li><a href="<?php echo base_url();?>mantenimiento/Vendedores">Vendedores</a></li>
+                <li><a href="<?php echo base_url();?>mantenimiento/Usuarios">Usuarios</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/Proveedores">Proveedores</a></li>
             </ul>
         </li>
