@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-12-2018 a las 22:59:17
+-- Tiempo de generación: 30-12-2018 a las 02:33:47
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -192,7 +192,9 @@ CREATE TABLE `detalle_venta_servicio` (
 INSERT INTO `detalle_venta_servicio` (`id`, `servicio_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
 (1, 4, 31, 4, 3, 12),
 (2, 1, 32, 1, 3, 3),
-(3, 1, 33, 1, 7, 7);
+(3, 1, 33, 1, 7, 7),
+(4, 1, 34, 0.2, 3, 0.2),
+(5, 1, 35, 0.2, 3, 0.2);
 
 -- --------------------------------------------------------
 
@@ -449,10 +451,10 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 22, 13, 1),
-(2, 'Ticket', 9, 13, 5),
+(1, 'Factura', 23, 0, 1),
+(2, 'Ticket', 9, 0, 5),
 (3, 'Cotizacion', 1, 0, 8),
-(5, 'Credito Fiscal', 0, 13, 9);
+(5, 'Credito Fiscal', 1, 13, 9);
 
 -- --------------------------------------------------------
 
@@ -533,7 +535,9 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (30, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2),
 (31, '2018-12-28', '5', '204.09', '26.53', '0.00', '230.62', 2, 1, '000008', 2),
 (32, '2018-12-28', '1', '3.94', '0.51', '0.00', '4.45', 3, 1, '000022', 1),
-(33, '2018-12-28', '8', '40.88', '0.00', '0.00', '40.88', 2, 1, '000001', 3);
+(33, '2018-12-28', '8', '40.88', '0.00', '0.00', '40.88', 2, 1, '000001', 3),
+(34, '2018-12-29', '9', '0.18', '0.02', '0.00', '0.20', 1, 1, '000001', 5),
+(35, '2018-12-29', '1', '0.18', '0.02', '0.00', '0.20', 1, 1, '000023', 1);
 
 --
 -- Índices para tablas volcadas
@@ -715,7 +719,7 @@ ALTER TABLE `detalle_venta`
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
 --
 ALTER TABLE `detalle_venta_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -775,7 +779,7 @@ ALTER TABLE `servicios`
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -787,7 +791,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Restricciones para tablas volcadas
