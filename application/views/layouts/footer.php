@@ -32,11 +32,11 @@
     <script src="<?php echo base_url();?>assets/plugins/dataTables/js/dataTables.bootstrap.js"></script>
     <!-- ./wrapper -->
     <script>
-
-    var contador=0;
-    var sigue;
-    var compr = 0;
-    var f = 0;
+    //Variables globales
+    var contador=0; //contador de agregar producto de venta
+    var sigue; //contador para verificar si sigue el contador anterior
+    var compr = 0; //guarda el id del comprobante en cuestion
+    var f = 0; //contador para credito fiscal
 
 $(document).ready(function (){
 
@@ -317,7 +317,7 @@ $(document).ready(function (){
         }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
         minLength:2, //caracteres que activan el autocomplete
         select: function(event, ui){
-            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio + "*" + ui.item.precio2+ "*" + ui.item.precio3;
+            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3;
             $("#btn-agregar").val(data);
         },
     });
@@ -392,22 +392,20 @@ $(document).ready(function (){
         if (data != " "){
                 infoProducto = data.split("*");
                 html = "<tr>";
-                html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";
+                html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>"; //
                 html += "<td>"+infoProducto[2]+"</td>";
-                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
+                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios1[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios2[]' value='"+infoProducto[5]+"'><input type='hidden' name='precios3[]' value='"+infoProducto[6]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
                 html += "<td>"+infoProducto[4]+"</td>";
                 html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
                 html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
                 html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
                 html += "</tr>";
                 $("#tbventas tbody").append(html);
-
                 sumar();
-               // $("#btn-agregar").val(null);
-               // $("#producto").val(null);
-            } else {
-                alert("seleccione un producto");
-            }
+
+        } else {
+            alert("seleccione un producto");
+        }
     }
     
      $(document).on("click", ".btn-remove-producto", function(){
@@ -419,14 +417,36 @@ $(document).ready(function (){
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
-        precio = $(this).closest("tr").find("td:eq(2)").text();
-       
+        precio1=$(this).closest("tr").find("td:eq(2)").children("input:eq(1)").val();
+        precio2=$(this).closest("tr").find("td:eq(2)").children("input:eq(2)").val();
+        precio3=$(this).closest("tr").find("td:eq(2)").children("input:eq(3)").val();
+        
+        if (cantidad>=25){
+            $(this).closest("tr").find("td:eq(2)").children("p").text(precio3);
+            $(this).closest("tr").find("td:eq(2)").children("input:eq(0)").val(precio3);
+            importe=magiaDeLaSuma(precio3, cantidad);
+        } else if(cantidad>=12){
+            $(this).closest("tr").find("td:eq(2)").children("p").text(precio2);
+            $(this).closest("tr").find("td:eq(2)").children("input:eq(0)").val(precio2);
+            importe=magiaDeLaSuma(precio2, cantidad);
+        } else {
+            $(this).closest("tr").find("td:eq(2)").children("p").text(precio1);
+            $(this).closest("tr").find("td:eq(2)").children("input:eq(0)").val(precio1);
+            importe=magiaDeLaSuma(precio1, cantidad);
+        }
+        totalImporte = parseFloat(importe).toFixed(2);
+        $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
+        $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
+        sumar();
+    });
+
+    function magiaDeLaSuma(precio, cantidad){
         if (compr == 5){
-            var precio2;
-            precio2 = (precio - (precio * 0.13));
-            importe =  precio2 * cantidad;
+            var precioSinIva;
+            precioSinIva = (precio - (precio * 0.13));
+            importe =  precioSinIva * cantidad;
             if (f == 0){
-                precioSI = parseFloat(precio2).toFixed(2);
+                precioSI = parseFloat(precioSinIva).toFixed(2);
                 $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
                 $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
                 f += 1;
@@ -435,12 +455,8 @@ $(document).ready(function (){
             importe = cantidad * precio;
             f=0;
         }
-        
-        totalImporte = parseFloat(importe).toFixed(2);
-        $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
-        $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
-        sumar();
-    });
+        return importe;
+    }
 
     $(document).on("click", ".btn-view-venta", function(){
         var producto = $(this).val();
