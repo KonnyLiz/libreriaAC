@@ -9,7 +9,7 @@
 
                         </ul>
                         <!--breadcrumbs end -->
-                       <div class="col-md-3 col-sm-3">
+                       <div class="col-md-3">
                        <a href="movimientos/ventas/add">
 
                         <?php $cant = 0?>
@@ -30,7 +30,7 @@
                              <?php foreach($usuario as $usuarios):?>
                                <?php $cant++;?>
                             <?php endforeach;?>
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-3 ">
                        <a href="mantenimiento/Usuarios">
                         <div class="dashboard-tile detail tile-red" style="background-color:#20B2AA   ;color: #fff">
                             <div class="content">
@@ -43,7 +43,7 @@
                         </a>
                         </div>
 
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-3 ">
                        <a href="mantenimiento/productos">
                          <?php $cant = 0?>
                              <?php foreach($productos as $usuarios):?>
@@ -61,7 +61,7 @@
                         </div>
 
 
-                        <div class="col-md-3 col-sm-3">
+                        <div class="col-md-3">
                        <a href="mantenimiento/clientes">
                           <?php $cant = 0?>
                              <?php foreach($cliente as $usuarios):?>

@@ -10,7 +10,7 @@
         <header id="header">
             <!--logo start-->
             <div class="brand">
-                <a href="index.html" class="logo"><span>Ferreteria</span></a>
+                <a href="index.html" class="logo"><span>Libreria</span></a>
             </div>
             <!--logo end-->
             <div class="toggle-navigation toggle-left">

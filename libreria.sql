@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
--- Servidor: localhost
--- Tiempo de generación: 30-12-2018 a las 02:33:47
--- Versión del servidor: 10.1.35-MariaDB
--- Versión de PHP: 7.2.9
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 30-12-2018 a las 06:11:20
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -324,6 +322,7 @@ CREATE TABLE `productos` (
   `id` int(11) NOT NULL,
   `codigo` varchar(10) COLLATE utf8_spanish2_ci NOT NULL,
   `nombre` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+  `id_presentacion` int(11) NOT NULL,
   `descripcion` varchar(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
   `id_marca` int(11) DEFAULT NULL,
   `id_proveedor` int(11) DEFAULT NULL,
@@ -341,11 +340,11 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id`, `codigo`, `nombre`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
-(1, '0025', 'lapicero', 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 804, 4, '2018-12-26', 1),
-(2, '999', 'servicio', 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
-(3, '99', 'clip', 'hierro', 2, 2, '8', '5', '5', '5', 30423, 6, '2018-12-27', 1),
-(4, '44', 'hjhj', 'jnj', 1, 1, '88', '8.09', '9,09', '7.09', 44, 5, '0000-00-00', 1);
+INSERT INTO `productos` (`id`, `codigo`, `nombre`, `id_presentacion`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
+(1, '0025', 'lapicero', 3, 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 804, 5, '2018-12-26', 1),
+(2, '999', 'servicio', 2, 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
+(3, '99', 'clip', 1, 'hierro', 2, 2, '8', '5', '5', '5', 30423, 6, '2018-12-27', 1),
+(5, '13234', 'cable usb', 1, 'cable usb', 2, 1, '0.35', '1.00', '0.95', '0.90', 5, 6, '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -455,6 +454,27 @@ INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALU
 (2, 'Ticket', 9, 0, 5),
 (3, 'Cotizacion', 1, 0, 8),
 (5, 'Credito Fiscal', 1, 13, 9);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_presentacion`
+--
+
+CREATE TABLE `tipo_presentacion` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(100) COLLATE utf8_spanish2_ci NOT NULL,
+  `estado` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tipo_presentacion`
+--
+
+INSERT INTO `tipo_presentacion` (`id`, `nombre`, `estado`) VALUES
+(1, 'cajas', 1),
+(2, 'resmas', 0),
+(3, 'gruesas', 1);
 
 -- --------------------------------------------------------
 
@@ -630,7 +650,8 @@ ALTER TABLE `productos`
   ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`),
   ADD KEY `fk_categoria_producto_idx` (`categoria_id`),
   ADD KEY `id_marca` (`id_marca`),
-  ADD KEY `id_proveedor` (`id_proveedor`);
+  ADD KEY `id_proveedor` (`id_proveedor`),
+  ADD KEY `id_presentacion` (`id_presentacion`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -664,6 +685,12 @@ ALTER TABLE `tipo_comprobante`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `tipo_presentacion`
+--
+ALTER TABLE `tipo_presentacion`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -690,109 +717,96 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `abastecer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_abastecer`
 --
 ALTER TABLE `detalle_abastecer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
 --
 ALTER TABLE `detalle_venta_servicio`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `eventos`
 --
 ALTER TABLE `eventos`
   MODIFY `id_evento` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `marca`
 --
 ALTER TABLE `marca`
   MODIFY `id_marca` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `menus`
 --
 ALTER TABLE `menus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
 --
 -- AUTO_INCREMENT de la tabla `permisos`
 --
 ALTER TABLE `permisos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
 --
 -- AUTO_INCREMENT de la tabla `reclamos`
 --
 ALTER TABLE `reclamos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT de la tabla `servicios`
 --
 ALTER TABLE `servicios`
   MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT de la tabla `tipo_comprobante`
 --
 ALTER TABLE `tipo_comprobante`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+--
+-- AUTO_INCREMENT de la tabla `tipo_presentacion`
+--
+ALTER TABLE `tipo_presentacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -831,7 +845,8 @@ ALTER TABLE `permisos`
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`categoria_id`) REFERENCES `categorias` (`id`),
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`),
-  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`);
+  ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`),
+  ADD CONSTRAINT `productos_ibfk_4` FOREIGN KEY (`id_presentacion`) REFERENCES `tipo_presentacion` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`
@@ -846,7 +861,6 @@ ALTER TABLE `ventas`
   ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`tipo_comprobante_id`) REFERENCES `tipo_comprobante` (`id`),
   ADD CONSTRAINT `ventas_ibfk_2` FOREIGN KEY (`cliente_id`) REFERENCES `clientes` (`id`),
   ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`usuario_id`) REFERENCES `usuarios` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

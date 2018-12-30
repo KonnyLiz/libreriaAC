@@ -9,6 +9,7 @@ class Productos extends CI_Controller {
 		$this->load->model("Productos_model");
 		$this->load->model("Categorias_model");
 		$this->load->model("Marcas_model");
+		$this->load->model("Presentacion_model");
 		$this->load->model("Proveedores_model");
 	}
 
@@ -30,6 +31,7 @@ class Productos extends CI_Controller {
 			"permisos" => $this->permisos,
 			"categorias" => $this->Categorias_model->getCategorias(),
 			"marca" => $this->Marcas_model->getMarcas() ,
+			"presen" => $this->Presentacion_model->getPresentacion() ,
 			"proveedor" => $this->Proveedores_model->getProveedores()  
 		);
 		$this->load->view("layouts/header");
@@ -42,6 +44,7 @@ class Productos extends CI_Controller {
 	public function store(){
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
+		$present = $this->input->post("presen");
 		$descripcion = $this->input->post("descripcion");
 		$marca = $this->input->post("marca");
 		$proveedor = $this->input->post("proveedor");
@@ -59,6 +62,7 @@ class Productos extends CI_Controller {
 			$data  = array(
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
+				'id_presentacion' => $present,
 				'descripcion' => $descripcion,
 				'id_marca' => $marca,
 				'id_proveedor' => $proveedor,
@@ -90,6 +94,7 @@ class Productos extends CI_Controller {
 			"producto" => $this->Productos_model->getProducto($id),
 			"categorias" => $this->Categorias_model->getCategorias(),
 			"marca" => $this->Marcas_model->getMarcas() ,
+			"presen" => $this->Presentacion_model->getPresentacion() ,
 			"proveedor" => $this->Proveedores_model->getProveedores(), 
 		);
 		$this->load->view("layouts/header");
@@ -102,6 +107,7 @@ class Productos extends CI_Controller {
 		$idproducto = $this->input->post("idproducto");
 		$codigo = $this->input->post("codigo");
 		$nombre = $this->input->post("nombre");
+		$present = $this->input->post("presen");
 		$marca = $this->input->post("marca");
 		$prov = $this->input->post("proveedor");
 		$descripcion = $this->input->post("descripcion");
@@ -132,6 +138,7 @@ class Productos extends CI_Controller {
 			$data  = array(
 				'codigo' => $codigo, 
 				'nombre' => $nombre,
+				'id_presentacion' => $present,
 				'descripcion' => $descripcion,
 				'id_proveedor' => $prov,
 				'id_marca' => $marca,
