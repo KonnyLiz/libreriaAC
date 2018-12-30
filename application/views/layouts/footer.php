@@ -448,7 +448,7 @@ $(document).ready(function (){
             if (f == 0){
                 precioSI = parseFloat(precioSinIva).toFixed(2);
                 $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
-                $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
+                $(this).closest("tr").find("td:eq(2)").children("input:eq(0)").val(precioSI);
                 f += 1;
             }
         } else {
