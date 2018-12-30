@@ -66,6 +66,7 @@
                                 <tr>
                                     <th>Codigo</th>
                                     <th>Nombre</th>
+                                    <th>Presentacion</th>
                                     <th>Descripcion</th>
                                     <th>Marca</th>
                                     <th>Proveedor</th>
@@ -83,6 +84,7 @@
                                         <tr>
                                             <td><?php echo $producto->codigo;?></td>
                                             <td><?php echo $producto->nombre;?></td>
+                                            <td><?php echo $producto->id_presentacion;?></td>
                                             <td><?php echo $producto->descripcion;?></td>
                                             <td><?php echo $producto->id_marca;?></td>
                                             <td><?php echo $producto->id_proveedor;?></td>

@@ -52,6 +52,18 @@
                                 <?php echo form_error("nombre", "<span class='help-block'>", "</span>");?>
                             </div>
                             <div class="form-group">
+                                <label for="categoria">Presentacion:</label>
+                                <select name="presen" id="categoria" class="form-control">
+                                    <?php foreach($presen as $present):?>
+                                        <?php if($present->id == $producto->id_presentacion):?>
+                                        <option value="<?php echo $present->id?>" selected><?php echo $present->nombre;?></option>
+                                    <?php else:?>
+                                        <option value="<?php echo $present->id?>"><?php echo $present->nombre;?></option>
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="descripcion">Descripcion:</label>
                                 <input type="text" class="form-control" id="descripcion" name="descripcion" value="<?php echo $producto->descripcion?>">
                             </div>

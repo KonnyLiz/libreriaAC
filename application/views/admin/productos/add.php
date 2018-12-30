@@ -50,6 +50,15 @@
                                 <?php echo form_error("nombre", "<span class='help-block'>", "</span>");?>
                             </div>
 
+                            <div class="form-group col-md-3">
+                                <label for="categoria">Presetacion:</label>
+                                  <select name="presen" id="categoria" class="form-control" required>
+                                    <?php foreach($presen as $present):?>
+                                        <option value="<?php echo $present->id?>"><?php echo $present->nombre;?></option>
+                                    <?php endforeach;?>
+                                </select>
+                            </div>
+
                             <div class="form-group col-md-2">
                                 <label for="categoria">Marca:</label>
                                   <select name="marca" id="categoria" class="form-control" required>
@@ -58,13 +67,6 @@
                                     <?php endforeach;?>
                                 </select>
                             </div>
-
-                            <div class="form-group col-md-3 ">
-                                <label for="descripcion">Descripcion:</label>
-                                <input type="text" value="<?php echo set_value("descripcion")?>" class="form-control" id="descripcion" name="descripcion">
-                            </div>
-
-
 
                             <div class="form-group col-md-2">
                                 <label for="categoria">Proveedor:</label>
@@ -100,13 +102,18 @@
                                 <input class="form-control" value="<?php echo set_value("stock")?>" id="stock" name="stock">
                             </div>
 
-                            <div class="form-group col-md-9">
+                            <div class="form-group col-md-3">
                                 <label for="categoria">Categoria:</label>
                                 <select name="categoria" id="categoria" class="form-control" required>
                                     <?php foreach($categorias as $categoria):?>
                                         <option value="<?php echo $categoria->id?>"><?php echo $categoria->nombre;?></option>
                                     <?php endforeach;?>
                                 </select>
+                            </div>
+
+                             <div class="form-group col-md-6 ">
+                                <label for="descripcion">Descripcion:</label>
+                                <input type="text" value="<?php echo set_value("descripcion")?>" class="form-control" id="descripcion" name="descripcion">
                             </div>
 
                             <div class="form-group col-md-2">
