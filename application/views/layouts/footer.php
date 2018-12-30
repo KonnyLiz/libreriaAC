@@ -419,29 +419,23 @@ $(document).ready(function (){
 
     $(document).on("keyup", "#tbventas input.cantidades", function(){
         cantidad = $(this).val();
-        nombre = $(this).closest("tr").find("td:eq(1)").text();
-        precio=0;
-        valor =$("#"+nombre+"").val();
-        valores = valor.split("*");
-
-        if (cantidad<12){
-             precio = valores[0];
-        }
-        else if(cantidad < 25){
-             precio = valores[1];
-        }else{
-             precio = valores[2];
-        }
-
-         $(this).closest("tr").find("td:eq(2)").children("p").text(precio);
-         $(this).closest("tr").find("td:eq(2)").children("input").val(precio);
-
-
-
         precio = $(this).closest("tr").find("td:eq(2)").text();
-
-
-        importe = cantidad * precio;
+       
+        if (compr == 5){
+            var precio2;
+            precio2 = (precio - (precio * 0.13));
+            importe =  precio2 * cantidad;
+            if (f == 0){
+                precioSI = parseFloat(precio2).toFixed(2);
+                $(this).closest("tr").find("td:eq(2)").children("p").text(precioSI);
+                $(this).closest("tr").find("td:eq(2)").children("input").val(precioSI);
+                f += 1;
+            }
+        } else {
+            importe = cantidad * precio;
+            f=0;
+        }
+        
         totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
         $(this).closest("tr").find("td:eq(5)").children("input").val(totalImporte);
@@ -608,7 +602,6 @@ function sumar(){
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
         subtotal = subtotal + Number($(this).find("td:eq(5)").text());
-        subtotal = (subtotal/1.13);
     });
 
     $("#subtotal").val(parseFloat(subtotal.toFixed(2)));
