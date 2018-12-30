@@ -11,6 +11,7 @@ private $permisos;
 		$this->load->model("Clientes_model");
 		$this->load->model("Productos_model");
 		$this->load->model("Servicios_model");
+		$this->load->model("Cajas_model");
 	}
 
 	public function index(){
@@ -86,14 +87,47 @@ private $permisos;
 			'tipo_comprobante_id' => $idcomprobante
 		);
 
+		//operación para el saldo 
+		$dat2= array(
+			'usuario' => $idusuario,
+			'transaccion' => 'venta',
+			'fecha' => $fecha,
+			'monto' => $total,
+			'saldo' => $total,
+		);
+		//guardamos el registro en caja
+		if($this->Cajas_model->save($dat2)){
+			$id_caja = $this->Cajas_model->lastID();
+			$this->updateCaja($id_caja,$subtotal,1);//se actualiza el saldo de la caja
+		}
+		///////////////////////////////
+
 		if ($this->Ventas_model->save($data)){
 			$idVenta = $this->Ventas_model->lastID();
 			$this->updateComprobante($idcomprobante); //actualizando el correlativo del comprobante
 			$this->save_detalle($idproductos, $nombreProductos, $idVenta, $precios, $cantidades, $importes); //guardando el detalle de la venta
+			//$this->caja($total);
 			redirect(base_url()."movimientos/ventas"); //redirigiendo a la lista de ventas
 		} else {
 			redirect(base_url()."movimientos/ventas/add");
 		}
+	}
+
+	//funcion para actualizar caja
+	protected function updateCaja($idcaja,$subtotal,$tipo){
+
+		$saldoActual = $this->Cajas_model->getSaldo($idcaja-1);
+		if ($tipo == 1) {
+			# code...
+			$data = array(
+			'saldo' => $saldoActual->saldo + $subtotal,
+		);
+		}else{
+			$data = array(
+				'saldo' => $saldoActual->saldo - $subtotal,
+			);
+		}
+		$this->Cajas_model->updateCaja($idcaja, $data);
 	}
 
 	//funcion para actualizar el correlativo de los comprobantes
@@ -107,6 +141,7 @@ private $permisos;
 
 	//funcion para guardar el detalle de la venta
 	protected function save_detalle($productos, $nombreProductos, $idVenta, $precios, $cantidades, $importes){
+		$data;
 		for ($i=0; $i < count($productos); $i++) {
 
 			$valor = $nombreProductos[$i];

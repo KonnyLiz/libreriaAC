@@ -67,7 +67,7 @@ class Ventas_model extends CI_Model {
 
 	//guarda los detalles de la venta
 	public function save_detalle($data){
-		$this->db->insert("detalle_venta", $data);
+		$this->db->insert("detalle_vjksdjkdentasssss", $data);
 	}
 
 	public function save_detalle_servicio($data){
