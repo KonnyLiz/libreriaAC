@@ -1,0 +1,1 @@
+id, codigo, nombre as label, precio, stock, precio_mayoreo1 as precio2, precio_mayoreo2 as precio3

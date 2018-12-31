@@ -12,6 +12,7 @@ private $permisos;
 		$this->load->model("Productos_model");
 		$this->load->model("Servicios_model");
 		$this->load->model("Cajas_model");
+		$this->load->model("Presentacion_model");
 	}
 
 	public function index(){

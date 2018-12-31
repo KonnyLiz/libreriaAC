@@ -317,7 +317,7 @@ $(document).ready(function (){
         }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
         minLength:2, //caracteres que activan el autocomplete
         select: function(event, ui){
-            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3;
+            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion;
             $("#btn-agregar").val(data);
         },
     });
@@ -393,7 +393,7 @@ $(document).ready(function (){
                 infoProducto = data.split("*");
                 html = "<tr>";
                 html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>"; //
-                html += "<td>"+infoProducto[2]+"</td>";
+                html += "<td>"+infoProducto[2]+infoProducto[7]+"</td>";
                 html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios1[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios2[]' value='"+infoProducto[5]+"'><input type='hidden' name='precios3[]' value='"+infoProducto[6]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
                 html += "<td>"+infoProducto[4]+"</td>";
                 html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
@@ -402,7 +402,7 @@ $(document).ready(function (){
                 html += "</tr>";
                 $("#tbventas tbody").append(html);
                 sumar();
-
+                console.log(infoProducto[7]);
         } else {
             alert("seleccione un producto");
         }

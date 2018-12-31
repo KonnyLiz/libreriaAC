@@ -10,10 +10,11 @@ class Ventas_model extends CI_Model {
 
 	public function getProductos($valor){
 
-			$this->db->select("id, codigo, nombre as label, precio, stock, precio_mayoreo1 as precio2, precio_mayoreo2 as precio3");
-			$this->db->from("productos");
-			$this->db->like("estado", "1");
-			$this->db->like("nombre", $valor);
+			$this->db->select("prod.id, prod.codigo, prod.nombre as label, prod.precio, prod.stock, prod.precio_mayoreo1 as precio2, prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
+			$this->db->from("productos prod");
+			$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
+			$this->db->like("prod.estado", "1");
+			$this->db->like("prod.nombre", $valor);
 			$resultados = $this->db->get();
 			return $resultados->result_array();
 	}
