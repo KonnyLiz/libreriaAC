@@ -12,6 +12,7 @@ private $permisos;
 		$this->load->model("Productos_model");
 		$this->load->model("Servicios_model");
 		$this->load->model("Cajas_model");
+		$this->load->model("Presentacion_model");
 	}
 
 	public function index(){
@@ -84,7 +85,7 @@ private $permisos;
 			'cliente_id' => $idcliente,
 			'usuario_id' => $idusuario,
 			'num_documento' => $numero,
-			'tipo_comprobante_id' => $idcomprobante
+			'tipo_comprobante_id' => $idcomprobante,
 		);
 
 		//operación para el saldo 

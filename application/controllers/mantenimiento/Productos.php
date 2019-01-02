@@ -56,7 +56,6 @@ class Productos extends CI_Controller {
 		$categoria = $this->input->post("categoria");
 
 		$this->form_validation->set_rules("codigo", "Codigo", "required|is_unique[productos.codigo]");
-		$this->form_validation->set_rules("nombre", "Nombre", "required|is_unique[productos.nombre]");
 
 		if ($this->form_validation->run()){
 			$data  = array(
