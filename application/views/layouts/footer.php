@@ -317,8 +317,9 @@ $(document).ready(function (){
         }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
         minLength:2, //caracteres que activan el autocomplete
         select: function(event, ui){
-            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion;
+            data = ui.item.id +"*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion + "*" + ui.item.nombre;
             $("#btn-agregar").val(data);
+            console.log(data);
         },
     });
 

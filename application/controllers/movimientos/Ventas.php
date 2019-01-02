@@ -85,7 +85,7 @@ private $permisos;
 			'cliente_id' => $idcliente,
 			'usuario_id' => $idusuario,
 			'num_documento' => $numero,
-			'tipo_comprobante_id' => $idcomprobante
+			'tipo_comprobante_id' => $idcomprobante,
 		);
 
 		//operación para el saldo 
