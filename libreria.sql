@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 31-12-2018 a las 04:17:14
+-- Tiempo de generación: 02-01-2019 a las 03:29:09
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -337,7 +337,8 @@ INSERT INTO `productos` (`id`, `codigo`, `nombre`, `id_presentacion`, `descripci
 (1, '0025', 'lapicero', 3, 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 804, 5, '2018-12-26', 1),
 (2, '999', 'servicio', 2, 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
 (3, '99', 'clip', 1, 'hierro', 2, 2, '8', '5', '5', '5', 30423, 6, '2018-12-27', 1),
-(5, '13234', 'cable usb', 1, 'cable usb', 2, 1, '0.35', '1.00', '0.95', '0.90', 5, 6, '0000-00-00', 1);
+(5, '13234', 'cable usb', 1, 'cable usb', 2, 1, '0.35', '1.00', '0.95', '0.90', 5, 6, '0000-00-00', 1),
+(7, '333', 'lapicero', 1, 'lol', 1, 1, '44', '46', '44', '41', 444565, 5, '0000-00-00', 1);
 
 -- --------------------------------------------------------
 
@@ -641,7 +642,6 @@ ALTER TABLE `permisos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_UNIQUE` (`nombre`),
   ADD KEY `fk_categoria_producto_idx` (`categoria_id`),
   ADD KEY `id_marca` (`id_marca`),
   ADD KEY `id_proveedor` (`id_proveedor`),
@@ -770,7 +770,7 @@ ALTER TABLE `permisos`
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
