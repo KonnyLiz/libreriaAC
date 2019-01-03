@@ -15,7 +15,6 @@
  <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/locale/es.js'></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/EasyAutocomplete/jquery.easy-autocomplete.min.js"></script> 
 
 
 
@@ -295,7 +294,6 @@ $(document).ready(function (){
         sumar();
     });
 
-
     $(document).on("click", ".btn-check", function(){
         cliente = $(this).val();
         infoCliente = cliente.split("*");
@@ -304,51 +302,32 @@ $(document).ready(function (){
         $("#modal-default").modal("hide");
     });
 
-    var options = {
-        url: base_url+"movimientos/ventas/getProductos",
-
-        getValue: "nombre",
-
-        template:{
-            type: "description",
-            fields:{
-                description:"tipo_presentacion",
-            }
+    $("#producto").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: base_url+"movimientos/ventas/getProductos",
+                type: "POST",
+                dataType: "json",
+                data:{ valor: request.term},
+                success: function(data){
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.nombre + " " + item.tipo_presentacion,
+                            id: item.id +"*" + item.codigo + "*" + item.nombre + "*" + item.precio + 
+                                    "*" + item.stock+ "*" + item.precio2+ "*" + item.precio3+"*" + item.tipo_presentacion
+                        }
+                    }))
+                },
+            })
+        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
+        minLength:2, //caracteres que activan el autocomplete
+        select: function(event, ui){
+           data = ui.item.id;
+           $("#btn-agregar").val(data); 
+           console.log(data);
         },
 
-        list: {
-            match: {
-                enabled: true
-            },
-
-            onClickEvent: function(){
-                var data = ui.item.id +"*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion;
-                $("#btn-agregar").val(data);
-            }
-        },
-    };
-
-    $("#producto").easyAutocomplete(options);
-
-    // $("#producto").autocomplete({
-    //     source: function(request, response){
-    //         $.ajax({
-    //             url: base_url+"movimientos/ventas/getProductos",
-    //             type: "POST",
-    //             dataType: "json",
-    //             data:{ valor: request.term},
-    //             success: function(data){
-    //                 response(data);
-    //             }
-    //         });
-    //     }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
-    //     minLength:2, //caracteres que activan el autocomplete
-    //     select: function(event, ui){
-    //         data = ui.item.id +"*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion + "*" + ui.item.nombre;
-    //         $("#btn-agregar").val(data);
-    //         console.log(data);
-    //     },
-    // });
+    });
 
     $("#cliente2").autocomplete({
         source: function(request, response){

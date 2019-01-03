@@ -7,19 +7,19 @@ class Ventas_model extends CI_Model {
 		$resultados = $this->db->get("tipo_comprobante");
 		return $resultados->result();
 	}
-
+ 
 	public function getProductos($valor){
 
-			$this->db->select("prod.id, prod.codigo, prod.nombre as label, prod.precio, prod.stock, prod.precio_mayoreo1 as precio2, prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
+			$this->db->select("prod.id, prod.codigo, prod.nombre, prod.precio, prod.stock, 
+			prod.precio_mayoreo1 as precio2,prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
 			$this->db->from("productos prod");
 			$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
 			$this->db->like("prod.estado", "1");
 			$this->db->like("prod.nombre", $valor);
 			$resultados = $this->db->get();
-			return $resultados->result_array();
+			return $resultados->result();
 	}
-	
-	
+
 	public function getClientes($valor){
 		$this->db->select("id, nombres");
 		$this->db->from("clientes");
@@ -38,12 +38,22 @@ class Ventas_model extends CI_Model {
     }
 
     function getServicio($valor){
-    	$this->db->select("id_servicio as id, nombre as label, precio, precio2, precio3");
-			$this->db->from("servicios");
-			$this->db->like("nombre", $valor);
+    	$this->db->select("serv.id_servicio as id, serv.nombre, serv.precio, serv.precio2, serv.precio3, tp.nombre as tipo_presentacion");
+			$this->db->from("servicios serv");
+			$this->db->join("tipo_presentacion tp", "serv.id_presentacion = tp.id");
+			$this->db->like("serv.nombre", $valor);
 			$resultados = $this->db->get();
 			return $resultados->result_array();
     }
+
+	// $this->db->select("prod.id, prod.codigo, prod.nombre, prod.precio, prod.stock, 
+	// 		prod.precio_mayoreo1 as precio2,prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
+	// 		$this->db->from("productos prod");
+	// 		$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
+	// 		$this->db->like("prod.estado", "1");
+	// 		$this->db->like("prod.nombre", $valor);
+	// 		$resultados = $this->db->get();
+	// 		return $resultados->result();
 
 	public function save($data){
 		return $this->db->insert("ventas", $data);

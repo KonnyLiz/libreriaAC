@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-01-2019 a las 03:29:09
+-- Tiempo de generación: 03-01-2019 a las 05:29:12
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -65,7 +65,7 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`id`, `usuario`, `transaccion`, `fecha`, `monto`, `saldo`) VALUES
-(0, 1, 0, '2018-12-31', 143.43, 126.93);
+(1, 1, 0, '2018-12-31', 143.43, 126.93);
 
 -- --------------------------------------------------------
 
@@ -408,6 +408,7 @@ INSERT INTO `roles` (`id`, `nombre`, `descripcion`) VALUES
 CREATE TABLE `servicios` (
   `id_servicio` int(11) NOT NULL,
   `nombre` varchar(25) COLLATE utf8mb4_spanish_ci NOT NULL,
+  `id_presentacion` int(11) NOT NULL,
   `descripción` varchar(100) COLLATE utf8mb4_spanish_ci NOT NULL,
   `precio` float NOT NULL,
   `precio2` float NOT NULL,
@@ -418,12 +419,12 @@ CREATE TABLE `servicios` (
 -- Volcado de datos para la tabla `servicios`
 --
 
-INSERT INTO `servicios` (`id_servicio`, `nombre`, `descripción`, `precio`, `precio2`, `precio3`) VALUES
-(1, 'laminación', 'con una hoja de plástico se laminan documentos', 1, 0.95, 0.9),
-(2, 'fotocopias', 'se sacan copias de documentos y más', 0.05, 0.05, 0.04),
-(3, 'impresiones', 'impresiones a color o blanco y negro', 0.2, 0.15, 0.13),
-(4, 'anillados', 'ya se de impresiones, libros o mas', 4, 3.75, 3.5),
-(5, 'refilado', 'refilación de cartuchos de impresora', 5, 4.75, 4.55);
+INSERT INTO `servicios` (`id_servicio`, `nombre`, `id_presentacion`, `descripción`, `precio`, `precio2`, `precio3`) VALUES
+(1, 'laminacion', 4, 'laminado', 1, 0.95, 0.9),
+(2, 'fotocopias', 4, 'fotocopias', 0.05, 0.05, 0.04),
+(3, 'impresiones', 4, 'impresion', 0.2, 0.15, 0.13),
+(4, 'anillados', 4, 'anillado', 4, 3.75, 3.5),
+(5, 'refilado', 4, 'lol', 5, 4.75, 4.55);
 
 -- --------------------------------------------------------
 
@@ -468,7 +469,8 @@ CREATE TABLE `tipo_presentacion` (
 INSERT INTO `tipo_presentacion` (`id`, `nombre`, `estado`) VALUES
 (1, 'cajas', 1),
 (2, 'resmas', 0),
-(3, 'gruesas', 1);
+(3, 'gruesas', 1),
+(4, 'Servicio', 1);
 
 -- --------------------------------------------------------
 
@@ -670,7 +672,9 @@ ALTER TABLE `roles`
 -- Indices de la tabla `servicios`
 --
 ALTER TABLE `servicios`
-  ADD PRIMARY KEY (`id_servicio`);
+  ADD PRIMARY KEY (`id_servicio`),
+  ADD KEY `id_presentacion` (`id_presentacion`),
+  ADD KEY `id_presentacion_2` (`id_presentacion`);
 
 --
 -- Indices de la tabla `tipo_comprobante`
@@ -711,6 +715,12 @@ ALTER TABLE `ventas`
 --
 ALTER TABLE `abastecer`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `caja`
+--
+ALTER TABLE `caja`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -806,7 +816,7 @@ ALTER TABLE `tipo_comprobante`
 -- AUTO_INCREMENT de la tabla `tipo_presentacion`
 --
 ALTER TABLE `tipo_presentacion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
@@ -860,6 +870,12 @@ ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_proveedor`) REFERENCES `proveedor` (`id_proveedor`),
   ADD CONSTRAINT `productos_ibfk_3` FOREIGN KEY (`id_marca`) REFERENCES `marca` (`id_marca`),
   ADD CONSTRAINT `productos_ibfk_4` FOREIGN KEY (`id_presentacion`) REFERENCES `tipo_presentacion` (`id`);
+
+--
+-- Filtros para la tabla `servicios`
+--
+ALTER TABLE `servicios`
+  ADD CONSTRAINT `servicios_ibfk_1` FOREIGN KEY (`id_presentacion`) REFERENCES `tipo_presentacion` (`id`);
 
 --
 -- Filtros para la tabla `usuarios`

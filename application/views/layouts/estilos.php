@@ -1,14 +1,6 @@
  <meta name='description' content=''>
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' />
-    
-    <!-- JS file -->
- 
-
-   <!-- CSS file -->
-   <link  type="text/css" rel="stylesheet" href="<?php echo base_url();?>assets/js/EasyAutocomplete/easy-autocomplete.min.css"> 
-   <!-- Additional CSS Themes file - not required-->
-<link rel="stylesheet" href="<?php echo base_url();?>assets/js/EasyAutocomplete/easy-autocomplete.themes.min.css"> 
-    
+   
     <link rel='shortcut icon' href=' <?php echo base_url();?>assets/img/favicon.ico' type='image/x-icon'>
     <link rel='stylesheet' href='<?php echo base_url();?>assets/plugins/bootstrap/css/bootstrap.min.css'>
     <!-- Fonts from Font Awsome -->
@@ -16,7 +8,6 @@
     <!-- CSS Animate -->
     <link rel='stylesheet' href='<?php echo base_url();?>assets/css/animate.css'>
     <link rel="stylesheet" href="<?php echo base_url();?>assets/templates/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/print.css" media="print" />
     <!-- Custom styles for this theme -->
     <link rel='stylesheet' href='<?php echo base_url();?>assets/css/main.css'>
     <link rel='stylesheet' href='<?php echo base_url();?>assets/plugins/dataTables/css/dataTables.css'>
