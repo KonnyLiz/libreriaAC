@@ -8,9 +8,13 @@
     </div>
 
 
-    <!-- jQuery 3 -->
+    <!-- higtcharts -->
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
 
-<!-- jQuery 3 -->
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+<!-- higtcharts -->
     <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/moment.min.js'></script>
  <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
