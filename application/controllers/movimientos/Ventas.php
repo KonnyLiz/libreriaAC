@@ -247,38 +247,4 @@ private $permisos;
 			redirect(base_url()."movimientos/ventas/add");
 		}
 	}
-
-	public function autocompletar(){
-	//si es una petición ajax y existe una variable post
-	//llamada info dejamos pasar
-	$campo = $this->input->post('info');
-	if($this->input->is_ajax_request() && $campo){
-	$abuscar = $this->security->xss_clean($this->input->post($campo));
-	$search = $this->Ventas_model->getProductos($abuscar);
-	
-	//si search es distinto de false significa que hay resultados
-	//y los mostramos con un loop foreach
-	if($search !== FALSE)
-	{
-	
-		foreach($search as $fila)
-		{
-		?>
-		
-		<ul><li><label><?php echo $fila->nombre; ?></label></li></ul>	
-		<?php 
-		}
-		
-		//en otro caso decimos que no hay resultados
-		}else{
-		?>
-		
-		<p><?php echo 'No hay resultados' ?></p>
-		
-	<?php 
-	}
-	
-	}
-	
-	}
 }

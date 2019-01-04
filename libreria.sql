@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 03-01-2019 a las 05:29:12
+-- Tiempo de generación: 04-01-2019 a las 03:47:11
 -- Versión del servidor: 10.1.35-MariaDB
 -- Versión de PHP: 7.2.9
 
@@ -65,7 +65,14 @@ CREATE TABLE `caja` (
 --
 
 INSERT INTO `caja` (`id`, `usuario`, `transaccion`, `fecha`, `monto`, `saldo`) VALUES
-(1, 1, 0, '2018-12-31', 143.43, 126.93);
+(1, 1, 0, '2018-12-31', 143.43, 126.93),
+(2, 1, 0, '2019-01-04', 184, 310.93),
+(3, 1, 0, '2019-01-04', 32, 342.93),
+(4, 1, 0, '2019-01-04', 24, 366.93),
+(5, 1, 0, '2019-01-04', 61, 427.93),
+(6, 1, 0, '2019-01-04', 3.6, 431.53),
+(7, 1, 0, '2019-01-04', 49, 480.53),
+(8, 1, 0, '2019-01-04', 49.4, 529.93);
 
 -- --------------------------------------------------------
 
@@ -159,6 +166,15 @@ CREATE TABLE `detalle_venta` (
   `importe` varchar(45) COLLATE utf8_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `detalle_venta`
+--
+
+INSERT INTO `detalle_venta` (`id`, `producto_id`, `venta_id`, `precio`, `cantidad`, `importe`) VALUES
+(1, 3, 42, '5', '9', '45.00'),
+(2, 3, 43, '5', '8', '40.00'),
+(3, 1, 43, '0.20', '6', '1.40');
+
 -- --------------------------------------------------------
 
 --
@@ -185,7 +201,17 @@ INSERT INTO `detalle_venta_servicio` (`id`, `servicio_id`, `venta_id`, `precio`,
 (4, 1, 34, 0.2, 3, 0.2),
 (5, 1, 35, 0.2, 3, 0.2),
 (6, 3, 36, 5, 25, 108.75),
-(7, 5, 36, 0.95, 22, 18.18);
+(7, 5, 36, 0.95, 22, 18.18),
+(8, 7, 37, 46, 4, 184),
+(9, 4, 38, 4, 8, 32),
+(10, 1, 39, 1, 2, 4),
+(11, 3, 39, 5, 4, 20),
+(12, 3, 40, 5, 9, 45),
+(13, 4, 40, 4, 4, 16),
+(14, 1, 41, 1, 3, 3),
+(15, 1, 41, 0.2, 3, 0.6),
+(16, 1, 42, 1, 4, 4),
+(17, 1, 43, 1, 8, 8);
 
 -- --------------------------------------------------------
 
@@ -334,9 +360,9 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id`, `codigo`, `nombre`, `id_presentacion`, `descripcion`, `id_marca`, `id_proveedor`, `precio_entrada`, `precio`, `precio_mayoreo1`, `precio_mayoreo2`, `stock`, `categoria_id`, `fecha_i`, `estado`) VALUES
-(1, '0025', 'lapicero', 3, 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 804, 5, '2018-12-26', 1),
+(1, '0025', 'lapicero', 3, 'negro', 2, 1, '0.08', '0.20', '0.15', '0.12', 798, 5, '2018-12-26', 1),
 (2, '999', 'servicio', 2, 'servicios varios', 3, 3, '------', '------', '------', '------', 0, 4, '0000-00-00', 0),
-(3, '99', 'clip', 1, 'hierro', 2, 2, '8', '5', '5', '5', 30423, 6, '2018-12-27', 1),
+(3, '99', 'clip', 1, 'hierro', 2, 2, '8', '5', '5', '5', 30406, 6, '2018-12-27', 1),
 (5, '13234', 'cable usb', 1, 'cable usb', 2, 1, '0.35', '1.00', '0.95', '0.90', 5, 6, '0000-00-00', 1),
 (7, '333', 'lapicero', 1, 'lol', 1, 1, '44', '46', '44', '41', 444565, 5, '0000-00-00', 1);
 
@@ -445,8 +471,8 @@ CREATE TABLE `tipo_comprobante` (
 --
 
 INSERT INTO `tipo_comprobante` (`id`, `nombre`, `cantidad`, `iva`, `serie`) VALUES
-(1, 'Factura', 23, 0, 1),
-(2, 'Ticket', 9, 0, 5),
+(1, 'Factura', 27, 0, 1),
+(2, 'Ticket', 12, 0, 5),
 (3, 'Cotizacion', 1, 0, 8),
 (5, 'Credito Fiscal', 2, 13, 9);
 
@@ -554,7 +580,14 @@ INSERT INTO `ventas` (`id`, `fecha`, `serie`, `subtotal`, `iva`, `descuento`, `t
 (33, '2018-12-28', '8', '40.88', '0.00', '0.00', '40.88', 2, 1, '000001', 3),
 (34, '2018-12-29', '9', '0.18', '0.02', '0.00', '0.20', 1, 1, '000001', 5),
 (35, '2018-12-29', '1', '0.18', '0.02', '0.00', '0.20', 1, 1, '000023', 1),
-(36, '2018-12-31', '9', '126.93', '16.50', '0.00', '143.43', 2, 1, '000002', 5);
+(36, '2018-12-31', '9', '126.93', '16.50', '0.00', '143.43', 2, 1, '000002', 5),
+(37, '2019-01-04', '5', '184', '0.00', '0.00', '184.00', 2, 1, '000010', 2),
+(38, '2019-01-04', '1', '32', '0.00', '0.00', '32.00', 3, 1, '000024', 1),
+(39, '2019-01-04', '5', '24', '0.00', '0.00', '24.00', 3, 1, '000011', 2),
+(40, '2019-01-04', '1', '61', '0.00', '0.00', '61.00', 1, 1, '000025', 1),
+(41, '2019-01-04', '1', '3.6', '0.00', '0.00', '3.60', 2, 1, '000026', 1),
+(42, '2019-01-04', '5', '49', '0.00', '0.00', '49.00', 2, 1, '000012', 2),
+(43, '2019-01-04', '1', '49.4', '0.00', '0.00', '49.40', 3, 1, '000027', 1);
 
 --
 -- Índices para tablas volcadas
@@ -720,7 +753,7 @@ ALTER TABLE `abastecer`
 -- AUTO_INCREMENT de la tabla `caja`
 --
 ALTER TABLE `caja`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -744,13 +777,13 @@ ALTER TABLE `detalle_abastecer`
 -- AUTO_INCREMENT de la tabla `detalle_venta`
 --
 ALTER TABLE `detalle_venta`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_venta_servicio`
 --
 ALTER TABLE `detalle_venta_servicio`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `eventos`
@@ -828,7 +861,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `ventas`
 --
 ALTER TABLE `ventas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Restricciones para tablas volcadas

@@ -46,15 +46,6 @@ class Ventas_model extends CI_Model {
 			return $resultados->result_array();
     }
 
-	// $this->db->select("prod.id, prod.codigo, prod.nombre, prod.precio, prod.stock, 
-	// 		prod.precio_mayoreo1 as precio2,prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
-	// 		$this->db->from("productos prod");
-	// 		$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
-	// 		$this->db->like("prod.estado", "1");
-	// 		$this->db->like("prod.nombre", $valor);
-	// 		$resultados = $this->db->get();
-	// 		return $resultados->result();
-
 	public function save($data){
 		return $this->db->insert("ventas", $data);
 	}
@@ -78,7 +69,7 @@ class Ventas_model extends CI_Model {
 
 	//guarda los detalles de la venta
 	public function save_detalle($data){
-		$this->db->insert("detalle_vjksdjkdentasssss", $data);
+		$this->db->insert("detalle_venta", $data);
 	}
 
 	public function save_detalle_servicio($data){
@@ -113,18 +104,20 @@ class Ventas_model extends CI_Model {
 	}
 
 	public function getDetalle($id){
-		$this->db->select("dt.*, p.codigo, p.nombre");
+		$this->db->select("dt.*, p.codigo, p.nombre, p.id_presentacion, tp.nombre as tipo_presentacion");
 		$this->db->from("detalle_venta dt");
 		$this->db->join("productos p", "dt.producto_id = p.id");
+		$this->db->join("tipo_presentacion tp", "p.id_presentacion = tp.id");
 		$this->db->where("dt.venta_id", $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
 
 	public function getDetalleServicio($id){
-		$this->db->select("dts.*, s.id_servicio, s.nombre");
+		$this->db->select("dts.*, s.id_servicio, s.nombre, s.id_presentacion, tp.nombre as tipo_presentacion");
 		$this->db->from("detalle_venta_servicio dts");
 		$this->db->join("servicios s", "dts.servicio_id = s.id_servicio");
+		$this->db->join("tipo_presentacion tp", "s.id_presentacion = tp.id");
 		$this->db->where("dts.venta_id", $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
@@ -135,7 +128,6 @@ class Ventas_model extends CI_Model {
 			$this->db->from("detalle_venta_servicio");
 			$this->db->like("venta_id", $valor);
 			$resultados = $this->db->get();
-
 			return $resultados->num_rows();
     }
 

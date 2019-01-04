@@ -24,9 +24,9 @@ class Cajas_model extends CI_Model {
 
 	public function getCaja(){
 		$this->db->from('caja');
-$this->db->order_by("id", "DESC");
-$query = $this->db->get(); 
-return $query->result();
+		$this->db->order_by("id", "DESC");
+		$query = $this->db->get(); 
+		return $query->result();
 	
 	}
 }
