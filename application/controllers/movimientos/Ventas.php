@@ -88,7 +88,7 @@ private $permisos;
 			'tipo_comprobante_id' => $idcomprobante,
 		);
 
-		//operación para el saldo 
+		//operación para el saldo
 		$dat2= array(
 			'usuario' => $idusuario,
 			'transaccion' => 'venta',
@@ -247,4 +247,18 @@ private $permisos;
 			redirect(base_url()."movimientos/ventas/add");
 		}
 	}
+
+	public function imprimir($id){
+		$idVenta = $this->input->post("id");
+		$data = array(
+			"venta" => $this->Ventas_model->getVenta($id),
+			"detalles" => $this->Ventas_model->getDetalle($id),
+		);
+		$this->load->library('pdf');
+		$paper_size = array(0,0,560,860);
+		$this->pdf->set_paper($paper_size);
+		$this->pdf->load_view('admin/ventas/factura',$data);
+		$this->pdf->output();
+		$this->pdf->stream("factura");
+ }
 }
