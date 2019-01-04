@@ -3,8 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Servicios_model extends CI_Model {
  
 	public function getServicios(){
-		//$this->db->where("estado","1");
-		$resultados = $this->db->get("servicios");
+		$this->db->from("servicios s");
+		$this->db->select("s.*,pre.nombre as id_presentacion");
+		$this->db->join("tipo_presentacion pre","s.id_presentacion = pre.id");/**/
+		$resultados = $this->db->get();
 		return $resultados->result();
 	}
 	public function getServicio($id){

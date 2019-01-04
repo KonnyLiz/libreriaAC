@@ -18,6 +18,7 @@
                 <li><a href="<?php echo base_url();?>mantenimiento/marcas">Marcas</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/presentacion">Prsentacion</a></li>
                 <li><a href="<?php echo base_url();?>mantenimiento/productos">Productos</a></li>
+                <li><a href="<?php echo base_url();?>mantenimiento/Servicios">Servicios</a></li>
                 <li><a href="<?php echo base_url();?>movimientos/reabastecer/add">Abastecer</a></li>
                 <li><a href="<?php echo base_url();?>movimientos/reabastecer">Abastecimientos</a></li>
             </ul>
