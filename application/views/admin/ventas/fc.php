@@ -33,8 +33,9 @@
 					<th>Codigo</th>
 					<th>Nombre</th>
 					<th>Precio</th>
+					<th>Presentacion</th>
 					<th>Cantidad</th>
-					<th>Importe</th>
+					<th>Subtotal</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,6 +43,7 @@
 				<tr>
 					<td><?php echo $detalle->codigo;?></td>
 					<td><?php echo $detalle->nombre;?></td>
+					<td><?php echo $detalle->tipo_presentacion;?></td>
 					<td><?php echo $detalle->precio;?></td>
 					<td><?php echo $detalle->cantidad;?></td>
 					<td><?php echo $detalle->importe;?></td>
@@ -52,8 +54,10 @@
 				<?php foreach($detallesServicios as $detalleS){?>
 
 				<tr>
-					<td><?php echo $detalleS->cantidad;?></td>
+					<td><?php echo $detalleS->id_servicio;?></td>
 					<td><?php echo $detalleS->nombre;?></td>
+					<td><?php echo $detalleS->tipo_presentacion;?></td>
+					<td><?php echo $detalleS->cantidad;?></td>
 					<td><?php echo $detalleS->precio;?></td>
 					<td><?php echo $detalleS->importe;?></td>
 				</tr>
@@ -62,19 +66,19 @@
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+					<td colspan="5" class="text-right"><strong>Subtotal:</strong></td>
 					<td><?php echo $venta->subtotal;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>IVA:</strong></td>
+					<td colspan="5" class="text-right"><strong>IVA:</strong></td>
 					<td><?php echo $venta->iva;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Descuento:</strong></td>
+					<td colspan="5" class="text-right"><strong>Descuento:</strong></td>
 					<td><?php echo $venta->descuento;?></td>
 				</tr>
 				<tr>
-					<td colspan="4" class="text-right"><strong>Total:</strong></td>
+					<td colspan="5" class="text-right"><strong>Total:</strong></td>
 					<td><?php echo $venta->total;?></td>
 				</tr>
 			</tfoot>

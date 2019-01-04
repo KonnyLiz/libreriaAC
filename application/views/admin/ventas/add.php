@@ -86,7 +86,8 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="">Producto:</label>
-                                    <input type="text" class="form-control" id="producto" name="valor">
+                                    <input type="text" class="form-control buscar" id="producto" name="valor">
+                                    <div class="contenedor"></div>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="">&nbsp;</label>

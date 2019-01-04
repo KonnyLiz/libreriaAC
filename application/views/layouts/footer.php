@@ -19,7 +19,6 @@
  <script src='<?php echo base_url(); ?>assets/fullcalendar/lib/jquery.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/fullcalendar.min.js'></script>
 <script src='<?php echo base_url(); ?>assets/fullcalendar/locale/es.js'></script>
-<script type="text/javascript" src="<?php echo base_url();?>assets/js/EasyAutocomplete/jquery.easy-autocomplete.min.js"></script> 
 
 
 
@@ -299,7 +298,6 @@ $(document).ready(function (){
         sumar();
     });
 
-
     $(document).on("click", ".btn-check", function(){
         cliente = $(this).val();
         infoCliente = cliente.split("*");
@@ -308,51 +306,32 @@ $(document).ready(function (){
         $("#modal-default").modal("hide");
     });
 
-    var options = {
-        url: base_url+"movimientos/ventas/getProductos",
-
-        getValue: "nombre",
-
-        template:{
-            type: "description",
-            fields:{
-                description:"tipo_presentacion",
-            }
+    $("#producto").autocomplete({
+        source: function(request, response){
+            $.ajax({
+                url: base_url+"movimientos/ventas/getProductos",
+                type: "POST",
+                dataType: "json",
+                data:{ valor: request.term},
+                success: function(data){
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.nombre + " " + item.tipo_presentacion,
+                            id: item.id +"*" + item.codigo + "*" + item.nombre + "*" + item.precio + 
+                                    "*" + item.stock+ "*" + item.precio2+ "*" + item.precio3+"*" + item.tipo_presentacion
+                        }
+                    }))
+                },
+            })
+        }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
+        minLength:2, //caracteres que activan el autocomplete
+        select: function(event, ui){
+           data = ui.item.id;
+           $("#btn-agregar").val(data); 
+           console.log(data);
         },
 
-        list: {
-            match: {
-                enabled: true
-            },
-
-            onClickEvent: function(){
-                var data = ui.item.id +"*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion;
-                $("#btn-agregar").val(data);
-            }
-        },
-    };
-
-    $("#producto").easyAutocomplete(options);
-
-    // $("#producto").autocomplete({
-    //     source: function(request, response){
-    //         $.ajax({
-    //             url: base_url+"movimientos/ventas/getProductos",
-    //             type: "POST",
-    //             dataType: "json",
-    //             data:{ valor: request.term},
-    //             success: function(data){
-    //                 response(data);
-    //             }
-    //         });
-    //     }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
-    //     minLength:2, //caracteres que activan el autocomplete
-    //     select: function(event, ui){
-    //         data = ui.item.id +"*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio + "*" + ui.item.stock+ "*" + ui.item.precio2+ "*" + ui.item.precio3+"*" + ui.item.tipo_presentacion + "*" + ui.item.nombre;
-    //         $("#btn-agregar").val(data);
-    //         console.log(data);
-    //     },
-    // });
+    });
 
     $("#cliente2").autocomplete({
         source: function(request, response){
@@ -423,18 +402,27 @@ $(document).ready(function (){
     function tablaDeProductos(data){
         if (data != " "){
                 infoProducto = data.split("*");
-                html = "<tr>";
-                html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>"; //
-                html += "<td>"+infoProducto[2]+infoProducto[7]+"</td>";
-                html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios1[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios2[]' value='"+infoProducto[5]+"'><input type='hidden' name='precios3[]' value='"+infoProducto[6]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
-                html += "<td>"+infoProducto[4]+"</td>";
-                html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
-                html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
-                html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
-                html += "</tr>";
-                $("#tbventas tbody").append(html);
-                sumar();
                 console.log(infoProducto[7]);
+                    html = "<tr>";
+                    if (infoProducto[7]=="Servicio"){
+                        html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[0]+"</td>"; //
+                        html += "<td><input type='hidden' name='nombreProductos[]' value='"+infoProducto[2]+"'>"+infoProducto[2]+" "+infoProducto[7]+"</td>";
+                        html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios1[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios2[]' value='"+infoProducto[5]+"'><input type='hidden' name='precios3[]' value='"+infoProducto[6]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
+                        html += "<td>"+0+"</td>";//stock
+                    } else{
+                        html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>"; //
+                        html += "<td><input type='hidden' name='nombreProductos[]' value='"+infoProducto[2]+"'>"+infoProducto[2]+" "+infoProducto[7]+"</td>";
+                        html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios1[]' value='"+infoProducto[3]+"'><input type='hidden' name='precios2[]' value='"+infoProducto[5]+"'><input type='hidden' name='precios3[]' value='"+infoProducto[6]+"'><p>"+infoProducto[3]+"</p></td>"; //precios
+                        html += "<td>"+infoProducto[4]+"</td>";//stock
+                    } 
+                    html += "<td><input type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
+                    html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes
+                    html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-times' style='color: #fff'></span></button></td>";
+                    html += "</tr>";
+                    $("#tbventas tbody").append(html);
+                    sumar();
+
+                    console.log();
         } else {
             alert("seleccione un producto");
         }

@@ -31,8 +31,9 @@
 				<tr>
 					<th>Cantidad</th>
 					<th>Nombre</th>
+					<th>Presentacion</th>
 					<th>Precio</th>
-					<th>Total</th>
+					<th>Subtotal</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -40,6 +41,7 @@
 				<tr>
 					<td><?php echo $detalle->cantidad;?></td>
 					<td><?php echo $detalle->nombre;?></td>
+					<td><?php echo $detalle->tipo_presentacion;?></td>
 					<td><?php echo $detalle->precio;?></td>
 					<td><?php echo $detalle->importe;?></td>
 				</tr>
@@ -52,6 +54,7 @@
 					<tr>
 						<td><?php echo $detalleS->cantidad;?></td>
 						<td><?php echo $detalleS->nombre;?></td>
+						<td><?php echo $detalleS->tipo_presentacion;?></td>
 						<td><?php echo $detalleS->precio;?></td>
 						<td><?php echo $detalleS->importe;?></td>
 					</tr>

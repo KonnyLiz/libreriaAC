@@ -7,19 +7,19 @@ class Ventas_model extends CI_Model {
 		$resultados = $this->db->get("tipo_comprobante");
 		return $resultados->result();
 	}
-
+ 
 	public function getProductos($valor){
 
-			$this->db->select("prod.id, prod.codigo, prod.nombre as label, prod.precio, prod.stock, prod.precio_mayoreo1 as precio2, prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
+			$this->db->select("prod.id, prod.codigo, prod.nombre, prod.precio, prod.stock, 
+			prod.precio_mayoreo1 as precio2,prod.precio_mayoreo2 as precio3, tp.nombre as tipo_presentacion");
 			$this->db->from("productos prod");
 			$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
 			$this->db->like("prod.estado", "1");
 			$this->db->like("prod.nombre", $valor);
 			$resultados = $this->db->get();
-			return $resultados->result_array();
+			return $resultados->result();
 	}
-	
-	
+
 	public function getClientes($valor){
 		$this->db->select("id, nombres");
 		$this->db->from("clientes");
@@ -38,9 +38,10 @@ class Ventas_model extends CI_Model {
     }
 
     function getServicio($valor){
-    	$this->db->select("id_servicio as id, nombre as label, precio, precio2, precio3");
-			$this->db->from("servicios");
-			$this->db->like("nombre", $valor);
+    	$this->db->select("serv.id_servicio as id, serv.nombre, serv.precio, serv.precio2, serv.precio3, tp.nombre as tipo_presentacion");
+			$this->db->from("servicios serv");
+			$this->db->join("tipo_presentacion tp", "serv.id_presentacion = tp.id");
+			$this->db->like("serv.nombre", $valor);
 			$resultados = $this->db->get();
 			return $resultados->result_array();
     }
@@ -68,7 +69,7 @@ class Ventas_model extends CI_Model {
 
 	//guarda los detalles de la venta
 	public function save_detalle($data){
-		$this->db->insert("detalle_vjksdjkdentasssss", $data);
+		$this->db->insert("detalle_venta", $data);
 	}
 
 	public function save_detalle_servicio($data){
@@ -103,18 +104,20 @@ class Ventas_model extends CI_Model {
 	}
 
 	public function getDetalle($id){
-		$this->db->select("dt.*, p.codigo, p.nombre");
+		$this->db->select("dt.*, p.codigo, p.nombre, p.id_presentacion, tp.nombre as tipo_presentacion");
 		$this->db->from("detalle_venta dt");
 		$this->db->join("productos p", "dt.producto_id = p.id");
+		$this->db->join("tipo_presentacion tp", "p.id_presentacion = tp.id");
 		$this->db->where("dt.venta_id", $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
 	}
 
 	public function getDetalleServicio($id){
-		$this->db->select("dts.*, s.id_servicio, s.nombre");
+		$this->db->select("dts.*, s.id_servicio, s.nombre, s.id_presentacion, tp.nombre as tipo_presentacion");
 		$this->db->from("detalle_venta_servicio dts");
 		$this->db->join("servicios s", "dts.servicio_id = s.id_servicio");
+		$this->db->join("tipo_presentacion tp", "s.id_presentacion = tp.id");
 		$this->db->where("dts.venta_id", $id);
 		$resultados = $this->db->get();
 		return $resultados->result();
@@ -125,7 +128,6 @@ class Ventas_model extends CI_Model {
 			$this->db->from("detalle_venta_servicio");
 			$this->db->like("venta_id", $valor);
 			$resultados = $this->db->get();
-
 			return $resultados->num_rows();
     }
 
