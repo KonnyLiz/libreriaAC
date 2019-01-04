@@ -24,10 +24,6 @@
     <!-- Main content -->
 
     <div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">Datos</h3>
-
-    </div>
     <div class="panel-body">
 
     <!-- Main content -->
@@ -47,7 +43,6 @@
                                     <th>Fecha</th>
                                     <th>Monto</th>
                                      <th>Saldo</th>
-                                    <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,7 +54,6 @@
                                         <td><?php echo $caja->fecha;?></td>
                                         <td><?php echo $caja->monto;?></td>
                                         <td><?php echo $caja->saldo;?></td>
-                                        <td><button type="button" class="btn btn-info btn-view-cajas" value="<?php echo $cajass;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button></td>
                                     </tr>
                                     <?php }?>
                                 <?php } ?>

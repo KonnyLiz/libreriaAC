@@ -8,6 +8,7 @@ private $permisos;
 		$this->permisos = $this->backend_lib->control();
 		$this->load->model("Reabastecer_model");
 		$this->load->model("Productos_model");
+		$this->load->model("Cajas_model");
 	}
 
 	public function add(){
@@ -55,6 +56,20 @@ private $permisos;
 			'usuario_id' => $idusuario,
 			'proveedor_id' => $idProveedor,
 		);
+		//operación para el saldo 
+		$dat2= array(
+			'usuario' => $idusuario,
+			'transaccion' => 2,
+			'fecha' => $fecha,
+			'monto' => $total,
+			'saldo' => $total,
+		);
+		//guardamos el registro en caja
+		if($this->Cajas_model->save($dat2)){
+			$id_caja = $this->Cajas_model->lastID();
+			$this->updateCaja($id_caja,$total,0);//se actualiza el saldo de la caja
+		}
+		//datos de cajas guardados-----
 
 		if ($this->Reabastecer_model->save($data)){
 			$idAbastecer = $this->Reabastecer_model->lastID(); 
@@ -63,6 +78,23 @@ private $permisos;
 		} else {
 			redirect(base_url()."movimientos/reabastecer/add");
 		}
+	}
+
+	//funcion para actualizar caja
+	protected function updateCaja($idcaja,$subtotal,$tipo){
+
+		$saldoActual = $this->Cajas_model->getSaldo($idcaja-1);
+		if ($tipo == 1) {
+			# code...
+			$data = array(
+			'saldo' => $saldoActual->saldo + $subtotal,
+		);
+		}else{
+			$data = array(
+				'saldo' => $saldoActual->saldo - $subtotal,
+			);
+		}
+		$this->Cajas_model->updateCaja($idcaja, $data);
 	}
 
 	protected function updateProducto($idProducto, $cantidad ,$fecha){
