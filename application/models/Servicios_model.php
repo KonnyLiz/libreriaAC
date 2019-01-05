@@ -23,4 +23,17 @@ class Servicios_model extends CI_Model {
 		return $this->db->update("servicios",$data);
 	}
 
+	public function getSer($id){
+		$this->db->where("id_servicio",$id);
+		$resultado = $this->db->get("servicios");
+		return $resultado->row();
+	}
+
+	public function delete($id){
+		$data  = array(
+			'estado' => "0", 
+		);
+		$this->Productos_model->update($id,$data);
+		echo "mantenimiento/productos";
+	}
 }

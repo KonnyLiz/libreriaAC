@@ -87,7 +87,7 @@
                                                 
                                             <a href="<?php echo base_url()?>mantenimiento/servicios/edit/<?php echo $servicio->id_servicio;?>" class="btn btn-warning"><span class="fa fa-pencil" style="color: #fff"></span></a>
                                             </li>
-                                            <a href="<?php echo base_url();?>mantenimiento/productos/delete/<?php echo $servicio->id_servicio;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>                                   
+                                            <a href="<?php echo base_url();?>mantenimiento/servicios/delete/<?php echo $servicio->id_servicio;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>                                   
                                              </div>
                                             </td>
                                         </tr>

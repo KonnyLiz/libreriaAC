@@ -36,33 +36,34 @@
                                 
                              </div>
                         <?php endif;?>
-                      <form action="<?php echo base_url();?>mantenimiento/servicios/store" method="POST">
+                      <form action="<?php echo base_url();?>mantenimiento/servicios/update" method="POST">
+                            
+                            <input type="hidden" name="id" value="<?php echo $servicio->id_servicio;?>">
 
                             <div class="form-group">
                                 <label for="codigo">Nombre del servicio:</label>
-                                <input type="text" value="<?php echo set_value("r1")?>" class="form-control" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" name="r1" required>
+                                <input type="text" value="<?php echo !empty(form_error("r1"))? set_value("r1"):$servicio->nombre;?>" class="form-control" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" name="r1" required>
                             </div>
 
                             <div class="form-group">
                                 <label for="codigo">Descripción:</label>
-                                <input type="text" value="<?php echo set_value("r2")?>" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control"  name="r2" required>
+                                <input type="text" value="<?php echo !empty(form_error("r2"))? set_value("r2"):$servicio->descripción;?>" title="Solo puede contener letras" pattern="[A-Za-z][\s]*{1,50}" class="form-control"  name="r2" required>
                             </div>
 
                             <div class="form-group ">
                                 <label for="codigo">Precio:</label>
-                                <input type="text" placeholder="0.00" value="<?php echo set_value("r3")?>" title="Formato: 9.99"  class="form-control"  name="r3" required>
+                                <input type="text" value="<?php echo !empty(form_error("r3"))? set_value("r3"):$servicio->precio;?>"  class="form-control"  name="r3" required>
                                 <?php echo form_error("r3", "<span class='help-block'>", "</span>");?>
                             </div>
 
-                           <div class="form-group <?php echo !empty(form_error("r4"))? 'has-error':'' ?>">
-                                <label for="codigo">Mayoreo 1:</label>
-                                <input type="text" placeholder="0.00" value="<?php echo set_value("r4")?>" title="Formato: 9.99" class="form-control"   name="r4" required>
+                          <div class="form-group ">
+                                <label for="codigo">Precio 2:</label>
+                                <input type="text" value="<?php echo !empty(form_error("r4"))? set_value("r4"):$servicio->precio2;?>"  class="form-control"  name="r4" required>
                                 <?php echo form_error("r4", "<span class='help-block'>", "</span>");?>
                             </div>
-
-                            <div class="form-group">
-                                <label for="codigo">Mayoreo 2:</label>
-                                <input type="text" placeholder="0.00" class="form-control" value="<?php echo set_value("r5")?>" title="Formato: 9.99" name="r5" required >
+                            <div class="form-group ">
+                                <label for="codigo">Precio 3:</label>
+                                <input type="text" value="<?php echo !empty(form_error("r5"))? set_value("r5"):$servicio->precio3;?>"  class="form-control"  name="r5" required>
                                 <?php echo form_error("r5", "<span class='help-block'>", "</span>");?>
                             </div>
 
