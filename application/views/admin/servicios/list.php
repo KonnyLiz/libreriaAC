@@ -6,11 +6,11 @@
                         <ul class="breadcrumb">
 
                             <li><a href="Dashboard">Dashboard</a></li>
-                            <li>Productos</li>
-                            <li class="active">Productos</li>
+                            <li>Inventario</li>
+                            <li class="active">Servicios</li>
                         </ul>
                     </div>
-                        <h1 class="h1">Productos</h1>
+                        <h1 class="h1">Servicios</h1>
                 </div>
 
 <!-- Content Wrapper. Contains page content -->
@@ -23,7 +23,7 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Informacion del Producto</h4>
+        <h4 class="modal-title">Informacion de los servicios</h4>
       </div>
       <div class="modal-body">
 
