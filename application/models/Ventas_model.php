@@ -83,6 +83,7 @@ class Ventas_model extends CI_Model {
 		 $this->db->join("clientes c", "v.cliente_id = c.id");
 		 $this->db->join("usuarios u", "v.usuario_id = u.id");
 		 $this->db->join("tipo_comprobante tc", "v.tipo_comprobante_id = tc.id");
+		 $this->db->where("v.estado","1");
 		 $resultados = $this->db->get();
 		 if ($resultados->num_rows() > 0){
 		 	return $resultados->result();
@@ -133,5 +134,16 @@ class Ventas_model extends CI_Model {
 
 	public function save_Cliente($data){
 		return $this->db->insert("clientes",$data);
+	}
+
+	public function update($id,$data){
+		$this->db->where("id",$id);
+		return $this->db->update("ventas",$data);
+	}
+
+	public function getProducto($id){
+		$this->db->where("id",$id);
+		$resultado = $this->db->get("productos");
+		return $resultado->row();
 	}
 }

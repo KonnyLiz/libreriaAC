@@ -87,7 +87,7 @@ private $permisos;
 				'direccion' => $direccion,
 				'registro' => $registro,
 				'estado' => $estado
-			);
+			); 
 
 			if ($this->Clientes_model->update($idcliente,$data)) {
 				redirect(base_url()."mantenimiento/clientes");

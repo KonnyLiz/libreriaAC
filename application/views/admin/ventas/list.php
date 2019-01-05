@@ -72,6 +72,7 @@
                                         <?php $ventas = $venta->id."*".$venta->tipo_comprobante_id; ?>
                                         <td><button type="button" class="btn btn-info btn-view-venta" value="<?php echo $ventas;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button>
                                         <a href="<?php echo base_url()?>movimientos/Ventas/imprimir/<?php echo $venta->id;?>" class="btn btn-success"><span class="fa fa-print" style="color: white;"></span></a>   
+                                        <a href="<?php echo base_url();?>movimientos/Ventas/delete/<?php echo $venta->id;?>" class="btn btn-danger btn-remove"><span class="fa fa-times" style="color: #fff"></span></a>
                                         </td>
                                     </tr>
                                     <?php }?>
