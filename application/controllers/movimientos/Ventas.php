@@ -272,47 +272,42 @@ private $permisos;
  }
 
  public function delete($idVenta){
-	$venta = $this->Ventas_model->getVenta($idVenta);
-	$detalleProducto = $this->Ventas_model->getDetalle($idVenta);
-	$detallesServicios = $this->Ventas_model->getDetalleServicio($idVenta);
-	$idcaja = $this->Cajas_model->lastID();
-	$tipoUpdateProducto = 2;
-	
-	$tipoUpdateCaja = 2;
-	$fecha = date("Y-m-d H:i:s");
-	$total = $venta->total;
-	$idusuario = 1; ///hay que modificar esto
+ 		$venta = $this->Ventas_model->getVenta($idVenta);
+		$detalleProducto = $this->Ventas_model->getDetalle($idVenta);
+		$detallesServicios = $this->Ventas_model->getDetalleServicio($idVenta);
+		$idcaja = $this->Cajas_model->lastID();
 
-	$dat2= array(
-		'usuario' => $idusuario,
-		'transaccion' => "2",
-		'fecha' => $fecha,
-		'monto' => $total,
-		'saldo' => $total,
-	);
-	//guardamos el registro en caja
-	if($this->Cajas_model->save($dat2)){
-		$id_caja = $this->Cajas_model->lastID();
-		$this->updateCaja($id_caja,$total,2);//se actualiza el saldo de la caja
-	}
-	
-	for ($i=0; $i < count($detalleProducto); $i++) {
-		$productos[$i]= $detalleProducto[$i]->producto_id;
-		$cantidad[$i] = $detalleProducto[$i]->cantidad;
-		$existe = $this->Ventas_model->getSiExisteServicio($valor);
+		$tipoUpdateCaja = 2;
+		$fecha = date("Y-m-d H:i:s");
+		$total = $venta->total;
+		$idusuario = 1; ///hay que modificar esto
 
-		if ($existe == 0){
-			if ($idcomprobante != 3) {
-				$this->updateProducto($productos[$i], $cantidades[$i], $tipoUpdateProducto); //actualizamos el stock del producto
-			}
+		$dat2= array(
+			'usuario' => $idusuario,
+			'transaccion' => "2",
+			'fecha' => $fecha,
+			'monto' => $total,
+			'saldo' => $total,
+		);
+
+		//guardamos el registro en caja
+		if($this->Cajas_model->save($dat2)){
+			$id_caja = $this->Cajas_model->lastID();
+			$this->updateCaja($id_caja,$total,2);//se actualiza el saldo de la caja
 		}
-		
-	}
 
-	$data  = array(
-		'estado' => "0", 
-	);
-	$this->Ventas_model->update($id,$data);
-	redirect(base_url()+"movimientos/ventas");
-}
+		for ($i=0; $i < count($detalleProducto); $i++) {
+			$producto= $detalleProducto[$i]->producto_id;
+			$cantidad= $detalleProducto[$i]->cantidad;
+
+			$this->updateProducto($producto, $cantidad, 0); //actualizamos el stock del producto
+			
+		}
+
+		$data  = array(
+			'estado' => "0", 
+		);
+		$this->Ventas_model->update($idVenta,$data);
+		echo "movimientos/ventas";
+	}
 }

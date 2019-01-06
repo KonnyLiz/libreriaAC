@@ -55,8 +55,6 @@
                                         <td><?php echo $caja->monto;?></td>
                                         <td><?php echo $caja->saldo;?></td>
 
-                                        <td><button type="button" class="btn btn-info btn-view-cajas" value="<?php echo $cajas;?>" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span></button></td>
-
                                     </tr>
                                     <?php }?>
                                 <?php } ?>
