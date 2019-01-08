@@ -41,7 +41,7 @@
 
                             <div class="form-group col-md-2 <?php echo !empty(form_error("codigo"))? 'has-error':'' ?>">
                                 <label for="codigo">Codigo:</label>
-                                <input type="text" title="Solo puede contener numeros" pattern="[0-9]{1,50}" value="<?php echo set_value("codigo")?>" class="form-control" id="codigo" name="codigo" required>
+                                <input type="text" value="<?php echo set_value("codigo")?>" class="form-control" id="codigo" name="codigo" required>
                                 <?php echo form_error("codigo", "<span class='help-block'>", "</span>");?>
                             </div>
                             <div class="form-group col-md-3 <?php echo !empty(form_error("nombre"))? 'has-error':'' ?>">
