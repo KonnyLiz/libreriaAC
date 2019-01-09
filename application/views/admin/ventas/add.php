@@ -139,7 +139,8 @@
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span class="input-group-addon">Descuento:</span>
-                                        <input type="text" class="form-control" name="descuento" id="descuento" value="0.00">
+                                        <input type="text" class="form-control" name="descuento" id="descuento" value="0">
+                                        <span class="input-group-addon">%</span>
                                     </div>
                                 </div>
                                 <div class="col-md-3">
