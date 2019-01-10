@@ -7,13 +7,13 @@ $dia = substr($fechas, -2, 2); ?>
 <table style="margin-left: 295px;">
   <tbody>
     <tr>
-      <td style="width: 65px;"><?php echo $dia;?></td>
+      <td style="width: 60px;"><?php echo $dia;?></td>
       <td style="width: 60px;"><?php echo $mes;?></td>
       <td style="width: 10px;"><?php echo $ano;?></td>
     </tr>
   </tbody>
 </table>
-<div style="margin-left: 120px;"><?php echo $venta->nombres." ".$venta->apellidos;?></div><br><br><br><br><br><br>
+<div style="margin-left: 140px;"><?php echo $venta->nombres." ".$venta->apellidos;?></div><br><br><br><br><br><br>
 
 
 
@@ -40,5 +40,5 @@ $dia = substr($fechas, -2, 2); ?>
     <?php } ?>
   </tbody>
 </table>
-<div style="position: fixed; top:570px; margin-left: 510px;"><?php echo $venta->subtotal;?></div><br>
-<div style="position: fixed; top:690px; margin-left: 510px;"><?php echo $venta->total;?></div>
+<div style="position: fixed; top:555px; margin-left: 510px;"><?php echo $venta->subtotal;?></div><br>
+<div style="position: fixed; top:670px; margin-left: 510px;"><?php echo $venta->total;?></div>

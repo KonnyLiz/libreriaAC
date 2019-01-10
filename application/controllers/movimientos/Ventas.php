@@ -74,7 +74,7 @@ private $permisos;
 		$precios =$this->input->post("precios");
 		$cantidades =$this->input->post("cantidades");
 		$importes =$this->input->post("importes");
-		
+
 
 		$data = array(
 			'fecha' => $fecha,
@@ -224,27 +224,21 @@ private $permisos;
 
 	public function save_Cliente(){
 		$nombres = $this->input->post("nombre2");
-		$grupo  =  null;
 		$apellidos = $this->input->post("r2");
 		$telefono = $this->input->post("r3");
-		$dui = $this->input->post("r4");
 		$nit = $this->input->post("r5");
 		$direccion = $this->input->post("r6");
 		$registro = $this->input->post("r7");
-		$empresa = $this->input->post("r8");
 		$estado = 1;
 
 
 		$data  = array(
-			'grupo' => $grupo,
 			'nombres' => $nombres,
 			'apellidos' => $apellidos,
 			'telefono' => $telefono,
-			'dui' => $dui,
 			'nit' => $nit,
 			'direccion' => $direccion,
 			'registro' => $registro,
-			'empresa' => $empresa,
 			'estado' => $estado
 		);
 
@@ -301,11 +295,11 @@ private $permisos;
 			$cantidad= $detalleProducto[$i]->cantidad;
 
 			$this->updateProducto($producto, $cantidad, 0); //actualizamos el stock del producto
-			
+
 		}
 
 		$data  = array(
-			'estado' => "0", 
+			'estado' => "0",
 		);
 		$this->Ventas_model->update($idVenta,$data);
 		echo "movimientos/ventas";
