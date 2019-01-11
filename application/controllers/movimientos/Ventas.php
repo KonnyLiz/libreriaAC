@@ -217,6 +217,8 @@ private $permisos;
 			$this->load->view("admin/ventas/fc", $data);
 		}elseif($comprobante == 2){
 			$this->load->view("admin/ventas/view", $data);
+		}elseif($comprobante == 3){
+			$this->load->view("admin/ventas/view", $data);
 		}else{
 			echo "que pedo";
 		}
