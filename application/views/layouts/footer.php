@@ -538,20 +538,26 @@ $(document).ready(function (){
                 dataType: "json",
                 data:{ valor: request.term},
                 success: function(data){
-                    response(data);
-                }
+                    response($.map(data, function (item) {
+                        return {
+                            label: item.nombre + " " + item.tipo_presentacion,
+                            id: item.id +"*" + item.codigo + "*" + item.nombre + "*" + item.precio_entrada + 
+                                    "*" + item.stock+ "*"+item.tipo_presentacion
+                        }
+                    }))
+                },
             });
         }, //indica la informacion a mostrar al momento de comenzar a llenar el campo
         minLength:2, //caracteres que activan el autocomplete
         select: function(event, ui){
-            data = ui.item.id + "*" + ui.item.codigo + "*" + ui.item.label + "*" + ui.item.precio_entrada + "*" + ui.item.stock;
-            $("#btn-agregar-abast").val(data);
+           data = ui.item.id;
+           $("#btn-agregar-abast").val(data); 
         },
     });
 
       $(document).on("keyup", "#tbreabastecer input.cantidades", function(){
         cantidad = $(this).val();
-        precio = $(this).closest("tr").find("td:eq(2)").text();
+        precio = $(this).closest("tr").find("td:eq(2)").children("input").val();
         importe = cantidad * precio;
         totalImporte = parseFloat(importe).toFixed(2);
         $(this).closest("tr").find("td:eq(5)").children("p").text(totalImporte);
@@ -565,8 +571,8 @@ $(document).ready(function (){
             infoProducto = data.split("*");
             html = "<tr>";
             html += "<td><input type='hidden' name='idProductos[]' value='"+infoProducto[0]+"'>"+infoProducto[1]+"</td>";//id y codigo
-            html += "<td>"+infoProducto[2]+"</td>"; //nombre
-            html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'>"+infoProducto[3]+"</td>"; //precios
+            html += "<td><p>"+infoProducto[2]+" "+infoProducto[5]+"</p></td>"; //nombre
+            html += "<td><input type='hidden' name='precios[]' value='"+infoProducto[3]+"'><input name='nuevoPrecio[]' class='cantidades' value='"+infoProducto[3]+"'></td>"; //precios
             html += "<td>"+infoProducto[4]+"</td>";//stock
             html += "<td><input  type='number' placeholder='Ingrese numero entero' name='cantidades[]' values='1' class='cantidades'></td>"; //cantidades
             html += "<td><input type='hidden' name='importes[]' value='"+infoProducto[3]+"'><p>"+infoProducto[3]+"</p></td>"; //immportes

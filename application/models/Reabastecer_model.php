@@ -4,12 +4,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Reabastecer_model extends CI_Model {
 
 	public function getProductos($valor){
-		$this->db->select("id, codigo, nombre as label, precio_entrada, stock");
-		$this->db->from("productos");
-		$this->db->like("nombre", $valor);
+
+		$this->db->select("prod.id, prod.codigo, prod.nombre, prod.precio_entrada, prod.stock, 
+		tp.nombre as tipo_presentacion");
+		$this->db->from("productos prod");
+		$this->db->join("tipo_presentacion tp", "prod.id_presentacion = tp.id");
+		$this->db->like("prod.estado", "1");
+		$this->db->like("prod.nombre", $valor);
 		$resultados = $this->db->get();
-		return $resultados->result_array();
-	}
+		return $resultados->result();
+}
 
 	public function getProveedor($valor){
 		$this->db->select("id_proveedor, nombre as label");

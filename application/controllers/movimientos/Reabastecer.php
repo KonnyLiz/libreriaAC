@@ -44,6 +44,8 @@ private $permisos;
 	public function store(){
 		$fecha = $this->input->post("fecha");
 		$idproductos =$this->input->post("idProductos");
+		$nuevoPrecio =$this->input->post("nuevoPrecio");
+		$precios =$this->input->post("precios");
 		$cantidades =$this->input->post("cantidades");
 		$importe =$this->input->post("importes");
 		$total = $this->input->post("total-reabastecer");
@@ -73,7 +75,7 @@ private $permisos;
 
 		if ($this->Reabastecer_model->save($data)){
 			$idAbastecer = $this->Reabastecer_model->lastID(); 
-			$this->save_detalle($idproductos, $idAbastecer, $cantidades, $importe, $fecha); //guardando el detalle de la venta
+			$this->save_detalle($idproductos, $nuevoPrecio, $precios, $idAbastecer, $cantidades, $importe, $fecha); //guardando el detalle de la venta
 			redirect(base_url()."movimientos/reabastecer"); //redirigiendo a la lista de ventas
 		} else {
 			redirect(base_url()."movimientos/reabastecer/add");
@@ -97,10 +99,11 @@ private $permisos;
 		$this->Cajas_model->updateCaja($idcaja, $data);
 	}
 
-	protected function updateProducto($idProducto, $cantidad ,$fecha){
+	protected function updateProducto($idProducto, $mediaPrecio, $cantidad ,$fecha){
 		$productoActual = $this->Productos_model->getProducto($idProducto);
 		$data = array(
 			'stock' => $productoActual->stock + $cantidad,
+			'precio_entrada' => $mediaPrecio,
 			'fecha_i'=> $fecha
 		);
 		$this->Productos_model->update($idProducto, $data);
@@ -116,16 +119,31 @@ private $permisos;
 	}
 
 	//funcion para guardar el detalle de la venta
-	protected function save_detalle($productos, $idAbastecimiento, $cantidades, $importes,$fecha ){
+	protected function save_detalle($productos, $nuevoPrecio, $precios, $idAbastecimiento, $cantidades, $importes,$fecha ){
 		for ($i=0; $i < count($productos); $i++) { 
-			$data = array(
-				'abastecer_id' => $idAbastecimiento,
-				'producto_id' => $productos[$i],
-				'cantidad_abastecer' => $cantidades[$i],
-				'importe' => $importes[$i],
-			);
-			$this->Reabastecer_model->save_detalle($data);
-			$this->updateProducto($productos[$i], $cantidades[$i], $fecha); //actualizamos el stock del producto
+			if ($precios[$i] == $nuevoPrecio[$i]){
+				$mediaPrecio = $precios[$i];
+				$data = array(
+					'abastecer_id' => $idAbastecimiento,
+					'producto_id' => $productos[$i],
+					'cantidad_abastecer' => $cantidades[$i],
+					'importe' => $importes[$i],
+				);
+				$this->Reabastecer_model->save_detalle($data);
+				$this->updateProducto($productos[$i], $mediaPrecio, $cantidades[$i], $fecha); //actualizamos el stock del producto
+			} else {
+				$mediaPrecio = ($precios[$i] + $nuevoPrecio[$i])/2;
+
+				$data = array(
+					'abastecer_id' => $idAbastecimiento,
+					'producto_id' => $productos[$i],
+					'cantidad_abastecer' => $cantidades[$i],
+					'importe' => $importes[$i],
+				);
+				$this->Reabastecer_model->save_detalle($data);
+				$this->updateProducto($productos[$i], $mediaPrecio, $cantidades[$i], $fecha); //actualizamos el stock del producto
+			}
+			
 		}
 	}
 }
