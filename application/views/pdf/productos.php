@@ -6,33 +6,28 @@
 <body>
 
   <header>
-      <table>
-          <tr>
-              <td id="header_texto">
-                  <div>Libreria A&C</div>
-                  <div>Reporte de Productos</div>
-              </td>
-              <td id="header_logo">
-              </td>
-          </tr>
-      </table>
+              
+                  <div style="text-align: center;">Libreria A&C</div>
+                  <div style="text-align: center;">Reporte de Productos</div>
+           
   </header>
   <footer>
       <div id="footer_texto">Reporte de Productos</div>
   </footer>
 
-  <table border="1" id="table_info">
+  <table border="1" style="border-collapse: collapse;" id="table_info">
        <thead>
            <tr>
                <th>#</th>
                <th>Codigo</th>
                <th>Nombre</th>
                <th>Marca</th>
-               <th>Descripcion</th>
-               <th>Precio Entrada</th>
+               <th>Presentacion</th>
+               
                <th>Precio Venta</th>
-               <th>Precio Mayoreo</th>
-               <th>Existencia</th>
+               <th>Precio Mayoreo >= 12 </th>
+               <th>Precio Mayoreo >= 25 </th>
+              
            </tr>
        </thead>
        <tbody>
@@ -42,11 +37,12 @@
                 <td><?php echo $producto->codigo;?></td>
                 <td><?php echo $producto->nombre;?></td>
                 <td><?php echo $producto->id_marca;?></td>
-                <td><?php echo $producto->descripcion;?></td>
-                <td><?php echo $producto->precio_entrada;?></td>
+                <td><?php echo $producto->id_presentacion;?></td>
+                
                 <td><?php echo $producto->precio;?></td>
                 <td><?php echo $producto->precio_mayoreo1;?></td>
-                <td><?php echo $producto->stock;?></td>
+                <td><?php echo $producto->precio_mayoreo2;?></td>
+                
             </tr>
           <?php  }?>
        </tbody>
