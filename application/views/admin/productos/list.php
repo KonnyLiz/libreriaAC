@@ -116,7 +116,7 @@
                             </tbody>
                         </table>
                         <a href="<?php echo base_url();?>pdfcontroller/productos" target="_blank">
-                            <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Generrar Reporte</button>
+                            <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Generar Reporte</button>
                         </a>
                        </div>
                      </div>

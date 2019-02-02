@@ -66,7 +66,7 @@ private $permisos;
 		$total = $this->input->post("total");
 		$idcomprobante = $this->input->post("idcomprobante");
 		$idcliente = $this->input->post("idcliente");
-		$idusuario = 1; ///hay que modificar esto
+		$idusuario = $this->session->userdata("id"); ///hay que modificar esto
 		$numero = $this->input->post("numero");
 		$serie = $this->input->post("serie");
 		$nombreProductos = $this->input->post("nombreProductos");

@@ -8,11 +8,8 @@
   <header>
       <table>
           <tr>
-              <td id="header_logo">
-                  <img id="logo" src="./assets/img/logoXYZ.png">
-              </td>
               <td id="header_texto">
-                  <div>Ferreteria XYZ</div>
+                  <div>Libreria A&C</div>
                   <div>Reporte de Productos</div>
               </td>
               <td id="header_logo">
@@ -30,10 +27,11 @@
                <th>#</th>
                <th>Codigo</th>
                <th>Nombre</th>
+               <th>Marca</th>
                <th>Descripcion</th>
-               <th>Precio de Entrada</th>
-               <th>Precio</th>
-               <th>Precio de Mayoreo</th>
+               <th>Precio Entrada</th>
+               <th>Precio Venta</th>
+               <th>Precio Mayoreo</th>
                <th>Existencia</th>
            </tr>
        </thead>
@@ -43,10 +41,11 @@
                 <td><?php echo $producto->id;?></td>
                 <td><?php echo $producto->codigo;?></td>
                 <td><?php echo $producto->nombre;?></td>
+                <td><?php echo $producto->id_marca;?></td>
                 <td><?php echo $producto->descripcion;?></td>
                 <td><?php echo $producto->precio_entrada;?></td>
                 <td><?php echo $producto->precio;?></td>
-                <td><?php echo $producto->precio_mayoreo;?></td>
+                <td><?php echo $producto->precio_mayoreo1;?></td>
                 <td><?php echo $producto->stock;?></td>
             </tr>
           <?php  }?>

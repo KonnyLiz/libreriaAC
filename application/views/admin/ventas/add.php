@@ -106,16 +106,6 @@
                                          <th>Eliminar</th>
 
                                     </tr>
-                                    <?php /*foreach($servicios as $serv):?>
-                                    <tr>
-                                      <td><?php echo ($serv->id_servicio);?><input type="hidden" name="precios" id="<?php echo($serv->nombre).'2';?>" value="<?php echo($serv->precio.'*'.$serv->precio2.'*'.$serv->precio3); ?>"></td>
-                                       <td><?php echo ($serv->nombre);?></td>
-                                       <td ><input id="<?php echo($serv->nombre).'1';?>" value="<?php echo($serv->precio);?>"></td>
-                                       <td>-------</td>
-                                       <td><input type='number'  name='' min="0" value='0' id="<?php echo($serv->nombre);?>" class='cantidades'></td>
-                                       <td><p id = "<?php echo($serv->nombre).'3';?>">0</p></td>
-                                      <td></td>
-                                    </tr>  <?php endforeach;*/?>
 
                                 </thead>
                                 <tbody>
@@ -149,12 +139,22 @@
                                         <input type="text" class="form-control" name="total" id="total" readonly="readonly">
                                     </div>
                                 </div>
-
+                            <div class="col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Efectivo:</span>
+                                        <input type="text" class="form-control" name="efectivo" id="efectivo" value="0">
+                                    </div>
+                            </div>
+                            <div class="col-md-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">Cambio:</span>
+                                        <input type="text" class="form-control" name="cambio" id="cambio" readonly="readonly" value="0">
+                                    </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                                 </div>
-
                             </div>
                         </form>
                         </div></div></div></div>
@@ -168,6 +168,10 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<!-- <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-default" ><span class="fa fa-search"></span> Buscar</button>
+</span> -->
 
 <div class="modal fade" id="modal-default">
     <div class="modal-dialog">
@@ -267,4 +271,24 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -
+<!-- /.modal -->
+
+<div class="modal fade" id="modal-cambio">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Lita de Clientes</h4>
+            </div>
+            <div class="modal-body">
+                <p>hola</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

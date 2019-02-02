@@ -62,6 +62,9 @@
                             </tbody>
                         </table>
                         <!-- Button del pdf -->
+                        <a href="<?php echo base_url();?>pdfcontroller/categoria" target="_blank">
+                            <button type="button" class="btn btn-success"><i class="fa fa-check"></i>Generar Reporte</button>
+                        </a>
                        </div>
                      </div>
                 </div>

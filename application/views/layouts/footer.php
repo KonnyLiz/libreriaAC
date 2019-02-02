@@ -490,6 +490,17 @@ $(document).ready(function (){
         
     });
 
+    $(document).on("keyup", "#efectivo", function(){
+        efectivo = parseFloat($(this).val()).toFixed(2);
+        aPagar= parseFloat($("#total").val()).toFixed(2);
+        if (efectivo >= aPagar {
+            cambio = parseFloat(efectivo - aPagar).toFixed(2);
+            $("#cambio").val(cambio);
+        } else {
+            $("#cambio").val("Falta para cobrar!");
+        }  
+    });
+
     function magiaDeLaSuma(precio, cantidad){
         if (compr == 5){
             var precioSinIva;
@@ -528,6 +539,8 @@ $(document).ready(function (){
      $(document).on("click", ".btn-print", function(){
         $("#modal-default .modal-body").print();
     });
+
+
 
      //********Reabastecimientos
       $("#producto-reabastecer").autocomplete({
